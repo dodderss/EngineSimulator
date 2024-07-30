@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Engine Designer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Engine Designer is a powerful and intuitive web application built with React that allows users to design and simulate engines. By entering various parameters such as bore, stroke, compression ratio, turbo information, and RPM limit, users can get detailed outputs including power, torque, efficiency, weight, and price.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Parameter Input:** Enter detailed engine parameters including bore, stroke, compression ratio, turbo info, and RPM limit.
+- **Real-time Calculation:** Get instant feedback on power, torque, efficiency, weight, and price as you modify parameters.
+- **Responsive Design:** User interface adapts to various screen sizes, ensuring a seamless experience on both desktop and mobile devices.
+- **Scrollable Statistics:** Keep track of key statistics with a dedicated scrollable section for easy navigation on smaller screens.
 
-### `npm start`
+## Screenshots
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Engine Designer](path/to/screenshot.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Make sure you have the following installed on your machine:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js (v14 or later)
+- npm (v6 or later)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
 
-### `npm run eject`
+    ```bash
+    git clone https://github.com/your-username/engine-designer.git
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Navigate to the project directory:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    cd engine-designer
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. Install the dependencies:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    ```bash
+    npm install
+    ```
 
-## Learn More
+### Running the Application
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the development server:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+
+Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to see the application in action.
+
+## Usage
+
+1. **Enter Parameters:** Use the input fields to enter the desired engine parameters such as bore, stroke, compression ratio, turbo info, and RPM limit.
+2. **View Results:** The application will automatically calculate and display the engine's power, torque, efficiency, weight, and price.
+3. **Adjust Parameters:** Modify the parameters to see how changes affect the engine's performance and characteristics.
+
+## Built With
+
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript at Any Scale.
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - For styling the application.
+
+## Contributing
+
+Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+- Inspiration from various engine design tools and simulators.
+- Thanks to the open-source community for their invaluable resources and contributions.
+
+---
+
+Made with ❤️ by [Your Name](https://github.com/WilliamD47)
