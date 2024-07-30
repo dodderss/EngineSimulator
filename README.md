@@ -50,9 +50,8 @@ Start the development server:
 
 ```bash
 npm start
-
+```
 Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to see the application in action.
-
 ## Usage
 
 1. **Enter Parameters:** Use the input fields to enter the desired engine parameters such as bore, stroke, compression ratio, turbo info, and RPM limit.
