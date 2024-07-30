@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +16,75 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+body {
+  background: #3c73ac;
+  background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
+  linear-gradient(90deg, rgba(255,255,255,0.2) 2px, transparent 1px),
+  linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
+  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  color: white;
+  /* helvetica neue 24px */
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.modelViewer {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 65vh;
+  width: 54.69vw;
+  background-color: #4988cb;
+  border: 2px solid white;
+  
+}
+
+.statList {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 35vh;
+  min-width: 200px;
+  width: 275px;
+  overflow-y: auto;
+}
+
+.bottomLeftSection {
+  width: 82vw;
+}
+
+.rightSection {
+  width: 18vw;
+  height: 92vh;
+  background-color: #638fbd;
+  border: 2px solid white;
+}
+
+.powerGraph {
+  width: 27.31vw;
+  height: 28.5vh;
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
+
+}
+
+.torqueGraph {
+  width: 27.31vw;
+  height: 28.5vh;
+  border-bottom: 2px solid white;
+}
+
+.topBar {
+  height: 8vh;
+  background-color: #638fbd;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+  width: 45.31vw;
 }
