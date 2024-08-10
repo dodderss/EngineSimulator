@@ -1,36 +1,35 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-
-
 body {
   background: #3c73ac;
-  background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
-  linear-gradient(90deg, rgba(255,255,255,0.2) 2px, transparent 1px),
-  linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
-  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
-  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 2px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
   color: white;
   /* helvetica neue 24px */
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 24px;
   font-weight: 800;
 }
@@ -43,7 +42,6 @@ body {
   width: 54.69vw;
   background-color: #4988cb;
   border: 2px solid white;
-  
 }
 
 .statList {
@@ -72,7 +70,6 @@ body {
   height: 28.5vh;
   border-bottom: 2px solid white;
   border-top: 2px solid white;
-
 }
 
 .torqueGraph {

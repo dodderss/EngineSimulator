@@ -46,8 +46,8 @@ function BottomEnd() {
                       bore: value,
                       displacement:
                         (Math.PI / 4) *
-                        (value) ** 2 *
-                        ((engine?.stroke || 0)/1000) *
+                        value ** 2 *
+                        ((engine?.stroke || 0) / 1000) *
                         (engine?.engineCylinders || 0),
                     },
                   });
@@ -66,8 +66,8 @@ function BottomEnd() {
                       stroke: value,
                       displacement:
                         (Math.PI / 4) *
-                        ((engine?.bore || 0)) ** 2 *
-                        (value/1000) *
+                        (engine?.bore || 0) ** 2 *
+                        (value / 1000) *
                         (engine?.engineCylinders || 0),
                     },
                   });

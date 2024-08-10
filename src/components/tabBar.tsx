@@ -30,7 +30,11 @@ function TabBar() {
     <div className="w-full h-full">
       <div className="tabbar">
         {tabs.map((tab, index) => (
-          <button key={index} onClick={() => setSelectedTab(index)} className="w-full">
+          <button
+            key={index}
+            onClick={() => setSelectedTab(index)}
+            className="w-full"
+          >
             <div className={getClassName(index)}>
               <p className="text-3xl">{tab[0]}</p>
             </div>

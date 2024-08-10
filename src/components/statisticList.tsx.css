@@ -1,7 +1,6 @@
 .statList {
-    /* 2px white border on all sides except top */
-    border-left: 2px solid #FFFFFF;
-    border-right: 2px solid #FFFFFF;
-    border-bottom: 2px solid #FFFFFF;
-
+  /* 2px white border on all sides except top */
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 }

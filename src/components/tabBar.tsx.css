@@ -1,32 +1,36 @@
 .tabbar {
-    background-color: #638fbd;
-    height: 6vh;
-    width: 100%;
-    display: flex; /* Use flexbox for the tab bar */
+  background-color: #638fbd;
+  height: 6vh;
+  width: 100%;
+  display: flex; /* Use flexbox for the tab bar */
 }
 
-.tab, .tabLast, .selected, .selectedLast {
-    flex: 1; /* Make each tab take up equal space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 6vh;
-    border-bottom: 2px solid #FFFFFF;
+.tab,
+.tabLast,
+.selected,
+.selectedLast {
+  flex: 1; /* Make each tab take up equal space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  border-bottom: 2px solid #ffffff;
 }
 
 .tab {
-    border-right: 2px solid #FFFFFF;
+  border-right: 2px solid #ffffff;
 }
 
-.tabLast, .selectedLast {
-    border-right: none;
+.tabLast,
+.selectedLast {
+  border-right: none;
 }
 
 .selected {
-    background-color: #92b1d1;
-    border-right: 2px solid #FFFFFF;
+  background-color: #92b1d1;
+  border-right: 2px solid #ffffff;
 }
 
 .selectedLast {
-    background-color: #92b1d1;
+  background-color: #92b1d1;
 }

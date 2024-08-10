@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from 'react';
-import './/slider.tsx.css';
+import React, { ChangeEvent } from "react";
+import ".//slider.tsx.css";
 
 interface SliderProps {
   label: string;
@@ -10,7 +10,14 @@ interface SliderProps {
   onChange: (value: number) => void; // Add this line
 }
 
-const Slider: React.FC<SliderProps> = ({ label, max, min, step, value, onChange }) => {
+const Slider: React.FC<SliderProps> = ({
+  label,
+  max,
+  min,
+  step,
+  value,
+  onChange,
+}) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value);
     onChange(newValue); // Call the onChange function passed from the parent
@@ -18,11 +25,30 @@ const Slider: React.FC<SliderProps> = ({ label, max, min, step, value, onChange 
 
   return (
     <div className="flex flex-col">
-      <h2 className="text-center text-2xl font-bold font-helvetica pb-5 pt-4">{label}</h2>
+      <h2 className="text-center text-2xl font-bold font-helvetica pb-5 pt-4">
+        {label}
+      </h2>
       <div className="flex justify-center gap-5 items-center">
-        <button className="sliderButton" onClick={() => onChange((value - step) >= min ? value - step : value)}>-</button>
-        <input type="range" min={min} max={max} step={step} onChange={handleChange} value={value} />
-        <button className="sliderButton" onClick={() => onChange((value + step) <= max ? value + step : value)}>+</button>
+        <button
+          className="sliderButton"
+          onClick={() => onChange(value - step >= min ? value - step : value)}
+        >
+          -
+        </button>
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          onChange={handleChange}
+          value={value}
+        />
+        <button
+          className="sliderButton"
+          onClick={() => onChange(value + step <= max ? value + step : value)}
+        >
+          +
+        </button>
       </div>
     </div>
   );
