@@ -17,14 +17,14 @@ const Slider: React.FC<SliderProps> = ({ label, max, min, step, value, onChange 
   };
 
   return (
-    <>
-      <h2 className="text-center text-2xl font-bold font-helvetica pb-5">{label}</h2>
+    <div className="flex flex-col">
+      <h2 className="text-center text-2xl font-bold font-helvetica pb-5 pt-4">{label}</h2>
       <div className="flex justify-center gap-5 items-center">
-        <button onClick={() => onChange((value - step) >= min ? value - step : value)}>-</button>
+        <button className="sliderButton" onClick={() => onChange((value - step) >= min ? value - step : value)}>-</button>
         <input type="range" min={min} max={max} step={step} onChange={handleChange} value={value} />
-        <button onClick={() => onChange((value + step) <= max ? value + step : value)}>+</button>
+        <button className="sliderButton" onClick={() => onChange((value + step) <= max ? value + step : value)}>+</button>
       </div>
-    </>
+    </div>
   );
 };
 

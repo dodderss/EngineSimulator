@@ -1,0 +1,50 @@
+.bottomEnd {
+  display: flex;
+  width: 100%;
+  height: 29vh;
+}
+
+.column {
+  box-sizing: border-box;
+  /* center text */
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.columnHeader {
+  padding: 10px;
+}
+
+.column1 {
+  width: 30%;
+  border-right: white 2px solid;
+}
+
+.column2 {
+  width: 40%;
+}
+
+.column3 {
+  width: 30%;
+  border-left: white 2px solid;
+}
+
+.tabText {
+  font-weight: 700;
+  font-size: 28px;
+  text-align: center;
+}
+
+.blockTable {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.blockCol {
+  width: 100%;
+  text-align: center;
+  border-bottom: white 2px solid;
+  padding: 10px;
+}
