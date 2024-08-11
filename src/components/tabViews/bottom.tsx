@@ -2,9 +2,10 @@ import Slider from "../slider";
 import "./tabElement.css";
 import { useContext, useState } from "react";
 import { EngineContext } from "../../globals";
+import Options from "../options";
 
 function BottomEnd() {
-  const [stroke, setStroke] = useState(0);
+  const [, setLayout] = useState("Inline");
 
   const { updateState, engine } = useContext(EngineContext);
   return (
@@ -16,11 +17,20 @@ function BottomEnd() {
           </div>
           <div className="columnContents w-full">
             <div className="blockTable">
-              <div className="blockCol border-r-2 border-white">
-                <p>Material</p>
+              <div className="materialCol w-full">
+                <div className="blockHeader border-r-2 border-white">
+                  <p>Material</p>
+                </div>
               </div>
-              <div className="blockCol">
-                <p>Layout</p>
+              <div className="layoutCol w-full">
+                <div className="blockHeader">
+                  <p>Layout</p>
+                </div>
+                <Options
+                  options={["Inline", "V 60°", "V 90°"]}
+                  value="Inline"
+                  onChange={(value) => setLayout(value)}
+                />
               </div>
             </div>
           </div>
@@ -38,7 +48,7 @@ function BottomEnd() {
                 max={150}
                 min={50}
                 step={0.5}
-                value={engine?.bore || 0}
+                value={engine.bore}
                 onChange={(value) => {
                   updateState({
                     engine: {
@@ -47,8 +57,8 @@ function BottomEnd() {
                       displacement:
                         (Math.PI / 4) *
                         value ** 2 *
-                        ((engine?.stroke || 0) / 1000) *
-                        (engine?.engineCylinders || 0),
+                        ((engine.stroke) / 1000) *
+                        (engine.engineCylinders),
                     },
                   });
                 }}
@@ -58,26 +68,26 @@ function BottomEnd() {
                 max={150}
                 min={50}
                 step={0.5}
-                value={engine?.stroke || 0}
+                value={engine.stroke}
                 onChange={(value) => {
                   updateState({
                     engine: {
                       ...engine,
-                      stroke: value,
+                      stroke: value ,
                       displacement:
                         (Math.PI / 4) *
-                        (engine?.bore || 0) ** 2 *
+                        (engine.bore) ** 2 *
                         (value / 1000) *
-                        (engine?.engineCylinders || 0),
+                        (engine.engineCylinders),
                     },
                   });
                 }}
               />
             </div>
             <div>
-              <p>{engine!.bore}</p>
-              <p>{engine!.stroke}</p>
-              <p>{engine!.displacement?.toPrecision(5)}</p>
+              <p>{engine.bore}</p>
+              <p>{engine.stroke}</p>
+              <p>{engine.displacement.toPrecision(5)}</p>
             </div>
           </div>
         </div>

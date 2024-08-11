@@ -1,0 +1,17 @@
+.options {
+  width: 100%;
+  height: 100%;
+}
+
+.optionItem {
+  color: #92b0d0;
+}
+
+.selectedOptionItem {
+  color: #ffffff;
+}
+
+.optionItem,
+.selectedOptionItem {
+  cursor: pointer;
+}

@@ -1,46 +1,46 @@
 import React from "react";
 
 export interface Engine {
-  bore?: number;
-  stroke?: number;
-  compressionRatio?: number;
-  displacement?: number;
-  power?: number;
-  torque?: number;
-  rpmLimit?: number;
-  fuelQuality?: number;
-  fuelType?: string;
-  turbo?: boolean;
-  engineType?: string;
-  engineCylinders?: number;
-  turboPressure?: number;
-  exhaustSize?: number;
-  engineWeight?: number;
-  enginePrice?: number;
-  engineName?: string;
-  fileName?: string;
-  blockMaterial?: string;
-  headMaterial?: string;
-  pistonMaterial?: string;
-  crankshaftMaterial?: string;
-  valveMaterial?: string;
-  headType?: string;
-  vvl?: boolean;
-  vvt?: boolean;
-  volumetricEfficiency?: number;
-  mechanicalEfficiency?: number;
-  totalEfficiency?: number;
-  engineLength?: number;
-  engineWidth?: number;
-  engineHeight?: number;
-  headColour?: string;
-  blockColour?: string;
-  valveCoverColour?: string;
-  turboColour?: string;
-  headDecorativeMaterial?: string;
-  blockDecorativeMaterial?: string;
-  valveCoverDecorativeMaterial?: string;
-  turboDecorativeMaterial?: string;
+  bore: number;
+  stroke: number;
+  compressionRatio: number;
+  displacement: number;
+  power: number;
+  torque: number;
+  rpmLimit: number;
+  fuelQuality: number;
+  fuelType: string;
+  turbo: boolean;
+  engineType: string;
+  engineCylinders: number;
+  turboPressure: number;
+  exhaustSize: number;
+  engineWeight: number;
+  enginePrice: number;
+  engineName: string;
+  fileName: string;
+  blockMaterial: string;
+  headMaterial: string;
+  pistonMaterial: string;
+  crankshaftMaterial: string;
+  valveMaterial: string;
+  headType: string;
+  vvl: boolean;
+  vvt: boolean;
+  volumetricEfficiency: number;
+  mechanicalEfficiency: number;
+  totalEfficiency: number;
+  engineLength: number;
+  engineWidth: number;
+  engineHeight: number;
+  headColour: string;
+  blockColour: string;
+  valveCoverColour: string;
+  turboColour: string;
+  headDecorativeMaterial: string;
+  blockDecorativeMaterial: string;
+  valveCoverDecorativeMaterial: string;
+  turboDecorativeMaterial: string;
 }
 
 export const DummyEngine: Engine = {
@@ -60,8 +60,8 @@ export const DummyEngine: Engine = {
   exhaustSize: 2.5, // Default to 2.5 inches
   engineWeight: 150, // Default to 150 kg
   enginePrice: 5000, // Default to 5000 USD
-  engineName: "", // Default to empty string
-  fileName: "", // Default to empty string
+  engineName: "My Engine", // Default to empty string
+  fileName: "/My\ Engine.engine", // Default to empty string
   blockMaterial: "Aluminum", // Default to Aluminum
   headMaterial: "Aluminum", // Default to Aluminum
   pistonMaterial: "Forged Steel", // Default to Forged Steel
@@ -87,7 +87,7 @@ export const DummyEngine: Engine = {
 };
 
 export interface AppState {
-  engine?: Engine;
+  engine: Engine;
   updateState: (newState: Partial<AppState>) => void;
 }
 
@@ -95,7 +95,7 @@ export interface AppState {
  * Default application state
  */
 const defaultState: AppState = {
-  engine: {},
+  engine: DummyEngine,
   updateState: (newState?: Partial<AppState>) => {},
 };
 

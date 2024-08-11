@@ -17,23 +17,23 @@ function StatisticList() {
       <h1 className="text-4xl">Statistics</h1>
       <StatisticItem
         image={PowerIcon.toString()}
-        text={`${engine?.power || 0} HP`}
+        text={`${engine.power} HP`}
       />
       <StatisticItem
         image={TorqueIcon.toString()}
-        text={`${engine?.torque || 0} Nm`}
+        text={`${engine.torque} Nm`}
       />
       <StatisticItem
         image={PriceIcon.toString()}
-        text={`£${engine?.enginePrice || 0}`}
+        text={`£${engine.enginePrice}`}
       />
       <StatisticItem
         image={EfficiencyIcon.toString()}
-        text={`${engine?.totalEfficiency || 0}%`}
+        text={`${engine.totalEfficiency}%`}
       />
       <StatisticItem
         image={WeightIcon.toString()}
-        text={`${engine?.engineWeight || 0} KG`}
+        text={`${engine.engineWeight} KG`}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import StatisticList from "./components/statisticList";
 import TabBar from "./components/tabBar";
+import TopBar from "./components/topBar";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <div className="flex">
         <div className="modelViewer" />
         <div className="flex flex-col justify-end">
-          <div className="topBar" />
+          <TopBar />
           <div className="powerGraph" />
           <div className="torqueGraph" />
         </div>

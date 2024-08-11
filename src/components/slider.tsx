@@ -24,8 +24,8 @@ const Slider: React.FC<SliderProps> = ({
   };
 
   return (
-    <div className="flex flex-col">
-      <h2 className="text-center text-2xl font-bold font-helvetica pb-5 pt-4">
+    <div className="flex flex-col pb-5">
+      <h2 className="text-center text-2xl font-bold font-helvetica pb-5">
         {label}
       </h2>
       <div className="flex justify-center gap-5 items-center">
