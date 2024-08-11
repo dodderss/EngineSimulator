@@ -61,6 +61,7 @@ export const DummyEngine: Engine = {
   engineWeight: 150, // Default to 150 kg
   enginePrice: 5000, // Default to 5000 USD
   engineName: "My Engine", // Default to empty string
+  // eslint-disable-next-line no-useless-escape
   fileName: "/My\ Engine.engine", // Default to empty string
   blockMaterial: "Aluminum", // Default to Aluminum
   headMaterial: "Aluminum", // Default to Aluminum
