@@ -1,46 +1,60 @@
+/* Import TailwindCSS */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Global Styles */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   scrollbar-color: white;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-body {
+  user-select: none;
   background: #3c73ac;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.2) 2px,
-      transparent 2px
-    ),
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
   color: white;
-  /* helvetica neue 24px */
   font-family: "Helvetica Neue", sans-serif;
   font-size: 24px;
   font-weight: 800;
-  
+}
+
+code {
+  font-family: "source-code-pro", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Headings */
+h1, h2 {
+  color: white;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+/* Component Styles */
+.modelViewer,
+.statList,
+.rightSection,
+.topBar,
+.powerGraph,
+.torqueGraph {
+  box-sizing: border-box;
 }
 
 .modelViewer {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   height: 65vh;
   width: 54.69vw;
   background-color: #4988cb;
@@ -48,9 +62,6 @@ body {
 }
 
 .statList {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   height: 35vh;
   min-width: 200px;
   width: 275px;
@@ -68,47 +79,35 @@ body {
   border: 2px solid white;
 }
 
-.powerGraph {
-  width: 27.31vw;
-  height: 28.5vh;
-  border-bottom: 2px solid white;
-  border-top: 2px solid white;
-}
-
+.powerGraph,
 .torqueGraph {
   width: 27.31vw;
   height: 28.5vh;
   border-bottom: 2px solid white;
 }
 
+.powerGraph {
+  border-top: 2px solid white;
+}
+
 .topBar {
   height: 8vh;
+  width: 45.31vw;
   background-color: #638fbd;
   border-right: 2px solid white;
   border-top: 2px solid white;
-  width: 45.31vw;
 }
 
-h1 {
-  font-size: 36px;
-  font-weight: 700;
-  color: white;
-}
-
-h2 {
-  font-size: 30px;
-  font-weight: 700;
-  color: white;
-}
-
-/* if under 1500 width */
+/* Responsive Styles */
 @media (max-width: 1919px) {
   body {
     font-size: 20px;
   }
+
   h1 {
     font-size: 24px;
   }
+
   h2 {
     font-size: 20px;
   }
