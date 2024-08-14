@@ -4,11 +4,12 @@ import MaximiseIcon from "../icons/maximise.svg";
 
 import { useContext } from "react";
 import { EngineContext } from "../globals";
-import { appWindow } from "@tauri-apps/api/window";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import "./topBar.tsx.css";
 
 function TopBar() {
   const { engine } = useContext(EngineContext);
+  const appWindow = getCurrentWindow();
 
   return (
     <div

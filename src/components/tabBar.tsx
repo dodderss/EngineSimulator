@@ -36,7 +36,7 @@ function TabBar() {
             className="w-full"
           >
             <div className={getClassName(index)}>
-              <p className="text-3xl">{tab[0]}</p>
+              <h1>{tab[0]}</h1>
             </div>
           </button>
         ))}

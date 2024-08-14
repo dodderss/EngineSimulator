@@ -10,6 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  scrollbar-color: white;
 }
 
 code {
@@ -86,4 +87,29 @@ body {
   border-right: 2px solid white;
   border-top: 2px solid white;
   width: 45.31vw;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+}
+
+/* if under 1500 width */
+@media (max-width: 1919px) {
+  body {
+    font-size: 20px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+  }
 }

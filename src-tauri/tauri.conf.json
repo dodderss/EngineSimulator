@@ -1,7 +1,7 @@
 {
   "productName": "Engine Simulator",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "engine.dodde.rs",
   "build": {
     "frontendDist": "../build",
     "devUrl": "http://localhost:3000",
@@ -12,12 +12,14 @@
     "windows": [
       {
         "title": "Engine Simulator",
-        "width": 800,
-        "height": 600,
+        "width": 1920,
+        "height": 1080,
         "resizable": true,
         "fullscreen": false,
-        "minWidth": 1920,
-        "minHeight": 1080
+        "minWidth": 1280,
+        "minHeight": 720,
+        "decorations": false,
+        "shadow": true
 
       }
     ],
