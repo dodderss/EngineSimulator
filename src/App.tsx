@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import StatisticList from "./components/statisticList";
 import TabBar from "./components/tabBar";
-import TopBar from "./components/topBar";
+import TopBar from "./components/topBar"; // Import the TopBar component
 
 function App() {
   return (

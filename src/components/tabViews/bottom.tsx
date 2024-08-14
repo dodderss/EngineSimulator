@@ -1,7 +1,7 @@
-import Slider from "../slider";
+import Slider from "../ui/slider";
 import "./tabElement.css";
 import { useContext, useState } from "react";
-import { EngineContext } from "../../globals";
+import { EngineContext } from "../../services/globals";
 import Options from "../options";
 
 function BottomEnd() {
@@ -36,7 +36,7 @@ function BottomEnd() {
           </div>
         </div>
       </div>
-      <div className="column column2 overflow-y-scroll">
+      <div className="column column2 overflow-y-scroll overflow-x-scroll">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white ">
             <h2>Capacity & Displacement</h2>

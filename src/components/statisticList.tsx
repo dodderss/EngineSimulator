@@ -1,13 +1,13 @@
-import StatisticItem from "./statisticItem";
-import PowerIcon from "../icons/power.svg";
-import TorqueIcon from "../icons/torque.svg";
-import PriceIcon from "../icons/price.svg";
-import EfficiencyIcon from "../icons/efficiency.svg";
-import WeightIcon from "../icons/weight.svg";
+import StatisticItem from "./ui/statisticItem";
+import PowerIcon from "../icons/decorative/power.svg";
+import TorqueIcon from "../icons/decorative/torque.svg";
+import PriceIcon from "../icons/decorative/price.svg";
+import EfficiencyIcon from "../icons/decorative/efficiency.svg";
+import WeightIcon from "../icons/decorative/weight.svg";
 
 import "./statisticList.tsx.css";
 import { useContext } from "react";
-import { EngineContext } from "../globals";
+import { EngineContext } from "../services/globals";
 
 function StatisticList() {
   const { engine } = useContext(EngineContext);

@@ -1,15 +1,24 @@
-import CloseIcon from "../icons/close.svg";
-import MinimiseIcon from "../icons/minimise.svg";
-import MaximiseIcon from "../icons/maximise.svg";
+import CloseIcon from "../icons/system/close.svg";
+import MinimiseIcon from "../icons/system/minimise.svg";
+import MaximiseIcon from "../icons/system/maximise.svg";
 
-import { useContext } from "react";
-import { EngineContext } from "../globals";
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import { useContext, useEffect, useState } from "react";
+import { EngineContext } from "../services/globals";
+import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import "./topBar.tsx.css";
 
 function TopBar() {
   const { engine } = useContext(EngineContext);
-  const appWindow = getCurrentWindow();
+  const [appWindow, setAppWindow] = useState<Window | null>(null);
+
+  useEffect(() => {
+    async function fetchWindow() {
+      const window = await getCurrentWindow();
+      setAppWindow(window);
+    }
+
+    fetchWindow();
+  }, []);
 
   return (
     <div
@@ -20,20 +29,20 @@ function TopBar() {
       <div className="flex flex-row space-x-5">
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
-          onClick={() => appWindow.maximize()}
+          onClick={() => appWindow?.maximize() ?? null}
         >
           <img src={MaximiseIcon.toString()} alt="" />
         </div>
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
-          onClick={() => appWindow.minimize()}
+          onClick={() => appWindow?.minimize() ?? null}
         >
           <img src={MinimiseIcon.toString()} alt="" />
         </div>
 
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
-          onClick={() => appWindow.close()}
+          onClick={() => appWindow?.close() ?? null}
         >
           <img src={CloseIcon.toString()} alt="" />
         </div>
