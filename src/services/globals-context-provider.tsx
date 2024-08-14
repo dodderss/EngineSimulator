@@ -28,7 +28,7 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
   };
 
   useEffect(() => {
-    RunCalculations(state.engine);
+    RunCalculations(state.engine, state.updateState);
   }, [state]);
 
   /**

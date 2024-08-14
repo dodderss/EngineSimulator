@@ -3,6 +3,7 @@ import "./tabElement.css";
 import { useContext, useState } from "react";
 import { EngineContext } from "../../services/globals";
 import Options from "../options";
+import RunCalculations from "../../services/calculations";
 
 function BottomEnd() {
   const [, setLayout] = useState("Inline");
@@ -61,6 +62,7 @@ function BottomEnd() {
                         engine.engineCylinders,
                     },
                   });
+                  RunCalculations(engine, updateState);
                 }}
               />
               <Slider
@@ -81,6 +83,7 @@ function BottomEnd() {
                         engine.engineCylinders,
                     },
                   });
+                  RunCalculations(engine, updateState);
                 }}
               />
             </div>
