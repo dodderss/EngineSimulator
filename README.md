@@ -1,82 +1,129 @@
-# Engine Designer
+# 3D Engine Designer
 
-Engine Designer is a powerful and intuitive web application built with React that allows users to design and simulate engines. By entering various parameters such as bore, stroke, compression ratio, turbo information, and RPM limit, users can get detailed outputs including power, torque, efficiency, weight, and price.
+## Overview
 
-## Features
+The 3D Engine Designer is a powerful tool for engineers and car enthusiasts, designed to simulate and optimize engine configurations before building them. The software enables users to visualize and analyze key engine parameters such as power, torque, and efficiency. By adjusting various engine components and variables, users can create custom engines tailored to specific performance requirements.
 
-- **Parameter Input:** Enter detailed engine parameters including bore, stroke, compression ratio, turbo info, and RPM limit.
-- **Real-time Calculation:** Get instant feedback on power, torque, efficiency, weight, and price as you modify parameters.
-- **Responsive Design:** User interface adapts to various screen sizes, ensuring a seamless experience on both desktop and mobile devices.
-- **Scrollable Statistics:** Keep track of key statistics with a dedicated scrollable section for easy navigation on smaller screens.
+## Key Features
 
-## Screenshots
-
-![Engine Designer](path/to/screenshot.png)
+- **Engine Simulation:** Simulate different engine configurations by adjusting variables such as piston size, turbocharger size, and fuel quality.
+- **3D Visualization:** Interact with a fully 3D environment to view your engine from any angle, with dimensions provided on the X, Y, and Z axes for accurate measurement.
+- **Real-Time Statistics:** Monitor key engine statistics such as horsepower, torque, efficiency, and cost in real-time as you modify the engine.
+- **Comprehensive Material Database:** Select from a variety of materials for engine blocks and pistons, each with unique properties such as weight, cost, and maximum power/torque capabilities.
+- **Customizable Graphs:** Generate and customize power and torque graphs to visualize engine performance across different RPM ranges.
+- **Problem Detection:** Automatically detects issues with the current engine configuration, such as material strength limitations, and provides actionable feedback.
+- **Cross-Platform Support:** Available as downloadable executables for Windows, macOS, and Linux built using React, TypeScript, and Tauri.
 
 ## Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
-
 ### Prerequisites
 
-Make sure you have the following installed on your machine:
+Ensure your system meets the following requirements:
 
-- Node.js (v14 or later)
-- npm (v6 or later)
+- **Windows:** Windows 10 or higher
+- **macOS:** macOS 10.15 (Catalina) or higher
+- **Linux:** A modern Linux distribution that supports `.deb` packages (e.g., Ubuntu, Debian)
 
 ### Installation
 
-1. Clone the repository:
+1. **Download the Installer:**
+   - Visit the [GitHub Releases](https://github.com/dodderss/EngineSimulator/releases) page and download the appropriate installer for your operating system:
+     - `.exe` for Windows
+     - `.dmg` for macOS
+     - `.deb` for Linux
 
-    ```bash
-    git clone https://github.com/your-username/engine-designer.git
-    ```
+2. **Run the Installer:**
+   - **Windows:**
+     - Double-click the downloaded `.exe` file and follow the on-screen instructions.
+   - **macOS:**
+     - Open the downloaded `.dmg` file and drag the 3D Engine Designer app into your `Applications` folder.
+   - **Linux:**
+     - Open a terminal and run:
+       ```bash
+       sudo dpkg -i path/to/3D-Engine-Designer.deb
+       ```
+       - Resolve any dependency issues by running:
+       ```bash
+       sudo apt-get install -f
+       ```
 
-2. Navigate to the project directory:
+3. **Launch the Application:**
+   - After installation, launch the 3D Engine Designer from your applications menu or desktop shortcut.
 
-    ```bash
-    cd engine-designer
-    ```
+### Usage
 
-3. Install the dependencies:
+1. **Create a New Engine Design:**
+   - Click on **"New Project"** to start designing a new engine.
+   - Choose from various engine layouts and configurations.
 
-    ```bash
-    npm install
-    ```
+2. **Customize Engine Components:**
+   - Use the **Properties Panel** to adjust specifications such as:
+     - **Bottom End:** Engine block type, bore, stroke, and material selection.
+     - **Top End:** Head type, valve configuration, timing settings, and materials.
+     - **Aspiration:** Turbocharger or supercharger options, including size and boost pressure.
+     - **Fuel & Timing:** Select fuel type, quality, and ignition timing.
+     - **Appearance:** Customize visual aspects of the engine for presentation purposes.
 
-### Running the Application
+3. **Visualize in 3D:**
+   - Navigate the **3D Viewport** to inspect your engine design from all angles.
+   - Utilize zoom, pan, and rotate controls for detailed inspection.
 
-Start the development server:
+4. **Analyze Performance:**
+   - Access real-time **Performance Graphs** displaying power and torque across various RPM ranges.
+   - Review **Efficiency Metrics** and **Material Stress Analyses** to ensure design feasibility.
 
-```bash
-npm start
-```
-Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to see the application in action.
-## Usage
+5. **Detect and Resolve Issues:**
+   - The **Problem Detection System** will alert you to potential issues such as:
+     - Material strength limitations.
+     - Incompatible component configurations.
+     - Inefficient performance metrics.
+   - Follow suggested solutions to optimize your engine design.
 
-1. **Enter Parameters:** Use the input fields to enter the desired engine parameters such as bore, stroke, compression ratio, turbo info, and RPM limit.
-2. **View Results:** The application will automatically calculate and display the engine's power, torque, efficiency, weight, and price.
-3. **Adjust Parameters:** Modify the parameters to see how changes affect the engine's performance and characteristics.
+6. **Save and Export:**
+   - Save your project locally or export configurations and reports for sharing and further analysis.
+   - Export 3D models and performance data for use in other engineering software.
 
-## Built With
+## Program Structure
 
-- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
-- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript at Any Scale.
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - For styling the application.
+The application is structured into modular components for ease of development and maintenance:
+
+- **Frontend:** Built with React and TypeScript for a responsive and interactive user interface.
+- **Backend:** Powered by Rust through Tauri for high-performance calculations and system operations.
+- **3D Rendering:** Utilizes WebGL and Three.js for real-time 3D visualization.
+- **Data Management:** Employs Redux for state management and data flow within the application.
+
+## Core Calculations
+
+### Engine Power Calculation
+
+\[
+P = \eta_m \times V_d \times n \times \rho_a \times \eta_v \times \frac{N^2}{2}
+\]
+
+**Where:**
+- \( P \) = Engine power (HP)
+- \( \eta_m \) = Mechanical efficiency (%)
+- \( V_d \) = Displacement volume (m³)
+- \( n \) = Number of strokes (constant at 4)
+- \( \rho_a \) = Air density (kg/m³)
+- \( \eta_v \) = Volumetric efficiency (%)
+- \( N \) = Engine RPM
+
+### Turbocharger Air Density Calculation
+
+\[
+\rho_a = \frac{(P_{gauge} + 14.7) \times 6894.76}{287.05 \times T}
+\]
+
+**Where:**
+- \( P_{gauge} \) = Boost pressure (PSI)
+- \( T \) = Air temperature (K)
 
 ## Contributing
 
-Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
+Contributions are welcome! Please follow these steps:
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-
-- Inspiration from various engine design tools and simulators.
-- Thanks to the open-source community for their invaluable resources and contributions.
-
----
-
-Made with ❤️ by [Your Name](https://github.com/WilliamD47)
+1. **Fork the Repository**
+2. **Create a Feature Branch**
+   ```bash
+   git checkout -b feature/YourFeature
