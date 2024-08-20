@@ -44,25 +44,25 @@ export interface Engine {
 }
 
 export const DummyEngine: Engine = {
-  bore: 86, // Default to 86 mm
-  stroke: 86, // Default to 86 mm
-  compressionRatio: 10, // Default to 10:1
-  displacement: 1998, // Default to 1998 cc
-  power: 150, // Default to 150 hp
+  bore: 84, // Default to 84 mm
+  stroke: 90, // Default to 90 mm
+  compressionRatio: 11, // Default to 11:1
+  displacement: 2979, // Default to 2979 cc
+  power: 150, // Default to 150 kw
   torque: 200, // Default to 200 Nm
-  rpmLimit: 6500, // Default to 6500 rpm
+  rpmLimit: 10000, // Default to 10000 rpm
   fuelQuality: 95, // Default to 95 octane
   fuelType: "Petrol", // Default to Petrol
   turbo: false, // Default to naturally aspirated
-  engineType: "Inline-4", // Default to Inline-4
-  engineCylinders: 4, // Default to 4 cylinders
+  engineType: "Inline-6", // Default to Inline-6
+  engineCylinders: 6, // Default to 6 cylinders
   turboPressure: 0, // Default to 0 bar (no turbo)
   exhaustSize: 2.5, // Default to 2.5 inches
   engineWeight: 150, // Default to 150 kg
   enginePrice: 5000, // Default to 5000 USD
-  engineName: "My Engine", // Default to empty string
+  engineName: "My Engine", // Default to "My Engine"
   // eslint-disable-next-line no-useless-escape
-  fileName: "/My\ Engine.engine", // Default to empty string
+  fileName: "/My Engine.engine", // Default to "/My Engine.engine"
   blockMaterial: "Aluminum", // Default to Aluminum
   headMaterial: "Aluminum", // Default to Aluminum
   pistonMaterial: "Forged Steel", // Default to Forged Steel
@@ -70,7 +70,7 @@ export const DummyEngine: Engine = {
   valveMaterial: "Titanium", // Default to Titanium
   headType: "DOHC", // Default to DOHC
   vvl: false, // Default to no VVL
-  vvt: true, // Default to VVT enabled
+  vvt: false, // Default to no VVT
   volumetricEfficiency: 90, // Default to 90%
   mechanicalEfficiency: 85, // Default to 85%
   totalEfficiency: 75, // Default to 75%

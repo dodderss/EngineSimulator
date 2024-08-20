@@ -1,13 +1,13 @@
-import React, { ChangeEvent } from "react";
-import ".//slider.tsx.css";
+import React, { ChangeEvent, useState } from "react";
+import "./slider.tsx.css";
 
 interface SliderProps {
   label: string;
   max: number;
   min: number;
   step: number;
-  value: number;
-  onChange: (value: number) => void; // Add this line
+  initialValue: number;
+  onChange: (value: number) => void;
 }
 
 const Slider: React.FC<SliderProps> = ({
@@ -15,12 +15,15 @@ const Slider: React.FC<SliderProps> = ({
   max,
   min,
   step,
-  value,
+  initialValue,
   onChange,
 }) => {
+  const [currentValue, setCurrentValue] = useState(initialValue);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value);
-    onChange(newValue); // Call the onChange function passed from the parent
+    setCurrentValue(newValue);
+    onChange(newValue);
   };
 
   return (
@@ -31,7 +34,12 @@ const Slider: React.FC<SliderProps> = ({
       <div className="flex justify-center gap-5 items-center">
         <button
           className="sliderButton"
-          onClick={() => onChange(value - step >= min ? value - step : value)}
+          onClick={() => {
+            const newValue =
+              currentValue - step >= min ? currentValue - step : currentValue;
+            setCurrentValue(newValue);
+            onChange(newValue);
+          }}
         >
           -
         </button>
@@ -41,11 +49,16 @@ const Slider: React.FC<SliderProps> = ({
           max={max}
           step={step}
           onChange={handleChange}
-          value={value}
+          value={currentValue}
         />
         <button
           className="sliderButton"
-          onClick={() => onChange(value + step <= max ? value + step : value)}
+          onClick={() => {
+            const newValue =
+              currentValue + step <= max ? currentValue + step : currentValue;
+            setCurrentValue(newValue);
+            onChange(newValue);
+          }}
         >
           +
         </button>

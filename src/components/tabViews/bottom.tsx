@@ -2,7 +2,7 @@ import Slider from "../ui/slider";
 import "./tabElement.css";
 import { useContext, useState } from "react";
 import { EngineContext } from "../../services/globals";
-import Options from "../options";
+import Options from "../ui/options";
 import RunCalculations from "../../services/calculations";
 
 function BottomEnd() {
@@ -49,20 +49,14 @@ function BottomEnd() {
                 max={150}
                 min={50}
                 step={0.5}
-                value={engine.bore}
+                initialValue={engine.bore}
                 onChange={(value) => {
-                  updateState({
-                    engine: {
-                      ...engine,
-                      bore: value,
-                      displacement:
-                        (Math.PI / 4) *
-                        value ** 2 *
-                        (engine.stroke / 1000) *
-                        engine.engineCylinders,
-                    },
-                  });
-                  RunCalculations(engine, updateState);
+                  const newEngine = {
+                    ...engine,
+                    bore: value,
+                  };
+                  updateState({ engine: newEngine });
+                  RunCalculations(newEngine, updateState);
                 }}
               />
               <Slider
@@ -70,20 +64,14 @@ function BottomEnd() {
                 max={150}
                 min={50}
                 step={0.5}
-                value={engine.stroke}
+                initialValue={engine.stroke}
                 onChange={(value) => {
-                  updateState({
-                    engine: {
-                      ...engine,
-                      stroke: value,
-                      displacement:
-                        (Math.PI / 4) *
-                        engine.bore ** 2 *
-                        (value / 1000) *
-                        engine.engineCylinders,
-                    },
-                  });
-                  RunCalculations(engine, updateState);
+                  const newEngine = {
+                    ...engine,
+                    stroke: value,
+                  };
+                  updateState({ engine: newEngine });
+                  RunCalculations(newEngine, updateState);
                 }}
               />
             </div>

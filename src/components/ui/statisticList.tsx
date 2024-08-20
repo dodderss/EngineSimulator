@@ -1,13 +1,13 @@
-import StatisticItem from "./ui/statisticItem";
-import PowerIcon from "../icons/decorative/power.svg";
-import TorqueIcon from "../icons/decorative/torque.svg";
-import PriceIcon from "../icons/decorative/price.svg";
-import EfficiencyIcon from "../icons/decorative/efficiency.svg";
-import WeightIcon from "../icons/decorative/weight.svg";
+import StatisticItem from "./statisticItem";
+import PowerIcon from "../../icons/decorative/power.svg";
+import TorqueIcon from "../../icons/decorative/torque.svg";
+import PriceIcon from "../../icons/decorative/price.svg";
+import EfficiencyIcon from "../../icons/decorative/efficiency.svg";
+import WeightIcon from "../../icons/decorative/weight.svg";
 
 import "./statisticList.tsx.css";
 import { useContext } from "react";
-import { EngineContext } from "../services/globals";
+import { EngineContext } from "../../services/globals";
 
 function StatisticList() {
   const { engine } = useContext(EngineContext);
@@ -17,11 +17,11 @@ function StatisticList() {
       <h1 className="text-4xl">Statistics</h1>
       <StatisticItem
         image={PowerIcon.toString()}
-        text={`${engine.power} HP`}
+        text={`${engine.power.toFixed(0)} HP`}
       />
       <StatisticItem
         image={TorqueIcon.toString()}
-        text={`${engine.torque} Nm`}
+        text={`${engine.torque.toFixed(0)} Nm`}
       />
       <StatisticItem
         image={PriceIcon.toString()}

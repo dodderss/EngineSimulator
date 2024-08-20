@@ -1,13 +1,21 @@
-// import { useState } from "react";
-import StatisticList from "./components/statisticList";
+import StatisticList from "./components/ui/statisticList";
 import TabBar from "./components/tabBar";
 import TopBar from "./components/topBar"; // Import the TopBar component
+import { useContext, useEffect } from "react";
+import RunCalculations from "./services/calculations";
+import { EngineContext } from "./services/globals";
 
 function App() {
+  const { engine, updateState } = useContext(EngineContext);
+  
+  useEffect(() => {
+    RunCalculations(engine, updateState);
+  }, [engine, updateState]);
+
   return (
-    <div className="App h-full">
+    <div className="App h-fulsl">
       <div className="flex">
-        <div className="modelViewer" />
+        <div className="modelViewer"></div>
         <div className="flex flex-col justify-end">
           <TopBar />
           <div className="powerGraph" />

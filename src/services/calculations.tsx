@@ -1,68 +1,95 @@
 import { AppState, Engine } from "./globals";
 
-const RunCalculations = (engine: Engine, updateState: (newState: Partial<AppState>) => void) => {
-  const rpm = [];
+const RunCalculations = (
+  engine: Engine,
+  updateState: (newState: Partial<AppState>) => void
+) => {
+  const rpm: number[] = [];
 
-  for (let i = 0; i <= engine.rpmLimit; i += 10) {
+  for (let i = 10; i <= engine.rpmLimit; i += 10) {
     rpm.push(i);
   }
 
-  const power = [];
-  const torque = [];
-  const ve = [];
-  const losses = [];
-  const netPower = [];
-  const netTorque = [];
-  const vvlFactor = [];
-  const vvtFactor = [];
-  const mep = [];
+  const power: number[] = [];
+  const torque: number[] = [];
+  const ve: number[] = [];
+  const losses: number[] = [];
+  const netPower: number[] = [];
+  const netTorque: number[] = [];
+  const vvlFactor: number[] = [];
+  const vvtFactor: number[] = [];
+  const mep: number[] = [];
 
-  for (let i = 0; i < rpm.length; i += 10) {
+  const displacement =
+    engine.engineCylinders *
+    (Math.PI / 4) *
+    Math.pow(engine.bore, 2) *
+    engine.stroke;
+  engine.displacement = displacement / 1000000;
+
+  rpm.forEach((currentRpm, index) => {
     // ---- Volume Efficiency ---- //
     ve.push(
-      0.88 * ((1 - (i - 5000) / 5000) ^ 2) -
-        0.03 * Math.log(engine.displacement) +
+      0.88 * (1 - Math.pow((currentRpm - 5000) / 5000, 2)) -
+        0.03 * Math.log10(engine.displacement) +
         0.15 * ((engine.compressionRatio - 1) / (engine.compressionRatio + 1))
     );
 
-    // ---- Power ---- //
-    power.push((engine.displacement * i * ve[i]) / (120 * Math.PI));
-
-    // ---- Torque ---- //
-    torque.push((power[i] * 9549) / i);
-
-    // ---- Losses ---- //
-    losses.push((0.001 * i) ^ 1.2);
-
-    // ---- Net Power ---- //
-    netPower.push(power[i] - losses[i] >= 0 ? power[i] - losses[i] : 0);
-
-    // ---- Net Torque ---- //
-    netTorque.push(
-      (netPower[i] * 6000) / i >= 0 ? (netPower[i] * 6000) / i : 0
-    );
+    // = 0.88 * (1 - ((O603 - 5000) / 5000)^2) - 0.03 * LOG($M$3) + 0.15 * (($B$5 - 1) / ($B$5 + 1))
+    // POWERS YOU IDIOT NOT BITWISE OPERATORS
 
     // ---- VVL Factor ---- //
-    vvlFactor.push(1 + (0.05 * (i - 2000)) / 2000);
+    vvlFactor.push(1 + (0.05 * (currentRpm - 2000)) / 2000);
+    // =1+(0.05 * ([@RPM] - 2000) / 2000)
 
     // ---- VVT Factor ---- //
-    vvtFactor.push(1 + (0.03 * (i - 1500)) / 1500);
+    vvtFactor.push(1 + (0.03 * (currentRpm - 1500)) / 1500);
+    // =1 + (0.03 * ([@RPM] - 1500) / 1500)
 
     // ---- MEP ---- //
     mep.push(
-      (10.5 +
-        (engine.compressionRatio - 8) * 0.5 +
-        (engine.turboPressure - 1) * 2) *
-        (engine.vvl ? vvlFactor[i] : 1) *
-        (engine.vvt ? vvtFactor[i] : 1)
+      (10.5 + (11 - 8) * 0.5 + (0 - 1) * 2) *
+        (engine.vvl ? vvlFactor[index] : 1) *
+        (engine.vvt ? vvtFactor[index] : 1)
     );
-  }
+    // =(10.5 + ($B$5 - 8) * 0.5 + ($M$4 - 1) * 2) * IF($B$10 = "y",  [@[VVL Factor]], 1) * IF($B$11 = "y",  [@[VVT Factor]], 1)
+    // =(10.5 + (Compression Ratio - 8) * 0.5 + (Boost Pressure - 1) * 2 IF(VVL = "y", [@[VVL Factor]], 1) * IF(VVT) = "y",  [@[VVT Factor]], 1)))
+    // (10.5 + (11 - 8) * 0.5 + (0 - 1) * 2)
+
+    // ---- Power ---- //
+    power.push(
+      (engine.displacement * mep[index] * currentRpm * ve[index]) /
+        (120 * Math.PI)
+    );
+    // =($M$3 * [@MEP] * O14 * R14)/(120*PI())
+
+    // ---- Torque ---- //
+    torque.push((power[index] * 9549) / currentRpm);
+    // =([@Power]*9549)/[@RPM]
+
+    // ---- Losses ---- //
+    losses.push(0.001 * Math.pow(currentRpm, 1.2));
+    // =0.001*[@RPM]^1.2
+
+    // ---- Net Power ---- //
+    netPower.push(
+      power[index] - losses[index] >= 0 ? power[index] - losses[index] : 0
+    );
+    // =IF([@Power]-[@Losses] >= 0, [@Power]-[@Losses], 0)
+
+    // ---- Net Torque ---- //
+    netTorque.push(
+      (netPower[index] * 9549) / currentRpm >= 0
+        ? (netPower[index] * 9549) / currentRpm
+        : 0
+    );
+    // =IF(([@NetTorque] * 6000)/[@RPM]>=0, ([@NetTorque] * 9549)/[@RPM], 0)
+  });
 
   // get max of power, torque and ve
-  const maxPower = Math.max(...power);
-  const maxTorque = Math.max(...torque);
+  const maxPower = Math.max(...netPower);
+  const maxTorque = Math.max(...netTorque);
   const maxVe = Math.max(...ve);
-
   updateState({
     engine: {
       ...engine,
@@ -72,10 +99,6 @@ const RunCalculations = (engine: Engine, updateState: (newState: Partial<AppStat
     },
   });
 
-  return {
-    netPower,
-    netTorque,
-  };
 };
 
 export default RunCalculations;
