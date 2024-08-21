@@ -2,7 +2,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   background-color: #638fbd;
-  width: 200px;
+  width: 10vw;
   height: 20px;
   border-radius: 0px;
   border: 2px solid white;
