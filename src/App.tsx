@@ -10,7 +10,8 @@ function App() {
   
   useEffect(() => {
     RunCalculations(engine, updateState);
-  }, [engine, updateState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="App h-fulsl">
