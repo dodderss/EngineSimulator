@@ -3,3 +3,8 @@ declare module "*.svg" {
   export default content;
 }
 
+// do the same for png
+declare module "*.png" {
+  const content: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>>;
+  export default content;
+}

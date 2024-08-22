@@ -1,0 +1,15 @@
+.custButton {
+    display: flex;
+    padding: 5px 0;
+    border: 2px solid #ffffff;
+    background-color: #638fbd;
+    width: 260px;
+    height: 80px;
+    cursor: pointer;
+  }
+  
+
+.custButton:hover {
+    background-color: #7ba0c8;
+  }
+  

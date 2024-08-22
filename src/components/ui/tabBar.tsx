@@ -1,10 +1,10 @@
 import "./tabBar.tsx.css";
 import { useState } from "react";
-import BottomEnd from "./tabViews/bottom";
-import TopEnd from "./tabViews/top";
-import Aspiration from "./tabViews/aspiration";
-import FuelAndTiming from "./tabViews/fuelandtiming";
-import Appearance from "./tabViews/appearance";
+import BottomEnd from "../tabViews/bottom";
+import TopEnd from "../tabViews/top";
+import Aspiration from "../tabViews/aspiration";
+import FuelAndTiming from "../tabViews/fuelandtiming";
+import Appearance from "../tabViews/appearance";
 
 function TabBar() {
   const [selectedTab, setSelectedTab] = useState<number>(0);
