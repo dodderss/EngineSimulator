@@ -8,7 +8,7 @@ import MenuScreen from "./components/menuScreen";
 
 function App() {
   const { engine, updateState } = useContext(EngineContext);
-  const [isEngineOpen, setIsEngineOpen] = useState(false);
+  const [isEngineOpen, setIsEngineOpen] = useState(true);
   useEffect(() => {
     RunCalculations(engine, updateState);
     // eslint-disable-next-line react-hooks/exhaustive-deps

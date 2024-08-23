@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import CloseIcon from "../icons/system/close.svg";
 import MinimiseIcon from "../icons/system/minimise.svg";
@@ -11,9 +11,12 @@ import MenuIcon from "../icons/decorative/menuLogo.png";
 
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import Button from "./ui/button";
-import { EngineContext } from "../services/globals";
 
-function MenuScreen({ updateIsEngineOpen }: { updateIsEngineOpen: (value: boolean) => void }) {
+function MenuScreen({
+  updateIsEngineOpen,
+}: {
+  updateIsEngineOpen: (value: boolean) => void;
+}) {
   const [appWindow, setAppWindow] = useState<Window | null>(null);
   useEffect(() => {
     async function fetchWindow() {

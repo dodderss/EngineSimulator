@@ -12,26 +12,40 @@ function BottomEnd() {
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
-        <div className="innerColumn w-full">
+        <div className="innerColumn w-full h-full">
           <div className="columnHeader w-full border-b-2 border-white">
             <h2>Engine Block</h2>
           </div>
-          <div className="columnContents w-full ">
-            <div className="blockTable">
-              <div className="materialCol w-full ">
-                <div className="blockHeader border-r-2 border-white">
+          <div className="columnContents w-full h-full">
+            <div className="blockTable h-full">
+              <div className="materialCol w-full border-r-white border-2 border-t-0 border-l-0">
+                <div className="blockHeader">
                   <p>Material</p>
                 </div>
               </div>
-              <div className="layoutCol w-full ">
+              <div className="layoutCol w-full h-full ">
                 <div className="blockHeader">
                   <p>Layout</p>
                 </div>
-                <Options
-                  options={["Inline", "V 60°", "V 90°"]}
-                  value="Inline"
-                  onChange={(value) => setLayout(value)}
-                />
+                <div className="h-full flex flex-row justify-between">
+                  <div className="pl-3 pr-3 pt-1">
+                    <Options
+                      options={["Inline", "V 60°", "V 90°"]}
+                      value="Inline"
+                      onChange={(value) => {
+                        setLayout(value);
+                      }}
+                    />
+                  </div>
+
+                  <div className="border-l-2 border-white  pl-3 pr-3 pt-1">
+                    <Options
+                      options={["3", "4", "5", "6"]}
+                      value="6"
+                      onChange={(value) => setLayout(value)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
