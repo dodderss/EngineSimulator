@@ -17,7 +17,7 @@ function StatisticList() {
       <h1 className="text-4xl">Statistics</h1>
       <StatisticItem
         image={PowerIcon.toString()}
-        text={`${engine.power.toFixed(0)} HP`}
+        text={`${engine.power.toFixed(0)} kW`}
       />
       <StatisticItem
         image={TorqueIcon.toString()}

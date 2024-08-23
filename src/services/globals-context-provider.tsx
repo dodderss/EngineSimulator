@@ -12,28 +12,28 @@ interface Props {
 export const EngineContextProvider: React.FunctionComponent<Props> = (
   props: Props
 ): JSX.Element => {
-  /**
-   * Using react hooks, set the default state
-   */
   const [state, setState] = useState<AppState>({
     engine: DummyEngine,
     updateState: () => {},
   });
 
-  /**
-   * Declare the update state method that will handle the state values
-   */
   const updateState = (newState: Partial<AppState>) => {
-    setState((prevState) => ({ ...prevState, ...newState }));
+    setState((prevState) => {
+      return {
+        ...prevState,
+        engine: {
+          ...prevState.engine,
+          ...newState.engine,
+        },
+        ...newState,
+      };
+    });
   };
 
   useEffect(() => {
     RunCalculations(state.engine, state.updateState);
-  }, [state]);
+  }, [state.engine, state.updateState]);
 
-  /**
-   * Context wrapper that will provider the state values to all its children nodes
-   */
   return (
     <EngineContext.Provider value={{ ...state, updateState }}>
       {props.children}

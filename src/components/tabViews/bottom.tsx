@@ -1,13 +1,12 @@
 import Slider from "../ui/slider";
 import "./tabElement.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { EngineContext } from "../../services/globals";
 import Options from "../ui/options";
 import RunCalculations from "../../services/calculations";
+import TabOptionData from "../../services/tabOptionData";
 
 function BottomEnd() {
-  const [, setLayout] = useState("Inline");
-
   const { updateState, engine } = useContext(EngineContext);
   return (
     <div className="bottomEnd">
@@ -30,19 +29,100 @@ function BottomEnd() {
                 <div className="h-full flex flex-row justify-between">
                   <div className="pl-3 pr-3 pt-1">
                     <Options
-                      options={["Inline", "V 60°", "V 90°"]}
-                      value="Inline"
+                      options={TabOptionData.blockTypes.map(
+                        (type) => type.name
+                      )}
+                      value={
+                        engine.engineType === "i"
+                          ? "Inline"
+                          : engine.engineType === "v60"
+                          ? "V60"
+                          : "V90"
+                      }
                       onChange={(value) => {
-                        setLayout(value);
+                        TabOptionData.blockTypes.forEach((type) => {
+                          if (type.name === value) {
+                            updateState({
+                              engine: {
+                                ...engine,
+                                engineType: type.value,
+                              },
+                            });
+                            RunCalculations({
+                              ...engine,
+                              engineType: type.value,
+                            }, updateState);
+                          }
+                        });
                       }}
                     />
                   </div>
 
                   <div className="border-l-2 border-white  pl-3 pr-3 pt-1">
                     <Options
-                      options={["3", "4", "5", "6"]}
-                      value="6"
-                      onChange={(value) => setLayout(value)}
+                      options={
+                        engine.engineType === "i"
+                          ? TabOptionData.inlineBlockTypes.map(
+                              (type) => type.name
+                            )
+                          : engine.engineType === "v60"
+                          ? TabOptionData.v60BlockTypes.map((type) => type.name)
+                          : TabOptionData.v90BlockTypes.map((type) => type.name)
+                      }
+                      value={engine.engineCylinders.toString()}
+                      onChange={(value) => {
+                        switch (engine.engineType) {
+                          case "i":
+                            TabOptionData.inlineBlockTypes.forEach((type) => {
+                              if (type.name === value) {
+                                updateState({
+                                  engine: {
+                                    ...engine,
+                                    engineCylinders: type.value,
+                                  },
+                                });
+                                RunCalculations({
+                                  ...engine,
+                                  engineCylinders: type.value,
+                                }, updateState);
+                              }
+                            });
+                            break;
+                          case "v60":
+                            TabOptionData.v60BlockTypes.forEach((type) => {
+                              if (type.name === value) {
+                                updateState({
+                                  engine: {
+                                    ...engine,
+                                    engineCylinders: type.value,
+                                  },
+                                });
+                                RunCalculations({
+                                  ...engine,
+                                  engineCylinders: type.value,
+                                }, updateState);
+                              }
+                            });
+                            break;
+                          case "v90":
+                            TabOptionData.v90BlockTypes.forEach((type) => {
+                              if (type.name === value) {
+                                updateState({
+                                  engine: {
+                                    ...engine,
+                                    engineCylinders: type.value,
+                                  },
+                                });
+                                RunCalculations({
+                                  ...engine,
+                                  engineCylinders: type.value,
+                                }, updateState);
+                              }
+                            });
+                            break;
+                        }
+                        
+                      }}
                     />
                   </div>
                 </div>

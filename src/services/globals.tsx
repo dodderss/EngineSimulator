@@ -54,7 +54,7 @@ export const DummyEngine: Engine = {
   fuelQuality: 95, // Default to 95 octane
   fuelType: "Petrol", // Default to Petrol
   turbo: false, // Default to naturally aspirated
-  engineType: "Inline-6", // Default to Inline-6
+  engineType: "i", // Default to Inline-6
   engineCylinders: 6, // Default to 6 cylinders
   turboPressure: 0, // Default to 0 bar (no turbo)
   exhaustSize: 2.5, // Default to 2.5 inches
