@@ -8,6 +8,18 @@ import Slider from "../ui/slider";
 function TopEnd() {
   const { updateState, engine } = useContext(EngineContext);
 
+  const findIndexByValue = (
+    dataList: { name: string; value: any; [key: string]: any }[],
+    targetValue: string
+  ): number => {
+    for (let index = 0; index < dataList.length; index++) {
+      if (dataList[index].value === targetValue) {
+        return index;
+      }
+    }
+    return -1; // Return -1 if the value is not found
+  };
+
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
@@ -21,11 +33,10 @@ function TopEnd() {
                 (type) => type.name
               )}
               value={
-                engine.headType === "sohc"
-                  ? "Single Overhead Cam"
-                  : engine.headType === "dohc"
-                  ? "Dual Overhead Cam"
-                  : "Pushrod"
+                findIndexByValue(
+                  TabOptionData.headTypes,
+                  engine.headType
+                )
               }
               onChange={(value) => {
                 TabOptionData.headTypes.forEach((type) => {
@@ -62,11 +73,10 @@ function TopEnd() {
                 (material) => material.name
               )}
               value={
-                engine.headMaterial === "castIron"
-                  ? "Cast Iron"
-                  : engine.headMaterial === "aluminiumAlloy"
-                  ? "Aluminium Alloy"
-                  : engine.headMaterial === "vcgi" ? "VGCI" : "Titanium"
+                findIndexByValue(
+                  TabOptionData.headMaterials,
+                  engine.headMaterial
+                )
               }
               onChange={(value) => {
                 TabOptionData.headMaterials.forEach((type) => {

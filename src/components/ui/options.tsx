@@ -3,13 +3,13 @@ import "./options.tsx.css";
 
 interface Props {
   options: string[];
-  value: string;
+  value: number;
   onChange: (value: string) => void;
 }
 
 function Options(props: Props) {
   const [selectedOption, setSelectedOption] = useState(
-    props.options.indexOf(props.value)
+    props.value
   );
 
   const OptionItem = (props2: { label: string; index: number }) => {

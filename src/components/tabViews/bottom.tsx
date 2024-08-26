@@ -19,10 +19,22 @@ function BottomEnd() {
     });
   };
 
+  const findIndexByValue = (
+    dataList: { name: string; value: any; [key: string]: any }[],
+    targetValue: string
+  ): number => {
+    for (let index = 0; index < dataList.length; index++) {
+      if (dataList[index].value === targetValue) {
+        return index;
+      }
+    }
+    return -1; // Return -1 if the value is not found
+  };
+
   return (
     <div className="bottomEnd">
-      <div className="column column1 overflow-y-auto">
-        <div className="innerColumn w-full overflow-y-scroll overflow-x-scroll">
+      <div className="column column1">
+        <div className="innerColumn w-full h-full overflow-y-auto">
           <div className="columnHeader w-full border-b-2 border-white">
             <h2>Engine Block</h2>
           </div>
@@ -38,13 +50,10 @@ function BottomEnd() {
                       options={TabOptionData.blockMaterials.map(
                         (material) => material.name
                       )}
-                      value={
-                        engine.blockMaterial === "castIron"
-                          ? "Cast Iron"
-                          : engine.blockMaterial === "aluminiumAlloy"
-                          ? "Aluminium Alloy"
-                          : "VGCI"
-                      }
+                      value={findIndexByValue(
+                        TabOptionData.blockMaterials,
+                        engine.blockMaterial
+                      )}
                       onChange={(value) =>
                         handleOptionChange(
                           TabOptionData.blockMaterials,
@@ -66,13 +75,10 @@ function BottomEnd() {
                       options={TabOptionData.blockTypes.map(
                         (type) => type.name
                       )}
-                      value={
-                        engine.engineType === "i"
-                          ? "Inline"
-                          : engine.engineType === "v60"
-                          ? "V60"
-                          : "V90"
-                      }
+                      value={findIndexByValue(
+                        TabOptionData.blockTypes,
+                        engine.engineType
+                      )}
                       onChange={(value) =>
                         handleOptionChange(
                           TabOptionData.blockTypes,
@@ -93,7 +99,22 @@ function BottomEnd() {
                           ? TabOptionData.v60BlockTypes.map((type) => type.name)
                           : TabOptionData.v90BlockTypes.map((type) => type.name)
                       }
-                      value={engine.engineCylinders.toString()}
+                      value={
+                        engine.engineType === "i"
+                          ? findIndexByValue(
+                              TabOptionData.inlineBlockTypes,
+                              engine.engineCylinders.toString()
+                            )
+                          : engine.engineType === "v60"
+                          ? findIndexByValue(
+                              TabOptionData.v60BlockTypes,
+                              engine.engineCylinders.toString()
+                            )
+                          : findIndexByValue(
+                              TabOptionData.v90BlockTypes,
+                              engine.engineCylinders.toString()
+                            )
+                      }
                       onChange={(value) => {
                         const blockTypes =
                           engine.engineType === "i"
@@ -167,15 +188,10 @@ function BottomEnd() {
                 options={TabOptionData.pistonMaterials.map(
                   (material) => material.name
                 )}
-                value={
-                  engine.pistonMaterial === "aluminiumAlloy"
-                    ? "Aluminium Alloy"
-                    : engine.pistonMaterial === "forgedAluminium"
-                    ? "Forged Aluminium"
-                    : engine.pistonMaterial === "hypereutectic"
-                    ? "Hypereutectic Aluminium"
-                    : "Steel"
-                }
+                value={findIndexByValue(
+                  TabOptionData.pistonMaterials,
+                  engine.pistonMaterial
+                )}
                 onChange={(value) =>
                   handleOptionChange(
                     TabOptionData.pistonMaterials,

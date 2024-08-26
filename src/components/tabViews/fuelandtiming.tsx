@@ -7,6 +7,18 @@ import Options from "../ui/options";
 function FuelAndTiming() {
   const { updateState, engine } = useContext(EngineContext);
 
+  const findIndexByValue = (
+    dataList: { name: string; value: any; [key: string]: any }[],
+    targetValue: string
+  ): number => {
+    for (let index = 0; index < dataList.length; index++) {
+      if (dataList[index].value === targetValue) {
+        return index;
+      }
+    }
+    return -1; // Return -1 if the value is not found
+  };
+
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
@@ -17,7 +29,10 @@ function FuelAndTiming() {
           <div className="columnContents w-full blockTable materialColflex flex-row justify-between pl-3 pr-3 pt-1">
             <Options
               options={TabOptionData.fuelQualities.map((type) => type.name)}
-              value={engine.fuelQuality + " Octane"}
+              value={findIndexByValue(
+                TabOptionData.fuelQualities,
+                engine.fuelQuality
+              )}
               onChange={(value) => {
                 TabOptionData.fuelQualities.forEach((type) => {
                   if (type.name === value) {
@@ -57,7 +72,7 @@ function FuelAndTiming() {
                   <div className="pl-3 pr-3 pt-1">
                     <Options
                       options={["No", "Yes"]}
-                      value={engine.vvt ? "Yes" : "No"}
+                      value={engine.vvt ? 1 : 0}
                       onChange={(value) => {
                         updateState({
                           engine: {
@@ -85,7 +100,7 @@ function FuelAndTiming() {
                   <div className="pl-3 pr-3 pt-1">
                     <Options
                       options={["No", "Yes"]}
-                      value={engine.vvl ? "Yes" : "No"}
+                      value={engine.vvl ? 1 : 0}
                       onChange={(value) => {
                         updateState({
                           engine: {
@@ -117,13 +132,8 @@ function FuelAndTiming() {
           <div className="columnContents w-full blockTable materialColflex flex-row justify-between pl-3 pr-3 pt-1">
             <Options
               options={TabOptionData.intakeTypes.map((type) => type.name)}
-              value={
-                engine.intakeType === "carb"
-                  ? "Carborated"
-                  : engine.intakeType === "mechInj"
-                  ? "Mechanical Injection"
-                  : "Electronic Fuel Injection"
-              }
+              value={findIndexByValue(TabOptionData.intakeTypes, engine.intakeType)}
+
               onChange={(value) => {
                 TabOptionData.intakeTypes.forEach((type) => {
                   if (type.name === value) {
