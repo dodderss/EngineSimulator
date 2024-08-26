@@ -27,6 +27,7 @@ class TabOptionData {
   public static blockMaterials = [
     {
       name: "Cast Iron",
+      value: "castIron",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -37,7 +38,7 @@ class TabOptionData {
     },
     {
       name: "Aluminium Alloy",
-
+      value: "aluminiumAlloy",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -48,7 +49,7 @@ class TabOptionData {
     },
     {
       name: "VGCI",
-
+      value: "vgci",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -59,7 +60,7 @@ class TabOptionData {
     },
     {
       name: "Titanium",
-
+      value: "titanium",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -74,6 +75,7 @@ class TabOptionData {
   public static pistonMaterials = [
     {
       name: "Aluminium Alloy",
+      value: "aluminiumAlloy",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -84,6 +86,7 @@ class TabOptionData {
     },
     {
       name: "Forged Aluminium",
+      value: "forgedAluminium",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -93,7 +96,8 @@ class TabOptionData {
         "Forged aluminium pistons are stronger than cast pistons and are used in high-performance engines.",
     },
     {
-      name: "Hypereutectic",
+      name: "Hypereutectic Aluminium",
+      value: "hypereutectic",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -104,6 +108,7 @@ class TabOptionData {
     },
     {
       name: "Steel",
+      value: "steel",
       //   placeholders
       density: 0,
       priceDensity: 0,
@@ -111,6 +116,101 @@ class TabOptionData {
       maxTorque: 0,
       description:
         "Steel pistons are strong and durable and are used in heavy-duty engines such as trucks and tractors.",
+    },
+  ];
+  public static headTypes = [
+    {
+      name: "Single Overhead Cam",
+      value: "sohc",
+      //   placeholders
+      frictionalLoss: 0,
+      weight: 0,
+      description:
+        "Single Overhead Cam heads have one camshaft per cylinder bank that operates both the intake and exhaust valves.",
+    },
+    {
+      name: "Dual Overhead Cam",
+      value: "dohc",
+      //   placeholders
+      frictionalLoss: 0,
+      weight: 0,
+      description:
+        "Dual Overhead Cam heads have two camshafts per cylinder bank, one for the intake valves and one for the exhaust valves.",
+    },
+    {
+      name: "Pushrod",
+      value: "pushrod",
+      //   placeholders
+      frictionalLoss: 0,
+      weight: 0,
+      description:
+        "Pushrod heads have a single camshaft in the engine block that operates the valves via pushrods and rocker arms.",
+    },
+  ];
+
+  public static aspirationTypes = [
+    {
+      name: "Naturally Aspirated",
+      value: "na",
+      allowsBoostControls: false,
+    },
+    {
+      name: "Turbocharged",
+      value: "turbo",
+      allowsBoostControls: true,
+    },
+    {
+      name: "Supercharged",
+      value: "super",
+      allowsBoostControls: true,
+    },
+  ];
+
+  public static fuelQualities = [
+    {
+      name: "80 Octane",
+      value: "80",
+      // placeholder
+      performanceEffector: 0,
+    },
+    {
+      name: "90 Octane",
+      value: "90",
+      // placeholder
+      performanceEffector: 0,
+    },
+    {
+      name: "95 Octane",
+      value: "95",
+      // placeholder
+      performanceEffector: 0,
+    },
+    {
+      name: "100 Octane",
+      value: "100",
+      // placeholder
+      performanceEffector: 0,
+    },
+  ];
+
+  public static intakeTypes = [
+    {
+      name: "Carborated",
+      value: "carb",
+      // placeholder
+      performanceEffector: 0,
+    },
+    {
+      name: "Mechanical Injection",
+      value: "mechInj",
+      // placeholder
+      performanceEffector: 0,
+    },
+    {
+      name: "Electronic Injection",
+      value: "efi",
+      // placeholder
+      performanceEffector: 0,
     },
   ];
 }

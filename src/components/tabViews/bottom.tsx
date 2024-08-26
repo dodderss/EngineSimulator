@@ -8,26 +8,60 @@ import TabOptionData from "../../services/tabOptionData";
 
 function BottomEnd() {
   const { updateState, engine } = useContext(EngineContext);
+
+  const handleOptionChange = (options: any[], value: string, key: string) => {
+    options.forEach((type: { name: any; value: any }) => {
+      if (type.name === value) {
+        const newEngine = { ...engine, [key]: type.value };
+        updateState({ engine: newEngine });
+        RunCalculations(newEngine, updateState);
+      }
+    });
+  };
+
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
-        <div className="innerColumn w-full h-full">
+        <div className="innerColumn w-full overflow-y-scroll overflow-x-scroll">
           <div className="columnHeader w-full border-b-2 border-white">
             <h2>Engine Block</h2>
           </div>
           <div className="columnContents w-full h-full">
-            <div className="blockTable h-full">
-              <div className="materialCol w-full border-r-white border-2 border-t-0 border-l-0">
+            <div className="blockTable">
+              <div className="materialCol w-full border-r-white border-r-2">
                 <div className="blockHeader">
                   <p>Material</p>
                 </div>
+                <div className="flex flex-row justify-between w-full">
+                  <div className="pl-3 pr-3 pt-1 box-border">
+                    <Options
+                      options={TabOptionData.blockMaterials.map(
+                        (material) => material.name
+                      )}
+                      value={
+                        engine.blockMaterial === "castIron"
+                          ? "Cast Iron"
+                          : engine.blockMaterial === "aluminiumAlloy"
+                          ? "Aluminium Alloy"
+                          : "VGCI"
+                      }
+                      onChange={(value) =>
+                        handleOptionChange(
+                          TabOptionData.blockMaterials,
+                          value,
+                          "blockMaterial"
+                        )
+                      }
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="layoutCol w-full h-full ">
+              <div className="layoutCol w-full h-full">
                 <div className="blockHeader">
                   <p>Layout</p>
                 </div>
-                <div className="h-full flex flex-row justify-between">
-                  <div className="pl-3 pr-3 pt-1">
+                <div className="flex flex-row justify-between h-full">
+                  <div className="pl-3 pr-3 pt-1 box-border">
                     <Options
                       options={TabOptionData.blockTypes.map(
                         (type) => type.name
@@ -39,26 +73,16 @@ function BottomEnd() {
                           ? "V60"
                           : "V90"
                       }
-                      onChange={(value) => {
-                        TabOptionData.blockTypes.forEach((type) => {
-                          if (type.name === value) {
-                            updateState({
-                              engine: {
-                                ...engine,
-                                engineType: type.value,
-                              },
-                            });
-                            RunCalculations({
-                              ...engine,
-                              engineType: type.value,
-                            }, updateState);
-                          }
-                        });
-                      }}
+                      onChange={(value) =>
+                        handleOptionChange(
+                          TabOptionData.blockTypes,
+                          value,
+                          "engineType"
+                        )
+                      }
                     />
                   </div>
-
-                  <div className="border-l-2 border-white  pl-3 pr-3 pt-1">
+                  <div className="border-l-2 border-white pl-3 pr-3 pt-1 box-border">
                     <Options
                       options={
                         engine.engineType === "i"
@@ -71,57 +95,17 @@ function BottomEnd() {
                       }
                       value={engine.engineCylinders.toString()}
                       onChange={(value) => {
-                        switch (engine.engineType) {
-                          case "i":
-                            TabOptionData.inlineBlockTypes.forEach((type) => {
-                              if (type.name === value) {
-                                updateState({
-                                  engine: {
-                                    ...engine,
-                                    engineCylinders: type.value,
-                                  },
-                                });
-                                RunCalculations({
-                                  ...engine,
-                                  engineCylinders: type.value,
-                                }, updateState);
-                              }
-                            });
-                            break;
-                          case "v60":
-                            TabOptionData.v60BlockTypes.forEach((type) => {
-                              if (type.name === value) {
-                                updateState({
-                                  engine: {
-                                    ...engine,
-                                    engineCylinders: type.value,
-                                  },
-                                });
-                                RunCalculations({
-                                  ...engine,
-                                  engineCylinders: type.value,
-                                }, updateState);
-                              }
-                            });
-                            break;
-                          case "v90":
-                            TabOptionData.v90BlockTypes.forEach((type) => {
-                              if (type.name === value) {
-                                updateState({
-                                  engine: {
-                                    ...engine,
-                                    engineCylinders: type.value,
-                                  },
-                                });
-                                RunCalculations({
-                                  ...engine,
-                                  engineCylinders: type.value,
-                                }, updateState);
-                              }
-                            });
-                            break;
-                        }
-                        
+                        const blockTypes =
+                          engine.engineType === "i"
+                            ? TabOptionData.inlineBlockTypes
+                            : engine.engineType === "v60"
+                            ? TabOptionData.v60BlockTypes
+                            : TabOptionData.v90BlockTypes;
+                        handleOptionChange(
+                          blockTypes,
+                          value,
+                          "engineCylinders"
+                        );
                       }}
                     />
                   </div>
@@ -131,59 +115,76 @@ function BottomEnd() {
           </div>
         </div>
       </div>
+
       <div className="column column2 overflow-y-scroll overflow-x-scroll">
         <div className="innerColumn w-full">
-          <div className="columnHeader w-full border-b-2 border-white ">
+          <div className="columnHeader w-full border-b-2 border-white">
             <h2>Capacity & Displacement</h2>
           </div>
-          <div className="columnContents w-full flex p-5 ">
+          <div className="columnContents w-full flex p-5">
             <div>
               <Slider
-                label="Bore Diameter"
+                label={"Bore: " + engine.bore.toString() + "mm"}
                 max={150}
                 min={50}
                 step={0.5}
                 initialValue={engine.bore}
                 onChange={(value) => {
-                  const newEngine = {
-                    ...engine,
-                    bore: value,
-                  };
+                  const newEngine = { ...engine, bore: value };
                   updateState({ engine: newEngine });
                   RunCalculations(newEngine, updateState);
                 }}
               />
               <Slider
-                label="Stroke"
+                label={"Stroke: " + engine.stroke.toString() + "mm"}
                 max={150}
                 min={50}
                 step={0.5}
                 initialValue={engine.stroke}
                 onChange={(value) => {
-                  const newEngine = {
-                    ...engine,
-                    stroke: value,
-                  };
+                  const newEngine = { ...engine, stroke: value };
                   updateState({ engine: newEngine });
                   RunCalculations(newEngine, updateState);
                 }}
               />
             </div>
             <div>
-              <p>{engine.bore}</p>
-              <p>{engine.stroke}</p>
-              <p>{engine.displacement.toPrecision(5)}</p>
+              <h2 className="text-center">Displacement:</h2>
+              <h2 className="text-center">{engine.displacement.toFixed(2)}L</h2>
             </div>
           </div>
         </div>
       </div>
+
       <div className="column column3">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white">
             <h2>Piston Material</h2>
           </div>
-          <div className="columnContents w-full overflow-y-auto">
-            <>hello</>
+          <div className="flex flex-row justify-between">
+            <div className="pl-3 pr-3 pt-1">
+              <Options
+                options={TabOptionData.pistonMaterials.map(
+                  (material) => material.name
+                )}
+                value={
+                  engine.pistonMaterial === "aluminiumAlloy"
+                    ? "Aluminium Alloy"
+                    : engine.pistonMaterial === "forgedAluminium"
+                    ? "Forged Aluminium"
+                    : engine.pistonMaterial === "hypereutectic"
+                    ? "Hypereutectic Aluminium"
+                    : "Steel"
+                }
+                onChange={(value) =>
+                  handleOptionChange(
+                    TabOptionData.pistonMaterials,
+                    value,
+                    "pistonMaterial"
+                  )
+                }
+              />
+            </div>
           </div>
         </div>
       </div>

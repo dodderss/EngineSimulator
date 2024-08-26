@@ -1,30 +1,30 @@
 import React from "react";
 
 export interface Engine {
-  bore: number;
+  bore: number; 
   stroke: number;
   compressionRatio: number;
   displacement: number;
   power: number;
   torque: number;
   rpmLimit: number;
-  fuelQuality: number;
-  fuelType: string;
-  turbo: boolean;
+  fuelQuality: string;
+  aspirationType: string;
   engineType: string;
   engineCylinders: number;
-  turboPressure: number;
+  boostPressure: number;
+  boostProviderSize: number;
   exhaustSize: number;
   engineWeight: number;
   enginePrice: number;
   engineName: string;
   fileName: string;
+  filePath: string;
   blockMaterial: string;
   headMaterial: string;
   pistonMaterial: string;
-  crankshaftMaterial: string;
-  valveMaterial: string;
   headType: string;
+  intakeType: string;
   vvl: boolean;
   vvt: boolean;
   volumetricEfficiency: number;
@@ -33,14 +33,6 @@ export interface Engine {
   engineLength: number;
   engineWidth: number;
   engineHeight: number;
-  headColour: string;
-  blockColour: string;
-  valveCoverColour: string;
-  turboColour: string;
-  headDecorativeMaterial: string;
-  blockDecorativeMaterial: string;
-  valveCoverDecorativeMaterial: string;
-  turboDecorativeMaterial: string;
 }
 
 export const DummyEngine: Engine = {
@@ -50,41 +42,33 @@ export const DummyEngine: Engine = {
   displacement: 2979, // Default to 2979 cc
   power: 150, // Default to 150 kw
   torque: 200, // Default to 200 Nm
-  rpmLimit: 10000, // Default to 10000 rpm
-  fuelQuality: 95, // Default to 95 octane
-  fuelType: "Petrol", // Default to Petrol
-  turbo: false, // Default to naturally aspirated
-  engineType: "i", // Default to Inline-6
+  rpmLimit: 7000, // Default to 10000 rpm
+  fuelQuality: "95", // Default to 95 octane
+  aspirationType: "na", // Default to naturally aspirated
+  engineType: "i", // Default to Inline
   engineCylinders: 6, // Default to 6 cylinders
-  turboPressure: 0, // Default to 0 bar (no turbo)
-  exhaustSize: 2.5, // Default to 2.5 inches
+  boostPressure: 0, // Default to 0 bar (no turbo)
+  boostProviderSize: 0, // Default to 0mm
+  exhaustSize: 30, // Default to 30mm
   engineWeight: 150, // Default to 150 kg
-  enginePrice: 5000, // Default to 5000 USD
+  enginePrice: 500, // Default to 5000 GBP
   engineName: "My Engine", // Default to "My Engine"
   // eslint-disable-next-line no-useless-escape
   fileName: "/My Engine.engine", // Default to "/My Engine.engine"
-  blockMaterial: "Aluminum", // Default to Aluminum
-  headMaterial: "Aluminum", // Default to Aluminum
-  pistonMaterial: "Forged Steel", // Default to Forged Steel
-  crankshaftMaterial: "Forged Steel", // Default to Forged Steel
-  valveMaterial: "Titanium", // Default to Titanium
-  headType: "DOHC", // Default to DOHC
+  filePath: "", // Default to ""
+  blockMaterial: "castIron", // Default to Aluminum
+  headMaterial: "castIron", // Default to Aluminum
+  pistonMaterial: "aluminiumAlloy", // Default to Forged Steel
+  headType: "dohc", // Default to DOHC
+  intakeType: "mechInj",
   vvl: false, // Default to no VVL
   vvt: false, // Default to no VVT
-  volumetricEfficiency: 90, // Default to 90%
-  mechanicalEfficiency: 85, // Default to 85%
-  totalEfficiency: 75, // Default to 75%
+  volumetricEfficiency: 60, // Default to 60%
+  mechanicalEfficiency: 30, // Default to 30%
+  totalEfficiency: 30, // Default to 30%
   engineLength: 600, // Default to 600 mm
   engineWidth: 600, // Default to 600 mm
   engineHeight: 600, // Default to 600 mm
-  headColour: "Silver", // Default to Silver
-  blockColour: "Black", // Default to Black
-  valveCoverColour: "Red", // Default to Red
-  turboColour: "Silver", // Default to Silver
-  headDecorativeMaterial: "Carbon Fiber", // Default to Carbon Fiber
-  blockDecorativeMaterial: "Carbon Fiber", // Default to Carbon Fiber
-  valveCoverDecorativeMaterial: "Carbon Fiber", // Default to Carbon Fiber
-  turboDecorativeMaterial: "Carbon Fiber", // Default to Carbon Fiber
 };
 
 export interface AppState {

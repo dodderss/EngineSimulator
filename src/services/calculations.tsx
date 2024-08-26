@@ -48,7 +48,7 @@ const RunCalculations = (
 
     // ---- MEP ---- //
     mep.push(
-      (10.5 + (11 - 8) * 0.5 + (0 - 1) * 2) *
+      (10.5 + (engine.compressionRatio - 8) * 0.5 + (engine.boostPressure - 1) * 2) *
         (engine.vvl ? vvlFactor[index] : 1) *
         (engine.vvt ? vvtFactor[index] : 1)
     );

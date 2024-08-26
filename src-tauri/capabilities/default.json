@@ -10,6 +10,16 @@
     "core:window:default",
     "core:window:allow-close",
     "core:window:allow-minimize",
-    "core:window:allow-maximize"
+    "core:window:allow-maximize",
+    "fs:default",
+    "fs:allow-write-text-file",
+    "fs:allow-read-text-file",
+    "fs:allow-create",
+    {
+      "identifier": "fs:scope",
+      "allow": [{ "path": "$AppLocalData" }, { "path": "$AppLocalData/**" },{ "path": "$APPDATA" }, { "path": "$APPDATA/**" }]
+    }
+    
+    
   ]
 }

@@ -2,6 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-  app_lib::run();
+    let _ = fix_path_env::fix(); // <---- Add this
+    app_lib::run();
 }
-

@@ -1,21 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.17b485a2.css",
-    "main.js": "/static/js/main.c1f23d05.js",
+    "main.css": "/static/css/main.29054da9.css",
+    "main.js": "/static/js/main.f073695b.js",
+    "static/media/menuLogo.png": "/static/media/menuLogo.13d5ffda0cede2f52320.png",
     "static/media/torque.svg": "/static/media/torque.77b80dab2322c96e4410f973ad008d05.svg",
     "static/media/price.svg": "/static/media/price.32a9139edad06bc8e7448fe345b2bcad.svg",
     "static/media/efficiency.svg": "/static/media/efficiency.2fdae2e764abb6ee1c064a83bc96ec9f.svg",
     "static/media/power.svg": "/static/media/power.8d87ececf9737c29f54558618a337513.svg",
     "static/media/weight.svg": "/static/media/weight.d7fbc2ef80d29e0692a6b9cc303e092b.svg",
+    "static/media/openFile.svg": "/static/media/openFile.7a6dc5d4a5f4c35ac6cb526ded749eee.svg",
     "index.html": "/index.html",
     "static/media/close.svg": "/static/media/close.1a37442d623a1928e556173b94edcb64.svg",
+    "static/media/newFile.svg": "/static/media/newFile.005e95df4cd619b83fd74811f4441ea4.svg",
     "static/media/maximise.svg": "/static/media/maximise.b9c7af1ba0a320a8812928bbfe22560c.svg",
     "static/media/minimise.svg": "/static/media/minimise.966eccf0062ca6bb5c14707d72dbfdb0.svg",
-    "main.17b485a2.css.map": "/static/css/main.17b485a2.css.map",
-    "main.c1f23d05.js.map": "/static/js/main.c1f23d05.js.map"
+    "main.29054da9.css.map": "/static/css/main.29054da9.css.map",
+    "main.f073695b.js.map": "/static/js/main.f073695b.js.map"
   },
   "entrypoints": [
-    "static/css/main.17b485a2.css",
-    "static/js/main.c1f23d05.js"
+    "static/css/main.29054da9.css",
+    "static/js/main.f073695b.js"
   ]
 }
