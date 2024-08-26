@@ -1,7 +1,19 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use tauri::Emitter;
 
+#[derive(Clone, serde::Serialize)]
+struct Payload {
+  args: Vec<String>,
+  cwd: String,
+}
 fn main() {
-    let _ = fix_path_env::fix(); // <---- Add this
-    app_lib::run();
+    tauri::Builder::default()
+        .plugin(tauri_plugin_deep_link::init())
+        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+            println!("{}, {argv:?}, {cwd}", app.package_info().name);
+            app.emit("single-instance", Payload { args: argv, cwd }).unwrap();
+        }))
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }

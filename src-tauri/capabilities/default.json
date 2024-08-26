@@ -2,9 +2,7 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "enables the default permissions",
-  "windows": [
-    "main"
-  ],
+  "windows": ["main"],
   "permissions": [
     "core:window:allow-start-dragging",
     "core:window:default",
@@ -15,11 +13,28 @@
     "fs:allow-write-text-file",
     "fs:allow-read-text-file",
     "fs:allow-create",
+    "fs:allow-app-write",
+    "core:resources:default",
+    "deep-link:default",
+    "core:event:default",
+
     {
       "identifier": "fs:scope",
-      "allow": [{ "path": "$AppLocalData" }, { "path": "$AppLocalData/**" },{ "path": "$APPDATA" }, { "path": "$APPDATA/**" }]
-    }
-    
-    
+      "allow": [
+        {
+          "path": "$AppLocalData"
+        },
+        {
+          "path": "$AppLocalData/**"
+        },
+        {
+          "path": "$APPDATA"
+        },
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    "dialog:default"
   ]
 }

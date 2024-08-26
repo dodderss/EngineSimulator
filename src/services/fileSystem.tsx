@@ -1,9 +1,20 @@
 import { create, BaseDirectory, open } from "@tauri-apps/plugin-fs";
+import { save } from '@tauri-apps/plugin-dialog';
 
-export async function createFile(path: string, contents: string) {
-  const file = create(path, { baseDir: BaseDirectory.AppLocalData });
-  (await file).write(new TextEncoder().encode(contents));
-  (await file).close();
+export async function createFile(contents: string) {
+  const path = await save({
+    filters: [
+      {
+        name: 'My Filter',
+        extensions: ['engine'],
+      },
+    ],
+  }).then(async (value) => {
+    const file = create(value!, { baseDir: BaseDirectory.AppLocalData });
+    (await file).write(new TextEncoder().encode(contents));
+    (await file).close();
+  })
+  
 }
 
 export async function writeFile(path: string, contents: string) {

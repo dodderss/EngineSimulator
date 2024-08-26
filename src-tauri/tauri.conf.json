@@ -19,7 +19,8 @@
         "minWidth": 1280,
         "minHeight": 720,
         "decorations": false,
-        "shadow": true
+        "shadow": true,
+        "dragDropEnabled": true
 
       }
     ],
@@ -36,7 +37,26 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
+    ],
+    "fileAssociations": [
+      {
+        "ext": ["engine"],
+        "mimeType": "text/plain",
+        "name": "Engine",
+        "description": "The file type for an Engine Simulator engine file",
+        "role": "Editor"
+      }
     ]
   },
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json"
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "plugins": {
+    "deep-link": {
+      "mobile": [
+        { "host": "engine.dodde.rs", "pathPrefix": ["/open"] }
+      ],
+      "desktop": {
+        "schemes": ["engine"]
+      }
+    }
+  }
 }

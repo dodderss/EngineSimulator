@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { EngineContext } from "../services/globals";
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import "./topBar.tsx.css";
+import { createFile } from "../services/fileSystem";
 
 function TopBar() {
   const { engine } = useContext(EngineContext);
@@ -25,7 +26,7 @@ function TopBar() {
       data-tauri-drag-region
       className="topBar flex items-center p-5 justify-between"
     >
-      <h1 className="text-4xl">{engine.engineName}</h1>
+      <h1 className="text-4xl" onClick={() => createFile(JSON.stringify(engine))}>{engine.engineName}</h1>
       <div className="flex flex-row space-x-5">
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"

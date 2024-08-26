@@ -34,11 +34,11 @@ function BottomEnd() {
   return (
     <div className="bottomEnd">
       <div className="column column1">
-        <div className="innerColumn w-full h-full overflow-y-auto">
-          <div className="columnHeader w-full border-b-2 border-white">
+        <div className="innerColumn w-full  overflow-y-auto">
+          <div className="columnHeader w-full border-b-2 border-white ">
             <h2>Engine Block</h2>
           </div>
-          <div className="columnContents w-full h-full">
+          <div className="columnContents w-full ">
             <div className="blockTable">
               <div className="materialCol w-full border-r-white border-r-2">
                 <div className="blockHeader">
@@ -65,11 +65,11 @@ function BottomEnd() {
                   </div>
                 </div>
               </div>
-              <div className="layoutCol w-full h-full">
+              <div className="materialCol w-full">
                 <div className="blockHeader">
                   <p>Layout</p>
                 </div>
-                <div className="flex flex-row justify-between h-full">
+                <div className="flex flex-row justify-between w-full">
                   <div className="pl-3 pr-3 pt-1 box-border">
                     <Options
                       options={TabOptionData.blockTypes.map(
