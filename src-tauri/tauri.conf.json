@@ -8,6 +8,7 @@
     "beforeDevCommand": "npm start",
     "beforeBuildCommand": "npm run build"
   },
+  
   "app": {
     "windows": [
       {

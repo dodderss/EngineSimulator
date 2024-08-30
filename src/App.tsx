@@ -6,58 +6,60 @@ import RunCalculations from "./services/calculations";
 import { EngineContext } from "./services/globals";
 import MenuScreen from "./components/menuScreen";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
-import { readFile } from "./services/fileSystem";
-import { listen } from '@tauri-apps/api/event'
-
+import { openFile, readFile } from "./services/fileSystem";
+import { listen } from "@tauri-apps/api/event";
 
 function App() {
   const { engine, updateState } = useContext(EngineContext);
   const [isEngineOpen, setIsEngineOpen] = useState(true);
   const [url, setUrl] = useState("");
-  
+
   useEffect(() => {
     RunCalculations(engine, updateState);
     const handleOpenUrl = async (urls: any) => {
       console.log("deep link:", urls);
-      setUrl(urls)
+      setUrl(urls);
 
-      updateState({engine: JSON.parse(await readFile(urls))})
+      updateState({ engine: JSON.parse(await readFile(urls)) });
     };
     const handleOpenUrlAsync = async () => {
       await onOpenUrl(handleOpenUrl);
     };
     handleOpenUrlAsync();
-    listen('tauri://file-drop', event => {
-      console.log(event)
-    })
+    listen("tauri://file-drop", (event) => {
+      console.log(event);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
 
-
-
-  return (
-    isEngineOpen ? (
-      <div className="App h-full">
-        <div className="flex">
-          <div className="modelViewer">
-            <p>{url}</p>
-          </div>
-          <div className="flex flex-col justify-end">
-            <TopBar />
-            <div className="powerGraph" />
-            <div className="torqueGraph" />
-          </div>
+  return isEngineOpen ? (
+    <div className="App h-full">
+      <div className="flex">
+        <div
+          className="modelViewer"
+          onClick={() => {
+            openFile().then((value) => {
+              console.log(value.toString());
+              updateState({ engine: JSON.parse(value.toString()) });
+            });
+          }}
+        >
+          <p>{url}</p>
         </div>
-        <div className="bottomLeftSection flex h-full">
-          <StatisticList />
-          <TabBar />
+        <div className="flex flex-col justify-end">
+          <TopBar />
+          <div className="powerGraph" />
+          <div className="torqueGraph" />
         </div>
-        <div className="rightSection bg-black fixed right-0 bottom-0" />
       </div>
-    ) : (
-      <MenuScreen updateIsEngineOpen={setIsEngineOpen}/>
-    )
+      <div className="bottomLeftSection flex h-full">
+        <StatisticList />
+        <TabBar />
+      </div>
+      <div className="rightSection bg-black fixed right-0 bottom-0" />
+    </div>
+  ) : (
+    <MenuScreen updateIsEngineOpen={setIsEngineOpen} />
   );
 }
 

@@ -2,7 +2,10 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "enables the default permissions",
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
+  
   "permissions": [
     "core:window:allow-start-dragging",
     "core:window:default",
@@ -14,10 +17,11 @@
     "fs:allow-read-text-file",
     "fs:allow-create",
     "fs:allow-app-write",
+    "fs:allow-app-read",
+    
     "core:resources:default",
     "deep-link:default",
     "core:event:default",
-
     {
       "identifier": "fs:scope",
       "allow": [
@@ -35,6 +39,7 @@
         }
       ]
     },
-    "dialog:default"
+    "dialog:default",
+    "fs:allow-open"
   ]
 }

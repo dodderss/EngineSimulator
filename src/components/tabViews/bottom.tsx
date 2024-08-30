@@ -28,7 +28,7 @@ function BottomEnd() {
         return index;
       }
     }
-    return -1; // Return -1 if the value is not found
+    return 0; // Return -1 if the value is not found
   };
 
   return (
