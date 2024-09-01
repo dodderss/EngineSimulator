@@ -215,4 +215,20 @@ class TabOptionData {
   ];
 }
 
+declare global {
+  interface String {
+    findName(inside: { value: string; name: string }[]): string;
+  }
+}
+/* eslint-disable no-extend-native */
+String.prototype.findName = function (
+  inside: { value: string; name: string }[]
+): string {
+  const foundItem = inside.find((item) => item.value === this.toString());
+  if (foundItem) {
+    return foundItem.name;
+  }
+  return "";
+};
+
 export default TabOptionData;

@@ -1,10 +1,9 @@
 import { create, BaseDirectory, open, readTextFile } from "@tauri-apps/plugin-fs";
 import { save } from '@tauri-apps/plugin-dialog';
 import { open as openDialogue } from '@tauri-apps/plugin-dialog';
-import { read } from "fs";
 
 export async function createFile(contents: string) {
-  const path = await save({
+  await save({
     filters: [
       {
         name: 'My Filter',
@@ -52,6 +51,6 @@ export async function openFile() {
     ],
   });
   const test = result as unknown as OpenDialogueResult;
-  console.log(await readFile(test.path));
+  await readFile(test.path);
   return await readFile(test.path)
 }

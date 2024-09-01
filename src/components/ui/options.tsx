@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./options.tsx.css";
 
 interface Props {
   options: string[];
-  value: number;
+  value: string;
   onChange: (value: string) => void;
+  uniqueKey?: string;
 }
 
 function Options(props: Props) {
   const [selectedOption, setSelectedOption] = useState(
-    props.value
+    props.options.indexOf(props.value)
   );
+
+  useEffect(() => {
+    setSelectedOption(props.options.indexOf(props.value));
+  }, [props.value, props.options]);
 
   const OptionItem = (props2: { label: string; index: number }) => {
     return (
@@ -29,9 +34,13 @@ function Options(props: Props) {
   };
 
   return (
-    <div className="options">
+    <div className="options" key={props.uniqueKey}>
       {props.options.map((option, index) => (
-        <OptionItem key={option} label={option} index={index} />
+        <OptionItem
+          key={`${props.uniqueKey}-${option}`}
+          label={option}
+          index={index}
+        />
       ))}
     </div>
   );

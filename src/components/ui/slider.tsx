@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import "./slider.tsx.css";
 
 interface SliderProps {
@@ -6,7 +6,7 @@ interface SliderProps {
   max: number;
   min: number;
   step: number;
-  initialValue: number;
+  value: number;
   onChange: (value: number) => void;
 }
 
@@ -15,16 +15,20 @@ const Slider: React.FC<SliderProps> = ({
   max,
   min,
   step,
-  initialValue,
+  value,
   onChange,
 }) => {
-  const [currentValue, setCurrentValue] = useState(initialValue);
+  const [currentValue, setCurrentValue] = useState(value);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value);
     setCurrentValue(newValue);
     onChange(newValue);
   };
+
+  useEffect(() => {
+    setCurrentValue(value);
+  }, [value]);
 
   return (
     <div className="flex flex-col pb-5">

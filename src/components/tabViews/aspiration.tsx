@@ -7,19 +7,6 @@ import Slider from "../ui/slider";
 
 function Aspiration() {
   const { updateState, engine } = useContext(EngineContext);
-
-  const findIndexByValue = (
-    dataList: { name: string; value: any; [key: string]: any }[],
-    targetValue: string
-  ): number => {
-    for (let index = 0; index < dataList.length; index++) {
-      if (dataList[index].value === targetValue) {
-        return index;
-      }
-    }
-    return -1; // Return -1 if the value is not found
-  };
-  
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
@@ -32,10 +19,11 @@ function Aspiration() {
               options={TabOptionData.aspirationTypes.map(
                 (aspiration) => aspiration.name
               )}
-              value={findIndexByValue(
-                TabOptionData.aspirationTypes,
-                engine.aspirationType
+              value={engine.aspirationType.findName(
+                TabOptionData.aspirationTypes
               )}
+              key="aspirationType"
+              uniqueKey="aspirationType"
               onChange={(value) => {
                 TabOptionData.aspirationTypes.forEach((type) => {
                   if (type.name === value) {
@@ -76,7 +64,7 @@ function Aspiration() {
                     max={50}
                     min={0}
                     step={0.5}
-                    initialValue={engine.boostPressure}
+                    value={engine.boostPressure}
                     onChange={(value) => {
                       const newEngine = {
                         ...engine,
@@ -102,7 +90,7 @@ function Aspiration() {
                     max={500}
                     min={0}
                     step={1}
-                    initialValue={engine.boostProviderSize}
+                    value={engine.boostProviderSize}
                     onChange={(value) => {
                       const newEngine = {
                         ...engine,
