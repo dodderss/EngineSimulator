@@ -1,3 +1,4 @@
 node_modules
 build
 Engine Simulator.code-workspace
+.DS_Store
