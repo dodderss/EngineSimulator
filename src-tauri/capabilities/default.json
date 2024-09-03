@@ -18,9 +18,7 @@
     "fs:allow-create",
     "fs:allow-app-write",
     "fs:allow-app-read",
-    
     "core:resources:default",
-    "deep-link:default",
     "core:event:default",
     {
       "identifier": "fs:scope",
