@@ -52,9 +52,11 @@ function App() {
         <div className="flex flex-col justify-end">
           <TopBar />
           <div className="powerGraph">
-            <Graph />
+            <Graph isTorque={false}/>
           </div>
-          <div className="torqueGraph" />
+          <div className="torqueGraph">
+          <Graph isTorque={true}/>
+          </div>
         </div>
       </div>
       <div className="bottomLeftSection flex h-full">

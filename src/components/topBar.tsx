@@ -1,6 +1,6 @@
-import CloseIcon from "../icons/system/close.svg";
-import MinimiseIcon from "../icons/system/minimise.svg";
-import MaximiseIcon from "../icons/system/maximise.svg";
+import CloseIcon from "../assets/icons/system/close.svg";
+import MinimiseIcon from "../assets/icons/system/minimise.svg";
+import MaximiseIcon from "../assets/icons/system/maximise.svg";
 
 import { useContext, useEffect, useState } from "react";
 import { EngineContext } from "../services/globals";

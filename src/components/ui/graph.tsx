@@ -12,9 +12,14 @@ type PowerSeries = {
   data: Power[];
 };
 
-const Graph = () => {
+type GraphProps = {
+  isTorque: boolean;
+};
+
+function Graph({ isTorque }: GraphProps) {
   const { engine } = useContext(EngineContext);
   const [powerSeries, setPowerSeries] = React.useState<PowerSeries[]>([]);
+  const [torqueSeries, setTorqueSeries] = React.useState<PowerSeries[]>([]);
 
   useEffect(() => {
     const rpm: number[] = [];
@@ -28,15 +33,29 @@ const Graph = () => {
       power: engine.powerList[index],
     }));
 
+    const tempTorque: Power[] = rpm.map((currentRpm, index) => ({
+      rpm: currentRpm,
+      power: engine.torqueList[index],
+    }));
+
     setPowerSeries([
       {
         label: "Power",
         data: tempPower,
       },
     ]);
-  }, [engine]);
+    setTorqueSeries([
+      {
+        label: "Torque",
+        data: tempTorque,
+      },
+    ]);
+  }, [engine.rpmLimit, engine.powerList, engine.torqueList]);
 
-  const data = React.useMemo(() => powerSeries, [powerSeries]);
+  const data = React.useMemo(
+    () => (isTorque ? torqueSeries : powerSeries),
+    [isTorque, powerSeries, torqueSeries]
+  );
 
   const primaryAxis: AxisOptions<Power> = {
     getValue: (datum) => datum.rpm,
@@ -63,6 +82,6 @@ const Graph = () => {
       />
     </div>
   );
-};
+}
 
 export default Graph;

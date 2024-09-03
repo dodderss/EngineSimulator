@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import CloseIcon from "../icons/system/close.svg";
-import MinimiseIcon from "../icons/system/minimise.svg";
-import MaximiseIcon from "../icons/system/maximise.svg";
+import CloseIcon from "../assets/icons/system/close.svg";
+import MinimiseIcon from "../assets/icons/system/minimise.svg";
+import MaximiseIcon from "../assets/icons/system/maximise.svg";
 
-import NewFileIcon from "../icons/decorative/newFile.svg";
-import OpenFileIcon from "../icons/decorative/openFile.svg";
+import NewFileIcon from "../assets/icons/decorative/newFile.svg";
+import OpenFileIcon from "../assets/icons/decorative/openFile.svg";
 
-import MenuIcon from "../icons/decorative/menuLogo.png";
+import MenuIcon from "../assets/icons/decorative/menuLogo.png";
 
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import Button from "./ui/button";
