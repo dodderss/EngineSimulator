@@ -8,6 +8,7 @@ import MenuScreen from "./components/menuScreen";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
 import { openFile, readFile } from "./services/fileSystem";
 import { listen } from "@tauri-apps/api/event";
+import Graph from "./components/ui/graph";
 
 function App() {
   const { engine, updateState } = useContext(EngineContext);
@@ -39,7 +40,9 @@ function App() {
           className="modelViewer"
           onClick={() => {
             openFile().then((value) => {
-              console.log(value.toString());
+              if (value === "") {
+                return;
+              }
               updateState({ engine: JSON.parse(value.toString()) });
             });
           }}
@@ -48,7 +51,9 @@ function App() {
         </div>
         <div className="flex flex-col justify-end">
           <TopBar />
-          <div className="powerGraph" />
+          <div className="powerGraph">
+            <Graph />
+          </div>
           <div className="torqueGraph" />
         </div>
       </div>

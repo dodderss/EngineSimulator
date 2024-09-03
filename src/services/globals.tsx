@@ -7,6 +7,8 @@ export interface Engine {
   displacement: number;
   power: number;
   torque: number;
+  powerList: number[];
+  torqueList: number[];
   rpmLimit: number;
   fuelQuality: string;
   aspirationType: string;
@@ -42,6 +44,8 @@ export const DummyEngine: Engine = {
   displacement: 2979, // Default to 2979 cc
   power: 150, // Default to 150 kw
   torque: 200, // Default to 200 Nm
+  powerList: [], // Default to empty array
+  torqueList: [], // Default to empty array
   rpmLimit: 7000, // Default to 10000 rpm
   fuelQuality: "95", // Default to 95 octane
   aspirationType: "na", // Default to naturally aspirated

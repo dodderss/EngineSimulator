@@ -96,6 +96,8 @@ const RunCalculations = (
       power: maxPower,
       torque: maxTorque,
       volumetricEfficiency: maxVe,
+      powerList: power,
+      torqueList: torque,
     },
   });
 
