@@ -26,6 +26,7 @@ const RunCalculations = (
     Math.pow(engine.bore, 2) *
     engine.stroke;
   engine.displacement = displacement / 1000000;
+  console.log(engine.engineCylinders, "ASJDHKJSDFKULHGKJFYSDGHF")
 
   rpm.forEach((currentRpm, index) => {
     // ---- Volume Efficiency ---- //

@@ -102,6 +102,7 @@ function BottomEnd() {
                           value,
                           "engineCylinders"
                         );
+                        console.log("Engine Cylinders:", value);
                       }}
                     />
                   </div>
