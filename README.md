@@ -1,6 +1,6 @@
 # 3D Engine Designer
 
-![The first selection screen in the simulator](https://imgur.com/HoEjTGW)
+![The first selection screen in the simulator](https://i.imgur.com/HoEjTGW.png)
 
 ## Overview
 
