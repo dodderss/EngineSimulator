@@ -8,6 +8,7 @@
     "@tauri-apps/plugin-deep-link": "^2.0.0-rc",
     "@tauri-apps/plugin-dialog": "^2.0.0-rc.1",
     "@tauri-apps/plugin-fs": "^2.0.0-rc.2",
+    "@tauri-apps/plugin-store": "^2.0.0-rc",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,7 +17,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "react": "^18.3.1",
-    "react-charts": "^3.0.0-beta.57",
+    "react-charts": "^3.0.0-beta.38",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
@@ -24,7 +25,7 @@
     "webpack": "^5.93.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

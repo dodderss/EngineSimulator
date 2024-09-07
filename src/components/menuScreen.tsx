@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import CloseIcon from "../assets/icons/system/close.svg";
 import MinimiseIcon from "../assets/icons/system/minimise.svg";
@@ -11,6 +11,8 @@ import MenuIcon from "../assets/icons/decorative/menuLogo.png";
 
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import Button from "./ui/button";
+import { openFile } from "../services/fileSystem";
+import { EngineContext } from "../services/globals";
 
 function MenuScreen({
   updateIsEngineOpen,
@@ -26,6 +28,8 @@ function MenuScreen({
 
     fetchWindow();
   }, []);
+  const { updateState } = useContext(EngineContext);
+
   return (
     <div style={{ height: "100vh" }}>
       <div className="fixed top-0 w-full h-24" data-tauri-drag-region>
@@ -67,7 +71,16 @@ function MenuScreen({
         <Button
           name="Open File"
           icon={OpenFileIcon.toString()}
-          onClick={() => {}}
+          onClick={() => {
+            openFile()
+              .then((value) => {
+                if (value === "") {
+                  return;
+                }
+                updateState({ engine: JSON.parse(value.toString()) });
+                updateIsEngineOpen(true);
+              })
+          }}
         />
       </div>
     </div>

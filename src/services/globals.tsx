@@ -29,6 +29,7 @@ export interface Engine {
   intakeType: string;
   vvl: boolean;
   vvt: boolean;
+  vvlRpm: number;
   volumetricEfficiency: number;
   mechanicalEfficiency: number;
   totalEfficiency: number;
@@ -67,8 +68,9 @@ export const DummyEngine: Engine = {
   intakeType: "mechInj",
   vvl: false, // Default to no VVL
   vvt: false, // Default to no VVT
+  vvlRpm: 4200, // Default to 4200 rpm
   volumetricEfficiency: 60, // Default to 60%
-  mechanicalEfficiency: 30, // Default to 30%
+  mechanicalEfficiency: 40, // Default to 40%
   totalEfficiency: 30, // Default to 30%
   engineLength: 600, // Default to 600 mm
   engineWidth: 600, // Default to 600 mm

@@ -1,4 +1,14 @@
 .windowButton {
-    cursor: pointer;
-    background-color: #a3c1e5;
+  cursor: pointer;
+  background-color: #a3c1e5;
+}
+
+.titleBar {
+  border: #00000000 2px solid;
+  transition: background-color 0.15s, border 0.15s;
+}
+
+.titleBar:hover {
+  background-color: #a3c1e5;
+  border: white 2px solid;
 }

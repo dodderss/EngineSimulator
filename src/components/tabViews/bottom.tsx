@@ -13,8 +13,8 @@ function BottomEnd() {
     const selectedOption = options.find((type) => type.name === value);
     if (selectedOption) {
       const newEngine = { ...engine, [key]: selectedOption.value };
-      console.log("Updating engine state:", newEngine); // Debug log
       updateState({ engine: newEngine });
+      RunCalculations(newEngine, updateState); // Call RunCalculations after updating the state
     }
   };
 
@@ -102,7 +102,10 @@ function BottomEnd() {
                           value,
                           "engineCylinders"
                         );
-                        console.log("Engine Cylinders:", value);
+                        RunCalculations(
+                          { ...engine, engineCylinders: parseInt(value) },
+                          updateState
+                        ); // Call RunCalculations after updating the state
                       }}
                     />
                   </div>
@@ -129,7 +132,7 @@ function BottomEnd() {
                 onChange={(value) => {
                   const newEngine = { ...engine, bore: value };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState);
+                  RunCalculations(newEngine, updateState); // Call RunCalculations after updating the state
                 }}
               />
               <Slider
@@ -141,7 +144,7 @@ function BottomEnd() {
                 onChange={(value) => {
                   const newEngine = { ...engine, stroke: value };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState);
+                  RunCalculations(newEngine, updateState); // Call RunCalculations after updating the state
                 }}
               />
             </div>

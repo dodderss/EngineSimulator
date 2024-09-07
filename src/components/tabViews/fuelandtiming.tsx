@@ -3,6 +3,7 @@ import RunCalculations from "../../services/calculations";
 import { EngineContext } from "../../services/globals";
 import TabOptionData from "../../services/tabOptionData";
 import Options from "../ui/options";
+import Slider from "../ui/slider";
 
 function FuelAndTiming() {
   const { updateState, engine } = useContext(EngineContext);
@@ -85,7 +86,7 @@ function FuelAndTiming() {
                   <p>VVL</p>
                 </div>
                 <div className="flex flex-row justify-between">
-                  <div className="pl-3 pr-3 pt-1">
+                  <div className="pl-3 pr-3 pt-1 flex flex-col">
                     <Options
                       options={["No", "Yes"]}
                       value={engine.vvl ? "Yes" : "No"}
@@ -101,6 +102,28 @@ function FuelAndTiming() {
                           {
                             ...engine,
                             vvl: value === "Yes" ? true : false,
+                          },
+                          updateState
+                        );
+                      }}
+                    />
+                    <Slider
+                      label={"RPM: " + engine.vvlRpm}
+                      min={0}
+                      max={8000}
+                      step={10}
+                      value={engine.vvlRpm}
+                      onChange={(value) => {
+                        updateState({
+                          engine: {
+                            ...engine,
+                            vvlRpm: value,
+                          },
+                        });
+                        RunCalculations(
+                          {
+                            ...engine,
+                            vvlRpm: value,
                           },
                           updateState
                         );

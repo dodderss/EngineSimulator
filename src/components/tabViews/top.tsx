@@ -77,6 +77,21 @@ function TopEnd() {
                 });
               }}
             />
+            <Slider
+              label={"RPM Limit: " + engine.rpmLimit.toString()}
+              value={engine.rpmLimit}
+              max={10000}
+              min={1000}
+              step={100}
+              onChange={(value) => {
+                const newEngine = {
+                  ...engine,
+                  rpmLimit: value,
+                };
+                updateState({ engine: newEngine });
+                RunCalculations(newEngine, updateState);
+              }}
+            />
           </div>
         </div>
       </div>

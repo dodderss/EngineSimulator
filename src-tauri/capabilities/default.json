@@ -38,6 +38,11 @@
       ]
     },
     "dialog:default",
-    "fs:allow-open"
+    "fs:allow-open",
+    "store:default",
+    "store:allow-get",
+    "store:allow-set",
+    "store:allow-save",
+    "store:allow-load"
   ]
 }

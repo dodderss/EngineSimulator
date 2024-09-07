@@ -1,10 +1,35 @@
 import { AppState, Engine } from "./globals";
+import { Store } from "@tauri-apps/plugin-store";
 
 const RunCalculations = (
   engine: Engine,
   updateState: (newState: Partial<AppState>) => void
 ) => {
   const rpm: number[] = [];
+  const store = new Store("store.bin");
+
+  let powerUnit = "kW";
+  let torqueUnit = "Nm";
+  // eslint-disable-next-line
+  let massUnit = "Kg";
+
+  const fetchData = async () => {
+    interface Units {
+      powerUnit?: string;
+      torqueUnit?: string;
+      massUnit?: string;
+    }
+
+    const units: Units = (await store.get("units")) ?? {};
+
+    if (units) {
+      powerUnit = units.powerUnit ?? "kW";
+      torqueUnit = units.torqueUnit ?? "Nm";
+      massUnit = units.massUnit ?? "kg";
+    }
+  };
+
+  fetchData();
 
   for (let i = 10; i <= engine.rpmLimit; i += 10) {
     rpm.push(i);
@@ -26,7 +51,6 @@ const RunCalculations = (
     Math.pow(engine.bore, 2) *
     engine.stroke;
   engine.displacement = displacement / 1000000;
-  console.log(engine.engineCylinders, "ASJDHKJSDFKULHGKJFYSDGHF")
 
   rpm.forEach((currentRpm, index) => {
     // ---- Volume Efficiency ---- //
@@ -39,17 +63,24 @@ const RunCalculations = (
     // = 0.88 * (1 - ((O603 - 5000) / 5000)^2) - 0.03 * LOG($M$3) + 0.15 * (($B$5 - 1) / ($B$5 + 1))
     // POWERS YOU IDIOT NOT BITWISE OPERATORS
 
-    // ---- VVL Factor ---- //
-    vvlFactor.push(1 + (0.05 * (currentRpm - 2000)) / 2000);
-    // =1+(0.05 * ([@RPM] - 2000) / 2000)
-
     // ---- VVT Factor ---- //
     vvtFactor.push(1 + (0.03 * (currentRpm - 1500)) / 1500);
+
+    // =1+(0.05 * ([@RPM] - 2000) / 2000)
+
+    // ---- VVL Factor ---- //
+    if (currentRpm >= engine.vvlRpm) {
+      vvlFactor.push(1 + (0.05 * (currentRpm - 2000)) / 2000);
+    } else {
+      vvlFactor.push(1);
+    }
     // =1 + (0.03 * ([@RPM] - 1500) / 1500)
 
     // ---- MEP ---- //
     mep.push(
-      (10.5 + (engine.compressionRatio - 8) * 0.5 + (engine.boostPressure - 1) * 2) *
+      (10.5 +
+        (engine.compressionRatio - 8) * 0.5 +
+        (engine.boostPressure - 1) * 2) *
         (engine.vvl ? vvlFactor[index] : 1) *
         (engine.vvt ? vvtFactor[index] : 1)
     );
@@ -74,20 +105,23 @@ const RunCalculations = (
 
     // ---- Net Power ---- //
     netPower.push(
-      power[index] - losses[index] >= 0 ? power[index] - losses[index] : 0
+      (power[index] - losses[index] >= 0 ? power[index] - losses[index] : 0) *
+        (engine.mechanicalEfficiency / 100) *
+        (powerUnit === "kW" ? 1 : 1.3596216173)
     );
     // =IF([@Power]-[@Losses] >= 0, [@Power]-[@Losses], 0)
 
     // ---- Net Torque ---- //
     netTorque.push(
-      (netPower[index] * 9549) / currentRpm >= 0
+      ((netPower[index] * 9549) / currentRpm >= 0
         ? (netPower[index] * 9549) / currentRpm
-        : 0
+        : 0) * (torqueUnit === "Nm" ? 1 : 0.7375621493)
     );
     // =IF(([@NetTorque] * 6000)/[@RPM]>=0, ([@NetTorque] * 9549)/[@RPM], 0)
   });
 
   // get max of power, torque and ve
+
   const maxPower = Math.max(...netPower);
   const maxTorque = Math.max(...netTorque);
   const maxVe = Math.max(...ve);
@@ -97,11 +131,10 @@ const RunCalculations = (
       power: maxPower,
       torque: maxTorque,
       volumetricEfficiency: maxVe,
-      powerList: power,
-      torqueList: torque,
+      powerList: netPower,
+      torqueList: netTorque,
     },
   });
-
 };
 
 export default RunCalculations;

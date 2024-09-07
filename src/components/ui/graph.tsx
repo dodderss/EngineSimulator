@@ -70,7 +70,7 @@ function Graph({ isTorque }: GraphProps) {
   ];
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "80%" }}>
       <Chart
         options={{
           data,

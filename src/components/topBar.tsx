@@ -1,6 +1,7 @@
 import CloseIcon from "../assets/icons/system/close.svg";
 import MinimiseIcon from "../assets/icons/system/minimise.svg";
 import MaximiseIcon from "../assets/icons/system/maximise.svg";
+import MenuIcon from "../assets/icons/system/menu.svg";
 
 import { useContext, useEffect, useState } from "react";
 import { EngineContext } from "../services/globals";
@@ -24,9 +25,18 @@ function TopBar() {
   return (
     <div
       data-tauri-drag-region
-      className="topBar flex items-center p-5 justify-between"
+      className="topBar flex items-center justify-between p-2 pr-5 pl-5"
     >
-      <h1 className="text-4xl" onClick={() => createFile(JSON.stringify(engine))}>{engine.engineName}</h1>
+      <div className="titleBar flex min-w-52 h-full justify-center align-center  items-center space-x-5 p-2 pl-6 pr-6">
+        
+        <img src={MenuIcon.toString()} alt="" className="max-h-8" />
+        <h1
+          className="text-3xl whitespace-nowrap"
+          onClick={() => createFile(JSON.stringify(engine))}
+        >
+          {engine.engineName}
+        </h1>
+      </div>
       <div className="flex flex-row space-x-5">
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
