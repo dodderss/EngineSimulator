@@ -1,5 +1,7 @@
 # 3D Engine Designer
 
+![The first selection screen in the simulator](https://imgur.com/HoEjTGW)
+
 ## Overview
 
 The 3D Engine Designer is a powerful tool for engineers and car enthusiasts, designed to simulate and optimize engine configurations before building them. The software enables users to visualize and analyze key engine parameters such as power, torque, and efficiency. By adjusting various engine components and variables, users can create custom engines tailored to specific performance requirements.
