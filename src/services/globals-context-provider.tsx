@@ -6,6 +6,18 @@ interface Props {
   children: React.ReactNode;
 }
 
+export interface Units {
+  powerUnit?: string;
+  torqueUnit?: string;
+  massUnit?: string;
+}
+
+export const DummyUnits = {
+  powerUnit: "kW",
+  torqueUnit: "Nm",
+  massUnit: "kg",
+};
+
 /**
  * The main context provider
  */
@@ -15,6 +27,8 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
   const [state, setState] = useState<AppState>({
     engine: DummyEngine,
     updateState: () => {},
+    units: DummyUnits,
+    updateUnits: () => {},
   });
 
   const updateState = (newState: Partial<AppState>) => {
@@ -31,11 +45,11 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
   };
 
   useEffect(() => {
-    RunCalculations(state.engine, state.updateState);
+    RunCalculations(state.engine, state.updateState, state.units, state.updateUnits);
   }, [state.engine, state.updateState]);
 
   return (
-    <EngineContext.Provider value={{ ...state, updateState }}>
+    <EngineContext.Provider value={{ ...state, updateState}}>
       {props.children}
     </EngineContext.Provider>
   );

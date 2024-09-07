@@ -1,4 +1,5 @@
 import React from "react";
+import { DummyUnits, Units } from "./globals-context-provider";
 
 export interface Engine {
   bore: number; 
@@ -80,6 +81,8 @@ export const DummyEngine: Engine = {
 export interface AppState {
   engine: Engine;
   updateState: (newState: Partial<AppState>) => void;
+  units: Units;
+  updateUnits: (newUnits: Partial<Units>) => void;
 }
 
 /**
@@ -88,6 +91,8 @@ export interface AppState {
 const defaultState: AppState = {
   engine: DummyEngine,
   updateState: (newState?: Partial<AppState>) => {},
+  units: DummyUnits,
+  updateUnits: (newUnits?: Partial<Units>) => {},
 };
 
 /**

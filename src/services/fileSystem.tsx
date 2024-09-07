@@ -15,6 +15,7 @@ export async function createFile(contents: string) {
         extensions: ["engine"],
       },
     ],
+    title: "Save Engine File",
   }).then(async (value) => {
     if (value === null) {
       return;
@@ -51,7 +52,7 @@ interface OpenDialogueResult {
 
 export async function openFile() {
   const result = await openDialogue({
-    name: "Open File",
+    title: "Open Engine File",
     filters: [
       {
         name: "My Filter",

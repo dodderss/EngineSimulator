@@ -6,50 +6,22 @@ import EfficiencyIcon from "../../assets/icons/decorative/efficiency.svg";
 import WeightIcon from "../../assets/icons/decorative/weight.svg";
 
 import "./statisticList.tsx.css";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext } from "react";
 import { EngineContext } from "../../services/globals";
-import { Store } from "@tauri-apps/plugin-store";
 
 function StatisticList() {
-  const { engine } = useContext(EngineContext);
-  const store = useMemo(() => {
-    return new Store("store.bin");
-  }, []);
-
-  const [powerUnit, setPowerUnit] = useState("kW");
-  const [torqueUnit, setTorqueUnit] = useState("Nm");
-  const [massUnit, setMassUnit] = useState("Kg");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      interface Units {
-        powerUnit?: string;
-        torqueUnit?: string;
-        massUnit?: string;
-      }
-
-      const units: Units = (await store.get("units")) ?? {};
-
-      if (units) {
-        setPowerUnit(units.powerUnit ?? "kW");
-        setTorqueUnit(units.torqueUnit ?? "Nm");
-        setMassUnit(units.massUnit ?? "kg");
-      }
-    };
-
-    fetchData();
-  }, [store]);
+  const { engine, units } = useContext(EngineContext);
 
   return (
     <div className="statList flex-col space-y-2 p-4 ">
       <h1 className="text-4xl">Statistics</h1>
       <StatisticItem
         image={PowerIcon.toString()}
-        text={`${engine.power.toFixed(0)} ` + powerUnit}
+        text={`${engine.power.toFixed(0)} ` + units.powerUnit}
       />
       <StatisticItem
         image={TorqueIcon.toString()}
-        text={`${engine.torque.toFixed(0)} ` + torqueUnit}
+        text={`${engine.torque.toFixed(0)} ` + units.torqueUnit}
       />
       <StatisticItem
         image={PriceIcon.toString()}
@@ -61,7 +33,7 @@ function StatisticList() {
       />
       <StatisticItem
         image={WeightIcon.toString()}
-        text={`${engine.engineWeight} ` + massUnit}
+        text={`${engine.engineWeight} ` + units.massUnit}
       />
     </div>
   );

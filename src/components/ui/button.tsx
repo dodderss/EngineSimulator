@@ -2,16 +2,26 @@ import "./button.tsx.css";
 
 interface ButtonProps {
   name: string;
-  icon: string;
+  icon?: string;
   onClick: () => void;
+  small?: boolean;
 }
 
-function Button({ name, icon, onClick }: ButtonProps) {
+function Button({ small, name, icon, onClick }: ButtonProps) {
   return (
-    <div className="custButton flex items-center gap-4" onClick={() => {
-      onClick();
-    }}>
-      <img src={icon} alt="icon" width="56" height="56" className="pl-4" />
+    <div
+      className={
+        small
+          ? "small custButton flex items-center gap-4"
+          : "large custButton flex items-center gap-4 "
+      }
+      onClick={() => {
+        onClick();
+      }}
+    >
+      {icon ? (
+        <img src={icon} alt="icon" width={small ? "48" : "56"} height={small ? "48" : "56"} className="pl-4" />
+      ) : null}
       <h2>{name}</h2>
     </div>
   );

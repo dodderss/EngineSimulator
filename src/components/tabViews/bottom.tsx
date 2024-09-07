@@ -7,14 +7,14 @@ import RunCalculations from "../../services/calculations";
 import TabOptionData from "../../services/tabOptionData";
 
 function BottomEnd() {
-  const { engine, updateState } = useContext(EngineContext);
+  const { engine, updateState, units, updateUnits } = useContext(EngineContext);
 
   const handleOptionChange = (options: any[], value: string, key: string) => {
     const selectedOption = options.find((type) => type.name === value);
     if (selectedOption) {
       const newEngine = { ...engine, [key]: selectedOption.value };
       updateState({ engine: newEngine });
-      RunCalculations(newEngine, updateState); // Call RunCalculations after updating the state
+      RunCalculations(newEngine, updateState, units, updateUnits); // Call RunCalculations after updating the state
     }
   };
 
@@ -104,7 +104,9 @@ function BottomEnd() {
                         );
                         RunCalculations(
                           { ...engine, engineCylinders: parseInt(value) },
-                          updateState
+                          updateState,
+                          units,
+                          updateUnits
                         ); // Call RunCalculations after updating the state
                       }}
                     />
@@ -132,7 +134,7 @@ function BottomEnd() {
                 onChange={(value) => {
                   const newEngine = { ...engine, bore: value };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState); // Call RunCalculations after updating the state
+                  RunCalculations(newEngine, updateState, units, updateUnits); // Call RunCalculations after updating the state
                 }}
               />
               <Slider
@@ -144,7 +146,7 @@ function BottomEnd() {
                 onChange={(value) => {
                   const newEngine = { ...engine, stroke: value };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState); // Call RunCalculations after updating the state
+                  RunCalculations(newEngine, updateState, units, updateUnits); // Call RunCalculations after updating the state
                 }}
               />
             </div>

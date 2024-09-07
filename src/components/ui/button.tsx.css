@@ -1,15 +1,26 @@
 .custButton {
-    display: flex;
-    padding: 5px 0;
-    border: 2px solid #ffffff;
-    background-color: #638fbd;
-    width: 260px;
-    height: 80px;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  padding: 5px 0;
+  cursor: pointer;
+}
 
-.custButton:hover {
-    background-color: #7ba0c8;
-  }
-  
+.large {
+  width: 260px;
+  height: 80px;
+  border: 2px solid #ffffff;
+  background-color: #638fbd;
+}
+
+.small {
+  width: 100%;
+  height: 60px;
+  padding: 2px;
+}
+
+.large:hover {
+  background-color: #7ba0c8;
+}
+
+.small:hover {
+  background-color: #94b4d9;
+}

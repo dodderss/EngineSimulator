@@ -1,35 +1,14 @@
 import { AppState, Engine } from "./globals";
 import { Store } from "@tauri-apps/plugin-store";
+import { Units } from "./globals-context-provider";
 
 const RunCalculations = (
   engine: Engine,
-  updateState: (newState: Partial<AppState>) => void
+  updateState: (newState: Partial<AppState>) => void,
+  units: Units,
+  updateUnits: (newUnits: Partial<Units>) => void
 ) => {
   const rpm: number[] = [];
-  const store = new Store("store.bin");
-
-  let powerUnit = "kW";
-  let torqueUnit = "Nm";
-  // eslint-disable-next-line
-  let massUnit = "Kg";
-
-  const fetchData = async () => {
-    interface Units {
-      powerUnit?: string;
-      torqueUnit?: string;
-      massUnit?: string;
-    }
-
-    const units: Units = (await store.get("units")) ?? {};
-
-    if (units) {
-      powerUnit = units.powerUnit ?? "kW";
-      torqueUnit = units.torqueUnit ?? "Nm";
-      massUnit = units.massUnit ?? "kg";
-    }
-  };
-
-  fetchData();
 
   for (let i = 10; i <= engine.rpmLimit; i += 10) {
     rpm.push(i);
@@ -41,6 +20,8 @@ const RunCalculations = (
   const losses: number[] = [];
   const netPower: number[] = [];
   const netTorque: number[] = [];
+  const netUnitPower: number[] = [];
+  const netUnitTorque: number[] = [];
   const vvlFactor: number[] = [];
   const vvtFactor: number[] = [];
   const mep: number[] = [];
@@ -106,8 +87,11 @@ const RunCalculations = (
     // ---- Net Power ---- //
     netPower.push(
       (power[index] - losses[index] >= 0 ? power[index] - losses[index] : 0) *
-        (engine.mechanicalEfficiency / 100) *
-        (powerUnit === "kW" ? 1 : 1.3596216173)
+        (engine.mechanicalEfficiency / 100)
+    );
+
+    netUnitPower.push(
+      netPower[index] * (units.powerUnit === "kW" ? 1 : 1.3596216173)
     );
     // =IF([@Power]-[@Losses] >= 0, [@Power]-[@Losses], 0)
 
@@ -115,15 +99,19 @@ const RunCalculations = (
     netTorque.push(
       ((netPower[index] * 9549) / currentRpm >= 0
         ? (netPower[index] * 9549) / currentRpm
-        : 0) * (torqueUnit === "Nm" ? 1 : 0.7375621493)
+        : 0) * (units.torqueUnit === "Nm" ? 1 : 0.7375621493)
+    );
+
+    netUnitTorque.push(
+      netTorque[index] * (units.torqueUnit === "Nm" ? 1 : 0.7375621493)
     );
     // =IF(([@NetTorque] * 6000)/[@RPM]>=0, ([@NetTorque] * 9549)/[@RPM], 0)
   });
 
   // get max of power, torque and ve
 
-  const maxPower = Math.max(...netPower);
-  const maxTorque = Math.max(...netTorque);
+  const maxPower = Math.max(...netUnitPower);
+  const maxTorque = Math.max(...netUnitTorque);
   const maxVe = Math.max(...ve);
   updateState({
     engine: {
@@ -131,8 +119,8 @@ const RunCalculations = (
       power: maxPower,
       torque: maxTorque,
       volumetricEfficiency: maxVe,
-      powerList: netPower,
-      torqueList: netTorque,
+      powerList: netUnitPower,
+      torqueList: netUnitTorque,
     },
   });
 };

@@ -26,6 +26,7 @@ tauri-plugin-fs = "2.0.0-beta.0"
 tauri-plugin-dialog = "2.0.0-beta.0"
 tauri-plugin-deep-link = "2.0.0-rc"
 tauri-plugin-store = "2.0.0-rc"
+tauri-plugin-process = "2.0.0-rc"
 [target."cfg(target_os = \"macos\")".dependencies]
 cocoa = "0.25"
 url = "2"

@@ -4,11 +4,31 @@
 }
 
 .titleBar {
+  position: absolute;
+  top: 0;
+  margin-top: 9px;
+  z-index: 100;
   border: #00000000 2px solid;
-  transition: background-color 0.15s, border 0.15s;
+  transition: background-color 0.15s, border 0.15s, height 0.3s ease;
+  height: 50px;
 }
 
-.titleBar:hover {
+.dropdownContent {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transition-delay: 0s;
+}
+
+.titleBar.dropDown .dropdownContent {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+
+.titleBar.dropDown {
   background-color: #a3c1e5;
   border: white 2px solid;
+}
+
+.titleBar.dropDown {
+  height: 297px;
 }
