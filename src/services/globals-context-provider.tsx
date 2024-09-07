@@ -44,12 +44,29 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
     });
   };
 
+  const updateUnits = (newUnits: Partial<Units>) => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        units: {
+          ...prevState.units,
+          ...newUnits,
+        },
+      };
+    });
+  };
+
   useEffect(() => {
-    RunCalculations(state.engine, state.updateState, state.units, state.updateUnits);
-  }, [state.engine, state.updateState]);
+    RunCalculations(
+      state.engine,
+      state.updateState,
+      state.units,
+      state.updateUnits
+    );
+  }, [state.engine, state.updateState, state.units, state.updateUnits]);
 
   return (
-    <EngineContext.Provider value={{ ...state, updateState}}>
+    <EngineContext.Provider value={{ ...state, updateState, updateUnits }}>
       {props.children}
     </EngineContext.Provider>
   );

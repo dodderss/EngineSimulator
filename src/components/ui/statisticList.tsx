@@ -14,7 +14,9 @@ function StatisticList() {
 
   return (
     <div className="statList flex-col space-y-2 p-4 ">
-      <h1 className="text-4xl">Statistics</h1>
+      <h1 className="text-4xl" onClick={() => console.log(units.powerUnit)}>
+        Statistics
+      </h1>
       <StatisticItem
         image={PowerIcon.toString()}
         text={`${engine.power.toFixed(0)} ` + units.powerUnit}

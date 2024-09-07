@@ -56,7 +56,6 @@ function TopBar({ setIsMenuOpen }: TopBarProps) {
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      console.log(`Key pressed: ${event.key}`);
       if (event.key === "Escape") {
         setDropdownOpen((prev) => !prev);
       }
