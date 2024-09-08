@@ -7,14 +7,15 @@ import {
 import { save } from "@tauri-apps/plugin-dialog";
 import { open as openDialogue } from "@tauri-apps/plugin-dialog";
 
-export async function createFile(contents: string) {
+export async function createFile(contents: string, fileName?: string) {
   await save({
     filters: [
       {
-        name: "My Filter",
+        name: "Engine Files",
         extensions: ["engine"],
       },
     ],
+    defaultPath: fileName,
     title: "Save Engine File",
   }).then(async (value) => {
     if (value === null) {
@@ -30,6 +31,7 @@ export async function writeFile(path: string, contents: string) {
   const file = await open(path, {
     write: true,
     baseDir: BaseDirectory.AppLocalData,
+
   });
   if (file === null || path === "") {
     return;

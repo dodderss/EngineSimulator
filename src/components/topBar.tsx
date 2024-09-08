@@ -7,7 +7,7 @@ import SaveIcon from "../assets/icons/system/save.svg";
 import OpenIcon from "../assets/icons/system/open.svg";
 import SettingsIcon from "../assets/icons/system/settings.svg";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { EngineContext } from "../services/globals";
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import "./topBar.tsx.css";
@@ -16,10 +16,11 @@ import { createFile, openFile } from "../services/fileSystem";
 import Button from "./ui/button";
 
 interface TopBarProps {
+  isMenuOpen: boolean;
   setIsMenuOpen: (value: boolean) => void;
 }
 
-function TopBar({ setIsMenuOpen }: TopBarProps) {
+function TopBar({ isMenuOpen, setIsMenuOpen }: TopBarProps) {
   const { engine, updateState } = useContext(EngineContext);
   const [appWindow, setAppWindow] = useState<Window | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -54,19 +55,23 @@ function TopBar({ setIsMenuOpen }: TopBarProps) {
     fetchWindow();
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (event: any) => {
-      if (event.key === "Escape") {
-        setDropdownOpen((prev) => !prev);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+  const handleMenuKeyDown = useCallback((event: any) => {
+    if (event.key === "Escape") {
+      setDropdownOpen((prev) => !prev);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      window.addEventListener("keydown", handleMenuKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", handleMenuKeyDown);
+      };
+    } else {
+      window.removeEventListener("keydown", handleMenuKeyDown);
+    }
+  }, [handleMenuKeyDown, isMenuOpen]);
 
   return (
     <div
@@ -118,7 +123,7 @@ function TopBar({ setIsMenuOpen }: TopBarProps) {
               icon={SaveIcon.toString()}
               name="Save as"
               onClick={() => {
-                createFile(JSON.stringify(engine));
+                createFile(JSON.stringify(engine), engine.engineName);
               }}
               small={true}
             />

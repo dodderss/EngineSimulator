@@ -27,7 +27,7 @@ interface Units {
 }
 
 function Settings({ isMenuOpen, setisMenuOpen }: MenuProps) {
-  const { engine, updateState, units, updateUnits } = useContext(EngineContext);
+  const { engine, updateState, updateUnits } = useContext(EngineContext);
   const store = useMemo(() => {
     return new Store("store.bin");
   }, []);
@@ -44,6 +44,20 @@ function Settings({ isMenuOpen, setisMenuOpen }: MenuProps) {
 
     fetchData();
   }, [store]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.key === "Escape") {
+        setisMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMenuOpen, setisMenuOpen]);
 
   return isMenuOpen ? (
     <div className="settings-overlay">

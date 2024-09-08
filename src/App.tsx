@@ -43,7 +43,7 @@ function App() {
           <p>{url}</p>
         </div>
         <div className="flex flex-col justify-end">
-          <TopBar setIsMenuOpen={setIsMenuOpen}/>
+          <TopBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
           <div className="powerGraph">
             <p className="mt-2 text-center">Power</p>
             <Graph isTorque={false} />

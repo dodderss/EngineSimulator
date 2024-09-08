@@ -72,14 +72,25 @@ function MenuScreen({
           name="Open File"
           icon={OpenFileIcon.toString()}
           onClick={() => {
-            openFile()
-              .then((value) => {
-                if (value === "") {
-                  return;
-                }
-                updateState({ engine: JSON.parse(value.toString()) });
-                updateIsEngineOpen(true);
-              })
+            try {
+              openFile()
+                .then((value) => {
+                  if (value === "") {
+                    return;
+                  }
+                  try {
+                    updateState({ engine: JSON.parse(value.toString()) });
+                  } catch (error) {
+                    alert("Invalid file format / file is corrupted");
+                  }
+                  updateIsEngineOpen(true);
+                })
+                .catch((error) => {
+                  alert("Error opening file: " + error.message);
+                });
+            } catch (error: any) {
+              alert("Unexpected error: " + error.message);
+            }
           }}
         />
       </div>
