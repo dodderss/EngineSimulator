@@ -3,7 +3,7 @@ import TabBar from "./components/ui/tabBar";
 import TopBar from "./components/topBar";
 import { useContext, useEffect, useState } from "react";
 import RunCalculations from "./services/calculations";
-import { EngineContext } from "./services/globals";
+import { EngineContext, isEngine } from "./services/globals";
 import MenuScreen from "./components/menuScreen";
 import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
 import { readFile } from "./services/fileSystem";
@@ -23,7 +23,24 @@ function App() {
       console.log("deep link:", urls);
       setUrl(urls);
 
-      updateState({ engine: JSON.parse(await readFile(urls)) });
+      await readFile(urls).then((value) => {
+        if (value === "") {
+          alert("Invalid file: File empty.");
+          return;
+        }
+
+        const parsedValue = JSON.parse(value.toString());
+
+        if (isEngine(parsedValue)) {
+          updateState({ engine: JSON.parse(value.toString()) });
+          setIsEngineOpen(true);
+
+          return value;
+        } else {
+          alert("Invalid file: File may be corrupted or an old version.");
+          return;
+        }
+      });
     };
     const handleOpenUrlAsync = async () => {
       await onOpenUrl(handleOpenUrl);

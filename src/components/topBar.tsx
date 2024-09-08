@@ -8,7 +8,7 @@ import OpenIcon from "../assets/icons/system/open.svg";
 import SettingsIcon from "../assets/icons/system/settings.svg";
 
 import { useContext, useEffect, useState, useCallback } from "react";
-import { EngineContext } from "../services/globals";
+import { EngineContext, isEngine } from "../services/globals";
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import "./topBar.tsx.css";
 import { exit } from "@tauri-apps/plugin-process";
@@ -133,9 +133,22 @@ function TopBar({ isMenuOpen, setIsMenuOpen }: TopBarProps) {
               onClick={() => {
                 openFile().then((value) => {
                   if (value === "") {
+                    alert("Invalid file: File empty.");
                     return;
                   }
-                  updateState({ engine: JSON.parse(value.toString()) });
+
+                  const parsedValue = JSON.parse(value.toString());
+
+                  if (isEngine(parsedValue)) {
+                    updateState({ engine: JSON.parse(value.toString()) });
+                    setIsMenuOpen(false);
+                    return value;
+                  } else {
+                    alert(
+                      "Invalid file: File may be corrupted or an old version."
+                    );
+                    return;
+                  }
                 });
               }}
               small={true}
