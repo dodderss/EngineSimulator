@@ -96,6 +96,62 @@ const defaultState: AppState = {
 };
 
 /**
+ * Type guard for Engine
+* @param obj
+* @returns boolean
+* @example
+* if (isEngine(obj)) {
+*  // obj is Engine
+* } else {
+* // obj is not Engine
+* }
+*/
+
+export function isEngine(obj: any): obj is Engine {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    typeof obj.bore === 'number' &&
+    typeof obj.stroke === 'number' &&
+    typeof obj.compressionRatio === 'number' &&
+    typeof obj.displacement === 'number' &&
+    typeof obj.power === 'number' &&
+    typeof obj.torque === 'number' &&
+    Array.isArray(obj.powerList) &&
+    obj.powerList.every((item: any) => typeof item === 'number') &&
+    Array.isArray(obj.torqueList) &&
+    obj.torqueList.every((item: any) => typeof item === 'number') &&
+    typeof obj.rpmLimit === 'number' &&
+    typeof obj.fuelQuality === 'string' &&
+    typeof obj.aspirationType === 'string' &&
+    typeof obj.engineType === 'string' &&
+    typeof obj.engineCylinders === 'number' &&
+    typeof obj.boostPressure === 'number' &&
+    typeof obj.boostProviderSize === 'number' &&
+    typeof obj.exhaustSize === 'number' &&
+    typeof obj.engineWeight === 'number' &&
+    typeof obj.enginePrice === 'number' &&
+    typeof obj.engineName === 'string' &&
+    typeof obj.fileName === 'string' &&
+    typeof obj.filePath === 'string' &&
+    typeof obj.blockMaterial === 'string' &&
+    typeof obj.headMaterial === 'string' &&
+    typeof obj.pistonMaterial === 'string' &&
+    typeof obj.headType === 'string' &&
+    typeof obj.intakeType === 'string' &&
+    typeof obj.vvl === 'boolean' &&
+    typeof obj.vvt === 'boolean' &&
+    typeof obj.vvlRpm === 'number' &&
+    typeof obj.volumetricEfficiency === 'number' &&
+    typeof obj.mechanicalEfficiency === 'number' &&
+    typeof obj.totalEfficiency === 'number' &&
+    typeof obj.engineLength === 'number' &&
+    typeof obj.engineWidth === 'number' &&
+    typeof obj.engineHeight === 'number'
+  );
+}
+
+/**
  * Creating the Application state context for the provider
  */
 export const EngineContext = React.createContext<AppState>(defaultState);

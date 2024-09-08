@@ -12,7 +12,7 @@ import MenuIcon from "../assets/icons/decorative/menuLogo.png";
 import { getCurrentWindow, Window } from "@tauri-apps/api/window";
 import Button from "./ui/button";
 import { openFile } from "../services/fileSystem";
-import { EngineContext } from "../services/globals";
+import { EngineContext, isEngine } from "../services/globals";
 
 function MenuScreen({
   updateIsEngineOpen,
@@ -72,25 +72,24 @@ function MenuScreen({
           name="Open File"
           icon={OpenFileIcon.toString()}
           onClick={() => {
-            try {
-              openFile()
-                .then((value) => {
-                  if (value === "") {
-                    return;
-                  }
-                  try {
-                    updateState({ engine: JSON.parse(value.toString()) });
-                  } catch (error) {
-                    alert("Invalid file format / file is corrupted");
-                  }
-                  updateIsEngineOpen(true);
-                })
-                .catch((error) => {
-                  alert("Error opening file: " + error.message);
-                });
-            } catch (error: any) {
-              alert("Unexpected error: " + error.message);
-            }
+            openFile().then((value) => {
+              if (value === "") {
+                alert("Invalid file: File empty.");
+                return;
+              }
+
+              const parsedValue = JSON.parse(value.toString());
+
+              if (isEngine(parsedValue)) {
+                updateState({ engine: JSON.parse(value.toString()) });
+                updateIsEngineOpen(true);
+
+                return value;
+              } else {
+                alert("Invalid file: File may be corrupted or an old version.");
+                return;
+              }
+            });
           }}
         />
       </div>

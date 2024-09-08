@@ -17,6 +17,12 @@
     "fs:allow-create",
     "fs:allow-app-write",
     "fs:allow-app-read",
+    "fs:allow-write",
+    "fs:allow-read",
+    "fs:allow-write-file",
+    "fs:allow-read-file",
+    "fs:write-all",
+    "fs:read-all",
     "deep-link:default",
     "core:resources:default",
     "core:event:default",
@@ -44,7 +50,6 @@
     "store:allow-set",
     "store:allow-save",
     "store:allow-load",
-    "process:default",
     "process:default"
   ]
 }

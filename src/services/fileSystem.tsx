@@ -8,23 +8,30 @@ import { save } from "@tauri-apps/plugin-dialog";
 import { open as openDialogue } from "@tauri-apps/plugin-dialog";
 
 export async function createFile(contents: string, fileName?: string) {
-  await save({
-    filters: [
-      {
-        name: "Engine Files",
-        extensions: ["engine"],
-      },
-    ],
-    defaultPath: fileName,
-    title: "Save Engine File",
-  }).then(async (value) => {
-    if (value === null) {
+  try {
+    const savePath = await save({
+      filters: [
+        {
+          name: "Engine Files",
+          extensions: ["engine"],
+        },
+      ],
+      defaultPath: fileName,
+      title: "Save Engine File",
+    });
+
+    if (savePath === null) {
+      console.log("Save operation was cancelled.");
       return;
     }
-    const file = create(value!, { baseDir: BaseDirectory.AppLocalData });
-    (await file).write(new TextEncoder().encode(contents));
-    (await file).close();
-  });
+
+    console.log(savePath);
+    const file = await create(savePath, { baseDir: BaseDirectory.AppLocalData });
+    await file.write(new TextEncoder().encode(contents));
+    await file.close();
+  } catch (error) {
+    console.error("Error creating file:", error);
+  }
 }
 
 export async function writeFile(path: string, contents: string) {

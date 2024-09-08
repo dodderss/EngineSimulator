@@ -35,6 +35,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (isEngineOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [isEngineOpen, setIsMenuOpen]);
+
   return isEngineOpen ? (
     <div className="App h-full">
       <Settings isMenuOpen={isMenuOpen} setisMenuOpen={setIsMenuOpen} />
@@ -43,7 +49,7 @@ function App() {
           <p>{url}</p>
         </div>
         <div className="flex flex-col justify-end">
-          <TopBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
+          <TopBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           <div className="powerGraph">
             <p className="mt-2 text-center">Power</p>
             <Graph isTorque={false} />

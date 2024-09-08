@@ -23,7 +23,6 @@ const Slider: React.FC<SliderProps> = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value);
     setCurrentValue(newValue);
-    onChange(newValue);
   };
 
   useEffect(() => {
@@ -53,6 +52,7 @@ const Slider: React.FC<SliderProps> = ({
           max={max}
           step={step}
           onChange={handleChange}
+          onMouseUp={() => onChange(currentValue)}
           value={currentValue}
         />
         <button
