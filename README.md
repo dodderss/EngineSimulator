@@ -14,7 +14,7 @@ The 3D Engine Designer is a program for my A-Level Computer Science NEA. It is d
 - **Comprehensive Material Database:** Select from a variety of materials for engine blocks and pistons, each with unique properties such as weight, cost, and maximum power/torque capabilities.
 - **Customizable Graphs:** Generate and customize power and torque graphs to visualize engine performance across different RPM ranges.
 - **Problem Detection:** Automatically detects issues with the current engine configuration, such as material strength limitations, and provides actionable feedback.
-- **Cross-Platform Support:** Available as downloadable executables for Windows, macOS, and Linux built using React, TypeScript, and Tauri.
+- **Cross-Platform Support:** Available as downloadable executables for Windows and macOS built using React, TypeScript, and Tauri.
 
 ## Getting Started
 
@@ -24,7 +24,6 @@ Ensure your system meets the following requirements:
 
 - **Windows:** Windows 7 or higher
 - **macOS:** macOS 10.15 (Catalina) or higher
-- **Linux:** A modern Linux distribution that supports `.deb` packages (e.g., Ubuntu 22.04+, Debian 12+)
 
 ### Installation
 
@@ -32,22 +31,13 @@ Ensure your system meets the following requirements:
    - Visit the [GitHub Releases](https://github.com/dodderss/EngineSimulator/releases) page and download the appropriate installer for your operating system:
      - `.exe` for Windows
      - `.dmg` for macOS
-     - `.deb` for Linux
 
 2. **Run the Installer:**
    - **Windows:**
      - Double-click the downloaded `.exe` file and follow the on-screen instructions.
    - **macOS:**
      - Open the downloaded `.dmg` file and drag the 3D Engine Designer app into your `Applications` folder.
-   - **Linux:**
-     - Open a terminal and run:
-       ```bash
-       sudo dpkg -i path/to/3D-Engine-Designer.deb
-       ```
-       - Resolve any dependency issues by running:
-       ```bash
-       sudo apt-get install -f
-       ```
+
 
 3. **Launch the Application:**
    - After installation, launch the 3D Engine Designer from your applications menu or desktop shortcut.
