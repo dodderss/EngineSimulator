@@ -22,9 +22,9 @@ The 3D Engine Designer is a program for my A-Level Computer Science NEA. It is d
 
 Ensure your system meets the following requirements:
 
-- **Windows:** Windows 10 or higher
+- **Windows:** Windows 7 or higher
 - **macOS:** macOS 10.15 (Catalina) or higher
-- **Linux:** A modern Linux distribution that supports `.deb` packages (e.g., Ubuntu, Debian)
+- **Linux:** A modern Linux distribution that supports `.deb` packages (e.g., Ubuntu 22.04+, Debian)
 
 ### Installation
 
