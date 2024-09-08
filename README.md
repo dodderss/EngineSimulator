@@ -24,7 +24,7 @@ Ensure your system meets the following requirements:
 
 - **Windows:** Windows 7 or higher
 - **macOS:** macOS 10.15 (Catalina) or higher
-- **Linux:** A modern Linux distribution that supports `.deb` packages (e.g., Ubuntu 22.04+, Debian)
+- **Linux:** A modern Linux distribution that supports `.deb` packages (e.g., Ubuntu 22.04+, Debian 12+)
 
 ### Installation
 
