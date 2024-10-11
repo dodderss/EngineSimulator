@@ -58,6 +58,7 @@ function App() {
     }
   }, [isEngineOpen, setIsMenuOpen]);
 
+
   return isEngineOpen ? (
     <div className="App h-full">
       <Settings isMenuOpen={isMenuOpen} setisMenuOpen={setIsMenuOpen} />
@@ -68,11 +69,11 @@ function App() {
         <div className="flex flex-col justify-end">
           <TopBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           <div className="powerGraph">
-            <p className="mt-2 text-center">Power</p>
+            <p className="mt-2 text-center ml-16 fixed">Power</p>
             <Graph isTorque={false} />
           </div>
           <div className="torqueGraph">
-            <p className="mt-2 text-center">Torque</p>
+            <p className="mt-2 text-center ml-16 fixed">Torque</p>
             <Graph isTorque={true} />
           </div>
         </div>

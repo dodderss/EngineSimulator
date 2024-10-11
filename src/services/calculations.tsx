@@ -1,5 +1,4 @@
 import { AppState, Engine } from "./globals";
-import { Store } from "@tauri-apps/plugin-store";
 import { Units } from "./globals-context-provider";
 
 const RunCalculations = (
@@ -42,7 +41,6 @@ const RunCalculations = (
     );
 
     // = 0.88 * (1 - ((O603 - 5000) / 5000)^2) - 0.03 * LOG($M$3) + 0.15 * (($B$5 - 1) / ($B$5 + 1))
-    // POWERS YOU IDIOT NOT BITWISE OPERATORS
 
     // ---- VVT Factor ---- //
     vvtFactor.push(1 + (0.03 * (currentRpm - 1500)) / 1500);

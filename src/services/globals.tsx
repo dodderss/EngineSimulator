@@ -1,72 +1,181 @@
 import React from "react";
 import { DummyUnits, Units } from "./globals-context-provider";
 
+/**
+ * Represents the engine specifications.
+ * @typedef {Object} Engine
+ * @property {number} bore - Bore size in mm.
+ * @property {number} stroke - Stroke size in mm.
+ * @property {number} compressionRatio - Compression ratio of the engine.
+ * @property {number} displacement - Displacement in cubic centimeters (cc).
+ * @property {number} power - Maximum power in kilowatts (kW).
+ * @property {number} torque - Maximum torque in Newton meters (Nm).
+ * @property {number[]} powerList - Power curve at various RPMs.
+ * @property {number[]} torqueList - Torque curve at various RPMs.
+ * @property {number} rpmLimit - RPM limit for the engine.
+ * @property {string} fuelQuality - Fuel quality required (octane rating).
+ * @property {string} aspirationType - Type of aspiration: naturally aspirated ('na') or turbocharged.
+ * @property {string} engineType - Engine configuration type (e.g., Inline 'i', V-type).
+ * @property {number} engineCylinders - Number of engine cylinders.
+ * @property {number} boostPressure - Boost pressure in bars (if turbocharged).
+ * @property {number} boostProviderSize - Size of the turbocharger in mm (if applicable).
+ * @property {number} exhaustSize - Size of the exhaust in mm.
+ * @property {number} engineWeight - Weight of the engine in kg.
+ * @property {number} enginePrice - Price of the engine in the chosen currency (e.g., GBP).
+ * @property {string} engineName - Name of the engine.
+ * @property {string} fileName - File name for saving engine data.
+ * @property {string} filePath - File path for saving engine data.
+ * @property {string} blockMaterial - Material used for the engine block (e.g., Aluminum, Cast Iron).
+ * @property {string} headMaterial - Material used for the engine head (e.g., Aluminum, Cast Iron).
+ * @property {string} pistonMaterial - Material used for the pistons (e.g., Forged Steel, Aluminum Alloy).
+ * @property {string} headType - Type of head used (e.g., DOHC, SOHC).
+ * @property {string} intakeType - Type of intake system (e.g., Mechanical Injection).
+ * @property {boolean} vvl - Indicates whether the engine uses Variable Valve Lift (VVL).
+ * @property {boolean} vvt - Indicates whether the engine uses Variable Valve Timing (VVT).
+ * @property {number} vvlRpm - RPM at which VVL is activated.
+ * @property {number} volumetricEfficiency - Volumetric efficiency of the engine (percentage).
+ * @property {number} mechanicalEfficiency - Mechanical efficiency of the engine (percentage).
+ * @property {number} totalEfficiency - Total efficiency of the engine (percentage).
+ * @property {number} engineLength - Engine length in mm.
+ * @property {number} engineWidth - Engine width in mm.
+ * @property {number} engineHeight - Engine height in mm.
+ */
+
 export interface Engine {
+  /** Bore size in mm. */
   bore: number; 
+  
+  /** Stroke size in mm. */
   stroke: number;
+
+  /** Compression ratio of the engine. */
   compressionRatio: number;
+
+  /** Displacement in cubic centimeters (cc). */
   displacement: number;
+
+  /** Maximum power in kilowatts (kW). */
   power: number;
+
+  /** Maximum torque in Newton meters (Nm). */
   torque: number;
+
+  /** Power curve at various RPMs. */
   powerList: number[];
+
+  /** Torque curve at various RPMs. */
   torqueList: number[];
+
+  /** RPM limit for the engine. */
   rpmLimit: number;
+
+  /** Fuel quality required (octane rating). */
   fuelQuality: string;
+
+  /** Type of aspiration: naturally aspirated ('na') or turbocharged. */
   aspirationType: string;
+
+  /** Engine configuration type (e.g., Inline 'i', V-type). */
   engineType: string;
+
+  /** Number of engine cylinders. */
   engineCylinders: number;
+
+  /** Boost pressure in bars (if turbocharged). */
   boostPressure: number;
+
+  /** Size of the turbocharger in mm (if applicable). */
   boostProviderSize: number;
+
+  /** Size of the exhaust in mm. */
   exhaustSize: number;
+
+  /** Weight of the engine in kg. */
   engineWeight: number;
+
+  /** Price of the engine in the chosen currency (e.g., GBP). */
   enginePrice: number;
+
+  /** Name of the engine. */
   engineName: string;
+
+  /** File name for saving engine data. */
   fileName: string;
+
+  /** File path for saving engine data. */
   filePath: string;
+
+  /** Material used for the engine block (e.g., Aluminum, Cast Iron). */
   blockMaterial: string;
+
+  /** Material used for the engine head (e.g., Aluminum, Cast Iron). */
   headMaterial: string;
+
+  /** Material used for the pistons (e.g., Forged Steel, Aluminum Alloy). */
   pistonMaterial: string;
+
+  /** Type of head used (e.g., DOHC, SOHC). */
   headType: string;
+
+  /** Type of intake system (e.g., Mechanical Injection). */
   intakeType: string;
+
+  /** Indicates whether the engine uses Variable Valve Lift (VVL). */
   vvl: boolean;
+
+  /** Indicates whether the engine uses Variable Valve Timing (VVT). */
   vvt: boolean;
+
+  /** RPM at which VVL is activated. */
   vvlRpm: number;
+
+  /** Volumetric efficiency of the engine (percentage). */
   volumetricEfficiency: number;
+
+  /** Mechanical efficiency of the engine (percentage). */
   mechanicalEfficiency: number;
+
+  /** Total efficiency of the engine (percentage). */
   totalEfficiency: number;
+
+  /** Engine length in mm. */
   engineLength: number;
+
+  /** Engine width in mm. */
   engineWidth: number;
+
+  /** Engine height in mm. */
   engineHeight: number;
 }
+
 
 export const DummyEngine: Engine = {
   bore: 84, // Default to 84 mm
   stroke: 90, // Default to 90 mm
   compressionRatio: 11, // Default to 11:1
   displacement: 2979, // Default to 2979 cc
-  power: 150, // Default to 150 kw
+  power: 150, // Default to 150 kW
   torque: 200, // Default to 200 Nm
   powerList: [], // Default to empty array
   torqueList: [], // Default to empty array
-  rpmLimit: 7000, // Default to 10000 rpm
+  rpmLimit: 7000, // Default to 7000 rpm
   fuelQuality: "95", // Default to 95 octane
   aspirationType: "na", // Default to naturally aspirated
   engineType: "i", // Default to Inline
   engineCylinders: 6, // Default to 6 cylinders
   boostPressure: 0, // Default to 0 bar (no turbo)
-  boostProviderSize: 0, // Default to 0mm
-  exhaustSize: 30, // Default to 30mm
+  boostProviderSize: 0, // Default to 0 mm
+  exhaustSize: 30, // Default to 30 mm
   engineWeight: 150, // Default to 150 kg
-  enginePrice: 500, // Default to 5000 GBP
+  enginePrice: 500, // Default to 500 GBP
   engineName: "My Engine", // Default to "My Engine"
-  // eslint-disable-next-line no-useless-escape
   fileName: "/My Engine.engine", // Default to "/My Engine.engine"
   filePath: "", // Default to ""
-  blockMaterial: "castIron", // Default to Aluminum
-  headMaterial: "castIron", // Default to Aluminum
-  pistonMaterial: "aluminiumAlloy", // Default to Forged Steel
+  blockMaterial: "castIron", // Default to Cast Iron
+  headMaterial: "castIron", // Default to Cast Iron
+  pistonMaterial: "aluminiumAlloy", // Default to Aluminum Alloy
   headType: "dohc", // Default to DOHC
-  intakeType: "mechInj",
+  intakeType: "mechInj", // Mechanical Injection
   vvl: false, // Default to no VVL
   vvt: false, // Default to no VVT
   vvlRpm: 4200, // Default to 4200 rpm
@@ -97,57 +206,56 @@ const defaultState: AppState = {
 
 /**
  * Type guard for Engine
-* @param obj
-* @returns boolean
-* @example
-* if (isEngine(obj)) {
-*  // obj is Engine
-* } else {
-* // obj is not Engine
-* }
-*/
-
+ * @param obj
+ * @returns boolean
+ * @example
+ * if (isEngine(obj)) {
+ *  // obj is Engine
+ * } else {
+ *  // obj is not Engine
+ * }
+ */
 export function isEngine(obj: any): obj is Engine {
   return (
-    typeof obj === 'object' &&
+    typeof obj === "object" &&
     obj !== null &&
-    typeof obj.bore === 'number' &&
-    typeof obj.stroke === 'number' &&
-    typeof obj.compressionRatio === 'number' &&
-    typeof obj.displacement === 'number' &&
-    typeof obj.power === 'number' &&
-    typeof obj.torque === 'number' &&
+    typeof obj.bore === "number" &&
+    typeof obj.stroke === "number" &&
+    typeof obj.compressionRatio === "number" &&
+    typeof obj.displacement === "number" &&
+    typeof obj.power === "number" &&
+    typeof obj.torque === "number" &&
     Array.isArray(obj.powerList) &&
-    obj.powerList.every((item: any) => typeof item === 'number') &&
+    obj.powerList.every((item: any) => typeof item === "number") &&
     Array.isArray(obj.torqueList) &&
-    obj.torqueList.every((item: any) => typeof item === 'number') &&
-    typeof obj.rpmLimit === 'number' &&
-    typeof obj.fuelQuality === 'string' &&
-    typeof obj.aspirationType === 'string' &&
-    typeof obj.engineType === 'string' &&
-    typeof obj.engineCylinders === 'number' &&
-    typeof obj.boostPressure === 'number' &&
-    typeof obj.boostProviderSize === 'number' &&
-    typeof obj.exhaustSize === 'number' &&
-    typeof obj.engineWeight === 'number' &&
-    typeof obj.enginePrice === 'number' &&
-    typeof obj.engineName === 'string' &&
-    typeof obj.fileName === 'string' &&
-    typeof obj.filePath === 'string' &&
-    typeof obj.blockMaterial === 'string' &&
-    typeof obj.headMaterial === 'string' &&
-    typeof obj.pistonMaterial === 'string' &&
-    typeof obj.headType === 'string' &&
-    typeof obj.intakeType === 'string' &&
-    typeof obj.vvl === 'boolean' &&
-    typeof obj.vvt === 'boolean' &&
-    typeof obj.vvlRpm === 'number' &&
-    typeof obj.volumetricEfficiency === 'number' &&
-    typeof obj.mechanicalEfficiency === 'number' &&
-    typeof obj.totalEfficiency === 'number' &&
-    typeof obj.engineLength === 'number' &&
-    typeof obj.engineWidth === 'number' &&
-    typeof obj.engineHeight === 'number'
+    obj.torqueList.every((item: any) => typeof item === "number") &&
+    typeof obj.rpmLimit === "number" &&
+    typeof obj.fuelQuality === "string" &&
+    typeof obj.aspirationType === "string" &&
+    typeof obj.engineType === "string" &&
+    typeof obj.engineCylinders === "number" &&
+    typeof obj.boostPressure === "number" &&
+    typeof obj.boostProviderSize === "number" &&
+    typeof obj.exhaustSize === "number" &&
+    typeof obj.engineWeight === "number" &&
+    typeof obj.enginePrice === "number" &&
+    typeof obj.engineName === "string" &&
+    typeof obj.fileName === "string" &&
+    typeof obj.filePath === "string" &&
+    typeof obj.blockMaterial === "string" &&
+    typeof obj.headMaterial === "string" &&
+    typeof obj.pistonMaterial === "string" &&
+    typeof obj.headType === "string" &&
+    typeof obj.intakeType === "string" &&
+    typeof obj.vvl === "boolean" &&
+    typeof obj.vvt === "boolean" &&
+    typeof obj.vvlRpm === "number" &&
+    typeof obj.volumetricEfficiency === "number" &&
+    typeof obj.mechanicalEfficiency === "number" &&
+    typeof obj.totalEfficiency === "number" &&
+    typeof obj.engineLength === "number" &&
+    typeof obj.engineWidth === "number" &&
+    typeof obj.engineHeight === "number"
   );
 }
 
