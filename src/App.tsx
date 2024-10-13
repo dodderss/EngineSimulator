@@ -10,11 +10,13 @@ import { readFile } from "./services/fileSystem";
 import { listen } from "@tauri-apps/api/event";
 import Graph from "./components/ui/graph";
 import Settings from "./components/settings";
+import OnlineHub from "./components/online-hub";
 
 function App() {
   const { engine, updateState, units, updateUnits } = useContext(EngineContext);
   const [isEngineOpen, setIsEngineOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isInternetMenuOpen, setIsInternetMenuOpen] = useState(false);
   const [url, setUrl] = useState("");
 
   useEffect(() => {
@@ -58,16 +60,24 @@ function App() {
     }
   }, [isEngineOpen, setIsMenuOpen]);
 
-
   return isEngineOpen ? (
     <div className="App h-full">
-      <Settings isMenuOpen={isMenuOpen} setisMenuOpen={setIsMenuOpen} />
+      {/* Overlay Items (don't show up until requested) */}
+      <Settings isOverlayOpen={isMenuOpen} setIsOverlayOpen={setIsMenuOpen} />
+      <OnlineHub isOverlayOpen={isInternetMenuOpen} setIsOverlayOpen={setIsInternetMenuOpen}/>
+      {/* Main App */}
       <div className="flex">
+        {/* Top and Left Section */}
         <div className="modelViewer">
           <p>{url}</p>
         </div>
         <div className="flex flex-col justify-end">
-          <TopBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          <TopBar
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+            isInternetMenuOpen={isInternetMenuOpen}
+            setIsInternetMenuOpen={setIsInternetMenuOpen}
+          />
           <div className="powerGraph">
             <p className="mt-2 text-center ml-16 fixed">Power</p>
             <Graph isTorque={false} />
@@ -78,11 +88,13 @@ function App() {
           </div>
         </div>
       </div>
+      {/* Bottom Left-Mid section */}
       <div className="bottomLeftSection flex h-full">
         <StatisticList />
         <TabBar />
       </div>
-      <div className="rightSection bg-black fixed right-0 bottom-0"></div>
+      {/* Right Section */}
+      <div className="rightSection fixed right-0 bottom-0"></div>
     </div>
   ) : (
     <MenuScreen updateIsEngineOpen={setIsEngineOpen} />

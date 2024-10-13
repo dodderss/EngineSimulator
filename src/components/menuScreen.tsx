@@ -60,7 +60,7 @@ function MenuScreen({
 
       <div className="flex flex-col h-full w-full justify-center items-center gap-5">
         <img src={MenuIcon} alt="Menu Icon" width={250} height={250} />
-        <h1 className="text-5xl">Engine Simulator</h1>
+        <h1 className="text-5xl">Enginuity</h1>
         <Button
           name="New Project"
           icon={NewFileIcon.toString()}

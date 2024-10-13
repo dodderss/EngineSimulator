@@ -8,16 +8,14 @@ import {
 } from "react";
 import { EngineContext } from "../services/globals";
 
-import CloseIcon from "../assets/icons/system/close.svg";
-
-import "./settings.tsx.css";
 import Options from "./ui/options";
 import { Store } from "@tauri-apps/plugin-store";
 import RunCalculations from "../services/calculations";
+import Overlay from "./ui/overlay";
 
-interface MenuProps {
-  isMenuOpen: boolean;
-  setisMenuOpen: Dispatch<SetStateAction<boolean>>;
+interface SettingsProps {
+  isOverlayOpen: boolean;
+  setIsOverlayOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 interface Units {
@@ -26,7 +24,7 @@ interface Units {
   massUnit?: string;
 }
 
-function Settings({ isMenuOpen, setisMenuOpen }: MenuProps) {
+function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
   const { engine, updateState, updateUnits } = useContext(EngineContext);
   const store = useMemo(() => {
     return new Store("store.bin");
@@ -45,32 +43,13 @@ function Settings({ isMenuOpen, setisMenuOpen }: MenuProps) {
     fetchData();
   }, [store]);
 
-  useEffect(() => {
-    const handleKeyDown = (event: any) => {
-      if (event.key === "Escape") {
-        setisMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isMenuOpen, setisMenuOpen]);
-
-  return isMenuOpen ? (
-    <div className="settings-overlay">
-      <div className="settings">
-        <div className="settings-header flex flex-row justify-between w-full p-3">
-          <h1>Settings</h1>
-          <div
-            className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
-            onClick={() => setisMenuOpen(false)}
-          >
-            <img src={CloseIcon.toString()} alt="" />
-          </div>
-        </div>
+  return isOverlayOpen ? (
+    <Overlay
+      isOverlayOpen={isOverlayOpen}
+      setIsOverlayOpen={setIsOverlayOpen}
+      title="Settings"
+    >
+      <div>
         <div className="p-3 space-x-5 flex flex-row">
           <div>
             <h2>Power unit</h2>
@@ -134,7 +113,7 @@ function Settings({ isMenuOpen, setisMenuOpen }: MenuProps) {
           </div>
         </div>
       </div>
-    </div>
+    </Overlay>
   ) : null;
 }
 

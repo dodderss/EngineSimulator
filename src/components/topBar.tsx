@@ -6,6 +6,7 @@ import MenuIcon from "../assets/icons/system/menu.svg";
 import SaveIcon from "../assets/icons/system/save.svg";
 import OpenIcon from "../assets/icons/system/open.svg";
 import SettingsIcon from "../assets/icons/system/settings.svg";
+import InternetIcon from "../assets/icons/decorative/internet.svg";
 
 import { useContext, useEffect, useState, useCallback } from "react";
 import { EngineContext, isEngine } from "../services/globals";
@@ -18,9 +19,11 @@ import Button from "./ui/button";
 interface TopBarProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (value: boolean) => void;
+  isInternetMenuOpen: boolean;
+  setIsInternetMenuOpen: (value: boolean) => void;
 }
 
-function TopBar({ isMenuOpen, setIsMenuOpen }: TopBarProps) {
+function TopBar({ isMenuOpen, setIsMenuOpen, setIsInternetMenuOpen }: TopBarProps) {
   const { engine, updateState } = useContext(EngineContext);
   const [appWindow, setAppWindow] = useState<Window | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -150,6 +153,14 @@ function TopBar({ isMenuOpen, setIsMenuOpen }: TopBarProps) {
                     return;
                   }
                 });
+              }}
+              small={true}
+            />
+            <Button
+              icon={InternetIcon.toString()}
+              name="Enginuity Hub"
+              onClick={() => {
+                setIsInternetMenuOpen(true);
               }}
               small={true}
             />
