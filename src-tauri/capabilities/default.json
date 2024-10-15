@@ -43,6 +43,20 @@
         }
       ]
     },
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "http://*"
+        },
+        {
+          "url": "https://*"
+        },
+        {
+          "url": "http://127.0.0.1:5000/**"
+        }
+      ]
+    },
     "dialog:default",
     "fs:allow-open",
     "store:default",
@@ -50,6 +64,7 @@
     "store:allow-set",
     "store:allow-save",
     "store:allow-load",
-    "process:default"
+    "process:default",
+    "http:default"
   ]
 }

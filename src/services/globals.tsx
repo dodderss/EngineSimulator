@@ -215,48 +215,161 @@ const defaultState: AppState = {
  *  // obj is not Engine
  * }
  */
-export function isEngine(obj: any): obj is Engine {
-  return (
-    typeof obj === "object" &&
-    obj !== null &&
-    typeof obj.bore === "number" &&
-    typeof obj.stroke === "number" &&
-    typeof obj.compressionRatio === "number" &&
-    typeof obj.displacement === "number" &&
-    typeof obj.power === "number" &&
-    typeof obj.torque === "number" &&
-    Array.isArray(obj.powerList) &&
-    obj.powerList.every((item: any) => typeof item === "number") &&
-    Array.isArray(obj.torqueList) &&
-    obj.torqueList.every((item: any) => typeof item === "number") &&
-    typeof obj.rpmLimit === "number" &&
-    typeof obj.fuelQuality === "string" &&
-    typeof obj.aspirationType === "string" &&
-    typeof obj.engineType === "string" &&
-    typeof obj.engineCylinders === "number" &&
-    typeof obj.boostPressure === "number" &&
-    typeof obj.boostProviderSize === "number" &&
-    typeof obj.exhaustSize === "number" &&
-    typeof obj.engineWeight === "number" &&
-    typeof obj.enginePrice === "number" &&
-    typeof obj.engineName === "string" &&
-    typeof obj.fileName === "string" &&
-    typeof obj.filePath === "string" &&
-    typeof obj.blockMaterial === "string" &&
-    typeof obj.headMaterial === "string" &&
-    typeof obj.pistonMaterial === "string" &&
-    typeof obj.headType === "string" &&
-    typeof obj.intakeType === "string" &&
-    typeof obj.vvl === "boolean" &&
-    typeof obj.vvt === "boolean" &&
-    typeof obj.vvlRpm === "number" &&
-    typeof obj.volumetricEfficiency === "number" &&
-    typeof obj.mechanicalEfficiency === "number" &&
-    typeof obj.totalEfficiency === "number" &&
-    typeof obj.engineLength === "number" &&
-    typeof obj.engineWidth === "number" &&
-    typeof obj.engineHeight === "number"
-  );
+export function isEngine(obj: any): boolean {
+  if (typeof obj !== "object" || obj === null) {
+    console.log("obj is not a valid object");
+    return false;
+  }
+  if (typeof obj.bore !== "number") {
+    console.log("bore");
+    return false;
+  }
+  if (typeof obj.stroke !== "number") {
+    console.log("stroke");
+    return false;
+  }
+  if (typeof obj.compressionRatio !== "number") {
+    console.log("compressionRatio");
+    return false;
+  }
+  if (typeof obj.displacement !== "number") {
+    console.log("displacement");
+    return false;
+  }
+  if (typeof obj.power !== "number") {
+    console.log("power");
+    return false;
+  }
+  if (typeof obj.torque !== "number") {
+    console.log("torque");
+    return false;
+  }
+  if (!Array.isArray(obj.powerList)) {
+    console.log("powerList is not an array");
+    return false;
+  }
+  if (!obj.powerList.every((item: any) => typeof item === "number")) {
+    console.log("powerList contains non-number");
+    return false;
+  }
+  if (!Array.isArray(obj.torqueList)) {
+    console.log("torqueList is not an array");
+    return false;
+  }
+  if (!obj.torqueList.every((item: any) => typeof item === "number")) {
+    console.log("torqueList contains non-number");
+    return false;
+  }
+  if (typeof obj.rpmLimit !== "number") {
+    console.log("rpmLimit");
+    return false;
+  }
+  if (typeof obj.fuelQuality !== "string") {
+    console.log("fuelQuality");
+    return false;
+  }
+  if (typeof obj.aspirationType !== "string") {
+    console.log("aspirationType");
+    return false;
+  }
+  if (typeof obj.engineType !== "string") {
+    console.log("engineType");
+    return false;
+  }
+  if (typeof obj.engineCylinders !== "number") {
+    console.log("engineCylinders");
+    return false;
+  }
+  if (typeof obj.boostPressure !== "number") {
+    console.log("boostPressure");
+    return false;
+  }
+  if (typeof obj.boostProviderSize !== "number") {
+    console.log("boostProviderSize");
+    return false;
+  }
+  if (typeof obj.exhaustSize !== "number") {
+    console.log("exhaustSize");
+    return false;
+  }
+  if (typeof obj.engineWeight !== "number") {
+    console.log("engineWeight");
+    return false;
+  }
+  if (typeof obj.enginePrice !== "number") {
+    console.log("enginePrice");
+    return false;
+  }
+  if (typeof obj.engineName !== "string") {
+    console.log("engineName");
+    return false;
+  }
+  if (typeof obj.fileName !== "string") {
+    console.log("fileName");
+    return false;
+  }
+  if (typeof obj.filePath !== "string") {
+    console.log("filePath");
+    return false;
+  }
+  if (typeof obj.blockMaterial !== "string") {
+    console.log("blockMaterial");
+    return false;
+  }
+  if (typeof obj.headMaterial !== "string") {
+    console.log("headMaterial");
+    return false;
+  }
+  if (typeof obj.pistonMaterial !== "string") {
+    console.log("pistonMaterial");
+    return false;
+  }
+  if (typeof obj.headType !== "string") {
+    console.log("headType");
+    return false;
+  }
+  if (typeof obj.intakeType !== "string") {
+    console.log("intakeType");
+    return false;
+  }
+  if (typeof obj.vvl !== "boolean") {
+    console.log("vvl");
+    return false;
+  }
+  if (typeof obj.vvt !== "boolean") {
+    console.log("vvt");
+    return false;
+  }
+  if (typeof obj.vvlRpm !== "number") {
+    console.log("vvlRpm");
+    return false;
+  }
+  if (typeof obj.volumetricEfficiency !== "number") {
+    console.log("volumetricEfficiency");
+    return false;
+  }
+  if (typeof obj.mechanicalEfficiency !== "number") {
+    console.log("mechanicalEfficiency");
+    return false;
+  }
+  if (typeof obj.totalEfficiency !== "number") {
+    console.log("totalEfficiency");
+    return false;
+  }
+  if (typeof obj.engineLength !== "number") {
+    console.log("engineLength");
+    return false;
+  }
+  if (typeof obj.engineWidth !== "number") {
+    console.log("engineWidth");
+    return false;
+  }
+  if (typeof obj.engineHeight !== "number") {
+    console.log("engineHeight");
+    return false;
+  }
+
+  return true;
 }
 
 /**
