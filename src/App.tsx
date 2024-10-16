@@ -1,4 +1,4 @@
-import StatisticList from "./components/ui/statisticList";
+import StatisticList from "./components/statisticList";
 import TabBar from "./components/ui/tabBar";
 import TopBar from "./components/topBar";
 import { useContext, useEffect, useState } from "react";
