@@ -43,8 +43,8 @@ import { DummyUnits, Units } from "./globals-context-provider";
 
 export interface Engine {
   /** Bore size in mm. */
-  bore: number; 
-  
+  bore: number;
+
   /** Stroke size in mm. */
   stroke: number;
 
@@ -147,7 +147,6 @@ export interface Engine {
   /** Engine height in mm. */
   engineHeight: number;
 }
-
 
 export const DummyEngine: Engine = {
   bore: 84, // Default to 84 mm

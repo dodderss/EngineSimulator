@@ -23,12 +23,20 @@ interface TopBarProps {
   setIsInternetMenuOpen: (value: boolean) => void;
 }
 
-function TopBar({ isMenuOpen, setIsMenuOpen, setIsInternetMenuOpen }: TopBarProps) {
+function TopBar({
+  isMenuOpen,
+  setIsMenuOpen,
+  setIsInternetMenuOpen,
+}: TopBarProps) {
   const { engine, updateState } = useContext(EngineContext);
   const [appWindow, setAppWindow] = useState<Window | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [engineName, setEngineName] = useState(engine.engineName);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    setEngineName(engine.engineName);
+  }, [engine.engineName]);
 
   const handleEdit = () => {
     setIsEditing(true);

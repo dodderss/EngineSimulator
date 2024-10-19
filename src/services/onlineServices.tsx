@@ -3,6 +3,7 @@ import { fetch } from "@tauri-apps/plugin-http";
 
 export async function getEngines() {
   const url = "http://127.0.0.1:5000/get_engines";
+  let goodEngines: Engine[] = [];
 
   try {
     const response = await fetch(url, {
@@ -35,13 +36,15 @@ export async function getEngines() {
           console.log(engine);
           throw new Error("Invalid engine data received");
         } else {
-          console.log(engine);
+          goodEngines.push(engine);
         }
       });
     }
   } catch (error) {
     console.error("There was an error:", error);
   }
+
+  return goodEngines;
 }
 
 export async function getEngineById(id: string) {

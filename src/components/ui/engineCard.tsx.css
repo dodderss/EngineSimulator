@@ -1,0 +1,9 @@
+.engineCard {
+  background-color: #638fbd;
+  border: 2px white solid;
+  padding: 12px;
+}
+
+.engineCard:hover {
+    background-color: #7ba0c8;
+}

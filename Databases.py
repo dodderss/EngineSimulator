@@ -2,6 +2,9 @@ import sqlite3
 import json
 from flask import Flask, request, jsonify  # type: ignore
 from flask_cors import CORS  # type: ignore
+import tkinter as tk
+from tkinter import messagebox
+from threading import Thread
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*",
@@ -48,7 +51,7 @@ class Database:
                 totalEfficiency REAL,
                 engineLength REAL,
                 engineWidth REAL,
-                engineHeight REAL
+                engineHeight REAL       
             );
         ''')
 
@@ -70,6 +73,13 @@ class Database:
             "powerList": newPowerList,
             "torqueList": newTorqueList,
         }
+
+    def delete_engine(self, engine_id):
+        connection = sqlite3.connect("database.db")
+        cursor = connection.cursor()
+        cursor.execute('DELETE FROM engines WHERE id = ?', (engine_id,))
+        connection.commit()
+        connection.close()
 
     def addEngine(self, engineJSON):
         connection = sqlite3.connect("database.db")
@@ -261,8 +271,83 @@ def get_engines():
     return jsonify({"status": "success", "data": engines_data}), 200
 
 
+def window():
+    def show_engine_details(engine_id):
+        db = Database()
+        engine = db.getEngine(engine_id)
+
+        if engine:
+            details_window = tk.Toplevel(root)
+            details_window.title(f"Engine Details: {engine[19]}")
+
+            details_text = "\n".join([
+                f"Engine Name: {engine[19]}",
+                f"Bore: {engine[1]}",
+                f"Stroke: {engine[2]}",
+                f"Compression Ratio: {engine[3]}",
+                f"Displacement: {engine[4]}",
+                f"Power: {engine[5]} HP",
+                f"Torque: {engine[6]} Nm",
+                f"RPM Limit: {engine[9]}",
+                f"Fuel Quality: {engine[10]}",
+                f"Engine Type: {engine[12]}",
+                f"Engine Cylinders: {engine[13]}",
+                f"Boost Pressure: {engine[14]} bar",
+                f"Exhaust Size: {engine[16]} inches",
+                f"Engine Weight: {engine[17]} kg",
+                f"Engine Price: £{engine[18]}",
+                f"Block Material: {engine[21]}",
+                f"Head Material: {engine[22]}",
+                f"Piston Material: {engine[23]}",
+                f"Head Type: {engine[24]}",
+                f"Intake Type: {engine[25]}",
+            ])
+
+            label = tk.Label(details_window, text=details_text, justify='left')
+            label.pack(padx=10, pady=10)
+
+            # Delete button
+            delete_button = tk.Button(details_window, text="Delete Engine", command=lambda: [
+                                    db.delete_engine(engine_id), details_window.destroy()])
+            delete_button.pack(pady=10)
+
+        else:
+            messagebox.showerror("Error", "Engine not found!")
+
+    # Function to update the list of engines in the UI
+
+
+    def update_engine_list():
+
+        engines = Database().getEngines()
+
+        engine_listbox.delete(0, tk.END)
+        for engine in engines:
+            engine_listbox.insert(tk.END, f"{engine[19]} (ID: {engine[0]})")
+
+
+    # Main Tkinter window
+    root = tk.Tk()
+    root.title("Engine Management")
+
+    # Listbox to display engines
+    engine_listbox = tk.Listbox(root, height=10, width=50)
+    engine_listbox.pack(padx=20, pady=20)
+
+    # Button to show details of selected engine
+    details_button = tk.Button(root, text="Show Details", command=lambda: show_engine_details(
+        int(engine_listbox.get(tk.ACTIVE).split()[-1][:-1])))
+    details_button.pack(pady=10)
+
+    # Update the engine list initially
+    update_engine_list()
+
+    root.mainloop()
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    Thread(target=lambda: app.run(debug=True, use_reloader=False)).start() 
+    window()
+    
 
 
 @app.after_request
