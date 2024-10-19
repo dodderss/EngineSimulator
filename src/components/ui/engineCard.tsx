@@ -41,7 +41,7 @@ function EngineCard({
           : aspiration === "turbo"
           ? "TURBOCHARGED"
           : "SUPERCHARGED"}{" "}
-        {layout == "i" ? "I" : "V"}
+        {layout === "i" ? "I" : "V"}
         {cylinders}
       </p>
       <div className="flex align-middle gap-2 mt-5">
