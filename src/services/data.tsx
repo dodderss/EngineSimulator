@@ -1,8 +1,8 @@
 class TabOptionData {
   public static blockTypes = [
-    { name: "Inline", value: "i" },
-    { name: "V 60°", value: "v60" },
-    { name: "V 90°", value: "v90" },
+    { name: "Inline", value: "i", densityEffector: 0.6 },
+    { name: "V 60°", value: "v60", densityEffector: 0.8 },
+    { name: "V 90°", value: "v90", densityEffector: 0.7 },
   ];
   public static inlineBlockTypes = [
     { name: "3", value: 3 },
@@ -29,10 +29,10 @@ class TabOptionData {
       name: "Cast Iron",
       value: "castIron",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 7000,
+      priceDensity: 7000,
+      maxPower: 600,
+      maxTorque: 500,
       description:
         "Cast Iron blocks are heavy but strong and are used in lots of engines, especialy on the lower end of the market due to their low price",
     },
@@ -40,10 +40,10 @@ class TabOptionData {
       name: "Aluminium Alloy",
       value: "aluminiumAlloy",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 2700,
+      priceDensity: 8000,
+      maxPower: 500,
+      maxTorque: 400,
       description:
         "Aluminium Alloy blocks are lighter than cast iron blocks and are used in more expensive modern engines",
     },
@@ -51,10 +51,10 @@ class TabOptionData {
       name: "VGCI",
       value: "vgci",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 6900,
+      priceDensity: 8000,
+      maxPower: 900,
+      maxTorque: 1200,
       description:
         "VGCI blocks are a mix of cast iron and aluminium and are used in high-performance engines",
     },
@@ -62,14 +62,15 @@ class TabOptionData {
       name: "Titanium",
       value: "titanium",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 4500,
+      priceDensity: 11700,
+      maxPower: 2000,
+      maxTorque: 3000,
       description:
         "Titanium blocks are very expensive but are used in the most high-performance engines",
     },
   ];
+
   public static headMaterials = this.blockMaterials;
 
   public static pistonMaterials = [
@@ -77,10 +78,10 @@ class TabOptionData {
       name: "Aluminium Alloy",
       value: "aluminiumAlloy",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 2700,
+      priceDensity: 7000,
+      maxPower: 550,
+      maxTorque: 450,
       description:
         "Aluminium alloy pistons are lightweight and have good thermal conductivity. They are used in most modern engines.",
     },
@@ -88,10 +89,10 @@ class TabOptionData {
       name: "Forged Aluminium",
       value: "forgedAluminium",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 2700,
+      priceDensity: 8000,
+      maxPower: 700,
+      maxTorque: 750,
       description:
         "Forged aluminium pistons are stronger than cast pistons and are used in high-performance engines.",
     },
@@ -99,10 +100,10 @@ class TabOptionData {
       name: "Hypereutectic Aluminium",
       value: "hypereutectic",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 2650,
+      priceDensity: 6000,
+      maxPower: 600,
+      maxTorque: 500,
       description:
         "Hypereutectic pistons are made from an aluminium-silicon alloy and are used in high-performance engines.",
     },
@@ -110,10 +111,10 @@ class TabOptionData {
       name: "Steel",
       value: "steel",
       //   placeholders
-      density: 0,
-      priceDensity: 0,
-      maxPower: 0,
-      maxTorque: 0,
+      density: 7800,
+      priceDensity: 6500,
+      maxPower: 800,
+      maxTorque: 1500,
       description:
         "Steel pistons are strong and durable and are used in heavy-duty engines such as trucks and tractors.",
     },

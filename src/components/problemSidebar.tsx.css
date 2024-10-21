@@ -1,10 +1,9 @@
-.propertiesSection {
-  height: 50%;
-  border-bottom: white 2px solid;
+.problemsSection {
   padding: 10px;
 }
 
-.problemsSection {
-  height: 50%;
-  padding: 10px;
+.problem {
+  background-color: #638fbd;
+  border: 2px white solid;
+  padding: 6px;
 }

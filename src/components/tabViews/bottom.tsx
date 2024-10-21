@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { EngineContext } from "../../services/globals";
 import Options from "../ui/options";
 import RunCalculations from "../../services/calculations";
-import TabOptionData from "../../services/tabOptionData";
+import TabOptionData from "../../services/data";
 
 function BottomEnd() {
   const { engine, updateState, units, updateUnits } = useContext(EngineContext);
@@ -127,7 +127,7 @@ function BottomEnd() {
             <div>
               <Slider
                 label={"Bore: " + engine.bore.toString() + "mm"}
-                max={150}
+                max={120}
                 min={50}
                 step={0.5}
                 value={engine.bore}
@@ -139,7 +139,7 @@ function BottomEnd() {
               />
               <Slider
                 label={"Stroke: " + engine.stroke.toString() + "mm"}
-                max={150}
+                max={120}
                 min={50}
                 step={0.5}
                 value={engine.stroke}

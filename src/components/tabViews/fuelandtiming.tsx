@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import RunCalculations from "../../services/calculations";
 import { EngineContext } from "../../services/globals";
-import TabOptionData from "../../services/tabOptionData";
+import TabOptionData from "../../services/data";
 import Options from "../ui/options";
 import Slider from "../ui/slider";
 

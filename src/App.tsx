@@ -11,6 +11,7 @@ import { listen } from "@tauri-apps/api/event";
 import Graph from "./components/ui/graph";
 import Settings from "./components/settings";
 import OnlineHub from "./components/online-hub";
+import ProblemSidebar from "./components/problemSidebar";
 
 function App() {
   const { engine, updateState, units, updateUnits } = useContext(EngineContext);
@@ -64,7 +65,10 @@ function App() {
     <div className="App h-full">
       {/* Overlay Items (don't show up until requested) */}
       <Settings isOverlayOpen={isMenuOpen} setIsOverlayOpen={setIsMenuOpen} />
-      <OnlineHub isOverlayOpen={isInternetMenuOpen} setIsOverlayOpen={setIsInternetMenuOpen}/>
+      <OnlineHub
+        isOverlayOpen={isInternetMenuOpen}
+        setIsOverlayOpen={setIsInternetMenuOpen}
+      />
       {/* Main App */}
       <div className="flex">
         {/* Top and Left Section */}
@@ -94,7 +98,9 @@ function App() {
         <TabBar />
       </div>
       {/* Right Section */}
-      <div className="rightSection fixed right-0 bottom-0"></div>
+      <div className="rightSection fixed right-0 bottom-0">
+        <ProblemSidebar />
+      </div>
     </div>
   ) : (
     <MenuScreen updateIsEngineOpen={setIsEngineOpen} />
