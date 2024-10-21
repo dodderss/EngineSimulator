@@ -91,7 +91,7 @@ export interface Engine {
   exhaustSize: number;
 
   /** Weight of the engine in kg. */
-  engineWeight: number;
+  engineMass: number;
 
   /** Price of the engine in the chosen currency (e.g., GBP). */
   enginePrice: number;
@@ -165,7 +165,7 @@ export const DummyEngine: Engine = {
   boostPressure: 0, // Default to 0 bar (no turbo)
   boostProviderSize: 0, // Default to 0 mm
   exhaustSize: 30, // Default to 30 mm
-  engineWeight: 150, // Default to 150 kg
+  engineMass: 150, // Default to 150 kg
   enginePrice: 500, // Default to 500 GBP
   engineName: "My Engine", // Default to "My Engine"
   fileName: "/My Engine.engine", // Default to "/My Engine.engine"

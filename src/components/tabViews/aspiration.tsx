@@ -6,7 +6,7 @@ import Options from "../ui/options";
 import Slider from "../ui/slider";
 
 function Aspiration() {
-  const { updateState, engine, units, updateUnits } = useContext(EngineContext);
+  const { updateState, engine, units } = useContext(EngineContext);
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
@@ -39,7 +39,7 @@ function Aspiration() {
                         aspirationType: type.value,
                       },
                       updateState,
-                      units, updateUnits
+                      units
                     );
                   }
                 });
@@ -72,7 +72,7 @@ function Aspiration() {
                         boostPressure: value / 14.504,
                       };
                       updateState({ engine: newEngine });
-                      RunCalculations(newEngine, updateState, units, updateUnits);
+                      RunCalculations(newEngine, updateState, units);
                     }}
                   />
                 </div>
@@ -98,7 +98,7 @@ function Aspiration() {
                         boostProviderSize: value,
                       };
                       updateState({ engine: newEngine });
-                      RunCalculations(newEngine, updateState, units, updateUnits);
+                      RunCalculations(newEngine, updateState, units);
                     }}
                   />
                 </div>

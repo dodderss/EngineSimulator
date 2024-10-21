@@ -7,14 +7,14 @@ import RunCalculations from "../../services/calculations";
 import TabOptionData from "../../services/data";
 
 function BottomEnd() {
-  const { engine, updateState, units, updateUnits } = useContext(EngineContext);
+  const { engine, updateState, units } = useContext(EngineContext);
 
   const handleOptionChange = (options: any[], value: string, key: string) => {
     const selectedOption = options.find((type) => type.name === value);
     if (selectedOption) {
       const newEngine = { ...engine, [key]: selectedOption.value };
       updateState({ engine: newEngine });
-      RunCalculations(newEngine, updateState, units, updateUnits); // Call RunCalculations after updating the state
+      RunCalculations(newEngine, updateState, units); // Call RunCalculations after updating the state
     }
   };
 
@@ -105,8 +105,7 @@ function BottomEnd() {
                         RunCalculations(
                           { ...engine, engineCylinders: parseInt(value) },
                           updateState,
-                          units,
-                          updateUnits
+                          units
                         ); // Call RunCalculations after updating the state
                       }}
                     />
@@ -128,25 +127,25 @@ function BottomEnd() {
               <Slider
                 label={"Bore: " + engine.bore.toString() + "mm"}
                 max={120}
-                min={50}
+                min={55}
                 step={0.5}
                 value={engine.bore}
                 onChange={(value) => {
                   const newEngine = { ...engine, bore: value };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState, units, updateUnits); // Call RunCalculations after updating the state
+                  RunCalculations(newEngine, updateState, units); // Call RunCalculations after updating the state
                 }}
               />
               <Slider
                 label={"Stroke: " + engine.stroke.toString() + "mm"}
                 max={120}
-                min={50}
+                min={55}
                 step={0.5}
                 value={engine.stroke}
                 onChange={(value) => {
                   const newEngine = { ...engine, stroke: value };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState, units, updateUnits); // Call RunCalculations after updating the state
+                  RunCalculations(newEngine, updateState, units); // Call RunCalculations after updating the state
                 }}
               />
             </div>

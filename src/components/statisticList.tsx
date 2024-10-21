@@ -31,11 +31,11 @@ function StatisticList() {
       />
       <StatisticItem
         image={EfficiencyIcon.toString()}
-        text={`${engine.totalEfficiency}%`}
+        text={`${engine.totalEfficiency.toFixed(1)}%`}
       />
       <StatisticItem
         image={WeightIcon.toString()}
-        text={`${engine.engineWeight} ` + units.massUnit}
+        text={`${engine.engineMass.toFixed(2)} ` + units.massUnit}
       />
     </div>
   );

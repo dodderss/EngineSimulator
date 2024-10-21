@@ -6,7 +6,7 @@ import Options from "../ui/options";
 import Slider from "../ui/slider";
 
 function FuelAndTiming() {
-  const { updateState, engine, units, updateUnits } = useContext(EngineContext);
+  const { updateState, engine, units } = useContext(EngineContext);
 
   return (
     <div className="bottomEnd">
@@ -35,7 +35,7 @@ function FuelAndTiming() {
                         ...engine,
                         fuelQuality: type.value,
                       },
-                      updateState, units, updateUnits
+                      updateState, units
                     );
                   }
                 });
@@ -74,7 +74,7 @@ function FuelAndTiming() {
                             ...engine,
                             vvt: value === "Yes" ? true : false,
                           },
-                          updateState, units, updateUnits
+                          updateState, units
                         );
                       }}
                     />
@@ -103,7 +103,7 @@ function FuelAndTiming() {
                             ...engine,
                             vvl: value === "Yes" ? true : false,
                           },
-                          updateState, units, updateUnits
+                          updateState, units
                         );
                       }}
                     />
@@ -125,7 +125,7 @@ function FuelAndTiming() {
                             ...engine,
                             vvlRpm: value,
                           },
-                          updateState, units, updateUnits
+                          updateState, units
                         );
                       }}
                     />
@@ -160,7 +160,7 @@ function FuelAndTiming() {
                         ...engine,
                         intakeType: type.value,
                       },
-                      updateState, units, updateUnits
+                      updateState, units
                     );
                   }
                 });

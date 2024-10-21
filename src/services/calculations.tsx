@@ -1,29 +1,29 @@
+import TabOptionData from "./data";
 import { AppState, Engine } from "./globals";
 import { Units } from "./globals-context-provider";
 
 const RunCalculations = (
   engine: Engine,
   updateState: (newState: Partial<AppState>) => void,
-  units: Units,
-  updateUnits: (newUnits: Partial<Units>) => void
+  units: Units
 ) => {
-  const rpm: number[] = [];
+  var rpm: number[] = [];
 
   for (let i = 10; i <= engine.rpmLimit; i += 10) {
     rpm.push(i);
   }
 
-  const power: number[] = [];
-  const torque: number[] = [];
-  const ve: number[] = [];
-  const losses: number[] = [];
-  const netPower: number[] = [];
-  const netTorque: number[] = [];
-  const netUnitPower: number[] = [];
-  const netUnitTorque: number[] = [];
-  const vvlFactor: number[] = [];
-  const vvtFactor: number[] = [];
-  const mep: number[] = [];
+  var power: number[] = [];
+  var torque: number[] = [];
+  var ve: number[] = [];
+  var losses: number[] = [];
+  var netPower: number[] = [];
+  var netTorque: number[] = [];
+  var netUnitPower: number[] = [];
+  var netUnitTorque: number[] = [];
+  var vvlFactor: number[] = [];
+  var vvtFactor: number[] = [];
+  var mep: number[] = [];
 
   const displacement =
     engine.engineCylinders *
@@ -31,6 +31,80 @@ const RunCalculations = (
     Math.pow(engine.bore, 2) *
     engine.stroke;
   engine.displacement = displacement / 1000000;
+
+  // ---- Total Block Mass Calculation ---- //
+
+  // Initialize mass effector for the block
+  var totalBlockMassEffector = 1;
+
+  // Find block type and material details
+  var blockType = TabOptionData.blockTypes.find(
+    (type) => type.value === engine.engineType
+  );
+  var blockMaterial = TabOptionData.blockMaterials.find(
+    (type) => type.value === engine.blockMaterial
+  );
+
+  // Calculate block volume (using volumeEffector instead of densityEffector)
+  var totalBlockVolume = blockType!.densityEffector * engine.displacement;
+
+  // Calculate block mass without effectors (volume * density)
+  var totalBlockMass = totalBlockVolume * blockMaterial!.density;
+
+  // Apply intake type density effector
+  TabOptionData.intakeTypes.forEach((type) => {
+    if (type.value === engine.intakeType) {
+      totalBlockMassEffector *= type.densityEffector;
+    }
+  });
+
+  // Apply VVT and VVL effectors to the block mass
+  totalBlockMassEffector *= engine.vvt ? 1.05 : 1; // VVT effector (5% increase if VVT is enabled)
+  totalBlockMassEffector *= engine.vvl ? 1.1 : 1; // VVL effector (10% increase if VVL is enabled)
+
+  // Final block mass after applying the effectors
+  totalBlockMass *= totalBlockMassEffector;
+
+  // ---- Total Head Mass Calculation ---- //
+
+  // Initialize mass effector for the head
+  var totalHeadMassEffector = 1;
+
+  var headMaterial = TabOptionData.headMaterials.find(
+    (type) => type.value === engine.headMaterial
+  );
+
+  // Ensure headType and headMaterial are valid
+
+  // Calculate head volume (using head volume effector)
+  let headVolume = blockType!.headMassEffector * engine.displacement;
+
+  // Calculate head mass without effectors (volume * density)
+  let headMass = headVolume * headMaterial!.density;
+
+  // Apply intake type density effector
+  TabOptionData.intakeTypes.forEach((type) => {
+    if (type.value === engine.intakeType) {
+      totalHeadMassEffector *= type.densityEffector;
+    }
+  });
+
+  // Apply VVT and VVL effectors to the head mass
+  totalHeadMassEffector *= engine.vvt ? 1.1 : 1; // VVT effector (10% increase if VVT is enabled)
+  totalHeadMassEffector *= engine.vvl ? 1.2 : 1; // VVL effector (20% increase if VVL is enabled)
+
+  // Final head mass after applying the effectors
+  headMass *= totalHeadMassEffector;
+
+  // ---- Total Engine Mass Calculation ---- //
+
+  // Sum of block mass and head mass
+  var totalMass = (totalBlockMass + headMass) / 150;
+
+  // Output the result
+  console.log("Total Engine Mass:", totalMass);
+
+  // ---- Power/Torque Calculations ---- //
 
   rpm.forEach((currentRpm, index) => {
     // ---- Volume Efficiency ---- //
@@ -111,12 +185,15 @@ const RunCalculations = (
   const maxPower = Math.max(...netUnitPower);
   const maxTorque = Math.max(...netUnitTorque);
   const maxVe = Math.max(...ve);
+  console.log(maxVe);
   updateState({
     engine: {
       ...engine,
       power: maxPower,
       torque: maxTorque,
       volumetricEfficiency: maxVe,
+      totalEfficiency: engine.mechanicalEfficiency * maxVe,
+      engineMass: totalMass,
       powerList: netUnitPower,
       torqueList: netUnitTorque,
     },

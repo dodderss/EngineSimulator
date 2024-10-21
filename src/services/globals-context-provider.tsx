@@ -62,7 +62,6 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
       state.engine,
       state.updateState,
       state.units,
-      state.updateUnits
     );
   }, [state.engine, state.updateState, state.units, state.updateUnits]);
 

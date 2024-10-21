@@ -6,7 +6,7 @@ import Options from "../ui/options";
 import Slider from "../ui/slider";
 
 function TopEnd() {
-  const { updateState, engine, units, updateUnits } = useContext(EngineContext);
+  const { updateState, engine, units } = useContext(EngineContext);
 
   return (
     <div className="bottomEnd">
@@ -37,7 +37,6 @@ function TopEnd() {
                       },
                       updateState,
                       units,
-                      updateUnits
                     );
                   }
                 });
@@ -74,8 +73,7 @@ function TopEnd() {
                         headMaterial: type.value,
                       },
                       updateState,
-                      units,
-                      updateUnits
+                      units
                     );
                   }
                 });
@@ -93,7 +91,7 @@ function TopEnd() {
                   rpmLimit: value,
                 };
                 updateState({ engine: newEngine });
-                RunCalculations(newEngine, updateState, units, updateUnits);
+                RunCalculations(newEngine, updateState, units);
               }}
             />
           </div>
@@ -118,7 +116,7 @@ function TopEnd() {
                     exhaustSize: value,
                   };
                   updateState({ engine: newEngine });
-                  RunCalculations(newEngine, updateState, units, updateUnits);
+                  RunCalculations(newEngine, updateState, units);
                 }}
               />
             </div>

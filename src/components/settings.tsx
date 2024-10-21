@@ -61,7 +61,7 @@ function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
                     updateState({ engine: engine });
                     updateUnits(newUnits);
 
-                    RunCalculations(engine, updateState, newUnits, updateUnits);
+                    RunCalculations(engine, updateState, newUnits);
                   });
                   return newUnits;
                 });
@@ -81,7 +81,7 @@ function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
                   store.set("units", newUnits).then(() => {
                     updateState({ engine: engine });
                     updateUnits(newUnits);
-                    RunCalculations(engine, updateState, newUnits, updateUnits);
+                    RunCalculations(engine, updateState, newUnits);
                   });
                   return newUnits;
                 });
@@ -101,7 +101,7 @@ function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
                   store.set("units", newUnits).then(() => {
                     updateState({ engine: engine });
                     updateUnits(newUnits);
-                    RunCalculations(engine, updateState, newUnits, updateUnits);
+                    RunCalculations(engine, updateState, newUnits);
                   });
                   return newUnits;
                 });

@@ -14,14 +14,14 @@ import OnlineHub from "./components/online-hub";
 import ProblemSidebar from "./components/problemSidebar";
 
 function App() {
-  const { engine, updateState, units, updateUnits } = useContext(EngineContext);
+  const { engine, updateState, units } = useContext(EngineContext);
   const [isEngineOpen, setIsEngineOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isInternetMenuOpen, setIsInternetMenuOpen] = useState(false);
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    RunCalculations(engine, updateState, units, updateUnits);
+    RunCalculations(engine, updateState, units);
     const handleOpenUrl = async (urls: any) => {
       console.log("deep link:", urls);
       setUrl(urls);

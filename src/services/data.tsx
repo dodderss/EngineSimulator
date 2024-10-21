@@ -1,8 +1,8 @@
 class TabOptionData {
   public static blockTypes = [
-    { name: "Inline", value: "i", densityEffector: 0.6 },
-    { name: "V 60°", value: "v60", densityEffector: 0.8 },
-    { name: "V 90°", value: "v90", densityEffector: 0.7 },
+    { name: "Inline", value: "i", densityEffector: 0.6, headMassEffector: 0.3 },
+    { name: "V 60°", value: "v60", densityEffector: 0.8, headMassEffector: 0.35 },
+    { name: "V 90°", value: "v90", densityEffector: 0.8, headMassEffector: 0.35 },
   ];
   public static inlineBlockTypes = [
     { name: "3", value: 3 },
@@ -200,18 +200,21 @@ class TabOptionData {
       value: "carb",
       // placeholder
       performanceEffector: 0,
+      densityEffector: 1.0
     },
     {
       name: "Mechanical Injection",
       value: "mechInj",
       // placeholder
       performanceEffector: 0,
+      densityEffector: 1.1
     },
     {
       name: "Electronic Injection",
       value: "efi",
       // placeholder
       performanceEffector: 0,
+      densityEffector: 1.2
     },
   ];
 }
