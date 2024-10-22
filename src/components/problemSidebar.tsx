@@ -136,7 +136,7 @@ function ProblemSidebar() {
     }
 
     if (chanceOfKnock > 50) {
-      knockCauses.map((cause) => {
+      knockCauses.forEach((cause) => {
         setProblems((prev) => [
           ...prev,
           {

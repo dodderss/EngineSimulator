@@ -95,7 +95,6 @@ function TopEnd() {
                   RunCalculations(newEngine, updateState, units);
                 }}
               />
-              {/* compression ratio slider  */}
               <Slider
                 label={
                   "Compression Ratio: " + engine.compressionRatio.toFixed(1).toString()

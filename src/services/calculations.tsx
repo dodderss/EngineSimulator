@@ -35,21 +35,22 @@ const RunCalculations = (
   // ---- Total Block Mass Calculation ---- //
 
   // Initialize mass effector for the block
-  var totalBlockMassEffector = 1;
+  let totalBlockMassEffector = 1;
 
   // Find block type and material details
-  var blockType = TabOptionData.blockTypes.find(
+  const blockType = TabOptionData.blockTypes.find(
     (type) => type.value === engine.engineType
   );
-  var blockMaterial = TabOptionData.blockMaterials.find(
+  const blockMaterial = TabOptionData.blockMaterials.find(
     (type) => type.value === engine.blockMaterial
   );
 
   // Calculate block volume (using volumeEffector instead of densityEffector)
-  var totalBlockVolume = blockType!.densityEffector * engine.displacement;
+  const totalBlockVolume = blockType!.densityEffector * engine.displacement;
+  const totalBlockPrice = blockMaterial!.priceDensity * totalBlockVolume;
 
   // Calculate block mass without effectors (volume * density)
-  var totalBlockMass = totalBlockVolume * blockMaterial!.density;
+  let totalBlockMass = totalBlockVolume * blockMaterial!.density;
 
   // Apply intake type density effector
   TabOptionData.intakeTypes.forEach((type) => {
@@ -68,16 +69,15 @@ const RunCalculations = (
   // ---- Total Head Mass Calculation ---- //
 
   // Initialize mass effector for the head
-  var totalHeadMassEffector = 1;
+  let totalHeadMassEffector = 1;
 
-  var headMaterial = TabOptionData.headMaterials.find(
+  const headMaterial = TabOptionData.headMaterials.find(
     (type) => type.value === engine.headMaterial
   );
 
-  // Ensure headType and headMaterial are valid
-
   // Calculate head volume (using head volume effector)
-  let headVolume = blockType!.headMassEffector * engine.displacement;
+  const headVolume = blockType!.headMassEffector * engine.displacement;
+  const headPrice = headMaterial!.priceDensity * headVolume;
 
   // Calculate head mass without effectors (volume * density)
   let headMass = headVolume * headMaterial!.density;
@@ -96,10 +96,51 @@ const RunCalculations = (
   // Final head mass after applying the effectors
   headMass *= totalHeadMassEffector;
 
+  // ---- Total Piston Mass Calculation ---- //
+
+  // Initialize mass effector for the pistons
+  let totalPistonMassEffector = 1;
+
+  const pistonMaterial = TabOptionData.pistonMaterials.find(
+    (type) => type.value === engine.pistonMaterial
+  );
+
+  // Calculate piston volume (assuming pistons have a volume effector)
+  const pistonVolume = blockType!.pistonMassEffector * engine.displacement;
+  const pistonPrice = pistonMaterial!.priceDensity * pistonVolume;
+
+  // Calculate piston mass without effectors (volume * density)
+  let pistonMass = pistonVolume * pistonMaterial!.density;
+
+  // Apply intake type density effector
+  TabOptionData.intakeTypes.forEach((type) => {
+    if (type.value === engine.intakeType) {
+      totalPistonMassEffector *= type.densityEffector;
+    }
+  });
+
+  // Apply VVT and VVL effectors to the piston mass
+  totalPistonMassEffector *= engine.vvt ? 1.1 : 1; // VVT effector (10% increase if VVT is enabled)
+  totalPistonMassEffector *= engine.vvl ? 1.2 : 1; // VVL effector (20% increase if VVL is enabled)
+
+  // Final piston mass after applying the effectors
+  pistonMass *= totalPistonMassEffector;
+
   // ---- Total Engine Mass Calculation ---- //
 
-  // Sum of block mass and head mass
-  var totalMass = (totalBlockMass + headMass) / 150;
+  // Sum of block mass, head mass, and piston mass
+  const totalMass = (totalBlockMass + headMass + pistonMass) / 150;
+  let totalPrice = 500 + (totalBlockPrice + headPrice + pistonPrice) / 30;
+
+  if (engine.vvt) {
+    totalPrice += 100;
+  }
+  if (engine.vvl) {
+    totalPrice += 200;
+  }
+  if (engine.boostPressure > 1) {
+    totalPrice += 50 * engine.boostPressure;
+  }
 
   // ---- Power/Torque Calculations ---- //
 
@@ -189,6 +230,7 @@ const RunCalculations = (
       torque: maxTorque,
       volumetricEfficiency: maxVe,
       totalEfficiency: engine.mechanicalEfficiency * maxVe,
+      enginePrice: totalPrice,
       engineMass: totalMass,
       powerList: netUnitPower,
       torqueList: netUnitTorque,

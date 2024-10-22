@@ -27,7 +27,7 @@ function StatisticList() {
       />
       <StatisticItem
         image={PriceIcon.toString()}
-        text={`£${engine.enginePrice}`}
+        text={`£${engine.enginePrice.toFixed(2)}`}
       />
       <StatisticItem
         image={EfficiencyIcon.toString()}

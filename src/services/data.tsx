@@ -1,8 +1,8 @@
 class TabOptionData {
   public static blockTypes = [
-    { name: "Inline", value: "i", densityEffector: 0.6, headMassEffector: 0.3 },
-    { name: "V 60°", value: "v60", densityEffector: 0.8, headMassEffector: 0.35 },
-    { name: "V 90°", value: "v90", densityEffector: 0.8, headMassEffector: 0.35 },
+    { name: "Inline", value: "i", densityEffector: 0.6, headMassEffector: 0.3, pistonMassEffector: 0.3 },
+    { name: "V 60°", value: "v60", densityEffector: 0.8, headMassEffector: 0.35, pistonMassEffector: 0.35 },
+    { name: "V 90°", value: "v90", densityEffector: 0.8, headMassEffector: 0.35, pistonMassEffector: 0.35 },
   ];
   public static inlineBlockTypes = [
     { name: "3", value: 3 },
@@ -63,7 +63,7 @@ class TabOptionData {
       value: "titanium",
       //   placeholders
       density: 4500,
-      priceDensity: 11700,
+      priceDensity: 117000,
       maxPower: 2000,
       maxTorque: 3000,
       description:
