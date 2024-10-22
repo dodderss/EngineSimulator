@@ -1,3 +1,4 @@
+import { ButtonHTMLAttributes } from "react";
 import "./button.tsx.css";
 
 interface ButtonProps {
@@ -5,11 +6,13 @@ interface ButtonProps {
   icon?: string;
   onClick: () => void;
   small?: boolean;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
 }
 
-function Button({ small, name, icon, onClick }: ButtonProps) {
+function Button({ small, name, icon, onClick, type = "button" }: ButtonProps) {
   return (
-    <div
+    <button
+      type={type}
       className={
         small
           ? "small custButton flex items-center gap-4"
@@ -23,7 +26,7 @@ function Button({ small, name, icon, onClick }: ButtonProps) {
         <img src={icon} alt="icon" width={small ? "48" : "56"} height={small ? "48" : "56"} className="pl-4" />
       ) : null}
       <h2>{name}</h2>
-    </div>
+    </button>
   );
 }
 

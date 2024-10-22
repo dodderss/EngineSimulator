@@ -7,3 +7,37 @@
   background-color: #638fbd;
   border: 2px solid white;
 }
+
+input {
+  background-color: #6a99cc;
+  color: white;
+  border: white 2px solid;
+  padding: 4rem;
+  
+} 
+
+input::placeholder {
+  color: white;
+}
+
+/* Vendor prefixes for better compatibility */
+input::-webkit-input-placeholder {
+  color: white;
+}
+
+input:-moz-placeholder {
+  color: white;
+}
+
+input::-moz-placeholder {
+  color: white;
+}
+
+input:-ms-input-placeholder {
+  color: white;
+}
+
+
+form {
+  background-color: #638fbd;
+}

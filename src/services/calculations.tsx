@@ -101,9 +101,6 @@ const RunCalculations = (
   // Sum of block mass and head mass
   var totalMass = (totalBlockMass + headMass) / 150;
 
-  // Output the result
-  console.log("Total Engine Mass:", totalMass);
-
   // ---- Power/Torque Calculations ---- //
 
   rpm.forEach((currentRpm, index) => {
@@ -185,7 +182,6 @@ const RunCalculations = (
   const maxPower = Math.max(...netUnitPower);
   const maxTorque = Math.max(...netUnitTorque);
   const maxVe = Math.max(...ve);
-  console.log(maxVe);
   updateState({
     engine: {
       ...engine,
