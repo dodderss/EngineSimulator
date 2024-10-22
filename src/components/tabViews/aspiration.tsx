@@ -82,7 +82,7 @@ function Aspiration() {
           <div className="column column3">
             <div className="innerColumn w-full">
               <div className="columnHeader w-full border-b-2 border-white ">
-                <h2>Size</h2>
+                <h2>Boost Provider Size</h2>
               </div>
               <div className="columnContents w-full flex p-5 ">
                 <div>

@@ -100,6 +100,56 @@ function ProblemSidebar() {
         }
       }
     });
+    var chanceOfKnock = 0;
+    var knockCauses = [];
+    if (engine.compressionRatio > 10) {
+      chanceOfKnock += 10;
+      knockCauses.push("High Compression Ratio");
+    }
+    if (engine.compressionRatio > 11) {
+      chanceOfKnock += 20;
+      knockCauses.push("Very High Compression Ratio");
+    }
+    if (engine.rpmLimit > 8000) {
+      chanceOfKnock += 10;
+      knockCauses.push("High RPM Limit");
+    }
+    if (engine.rpmLimit > 9000) {
+      chanceOfKnock += 10;
+      knockCauses.push("Very High RPM Limit");
+    }
+    if (!engine.vvt) {
+      chanceOfKnock += 10;
+      knockCauses.push("No VVT");
+    }
+    if (!engine.vvl) {
+      chanceOfKnock += 10;
+      knockCauses.push("No VVL");
+    }
+    if (engine.boostPressure > 1) {
+      chanceOfKnock += 10;
+      knockCauses.push("High Boost Pressure");
+    }
+    if (engine.boostPressure > 2) {
+      chanceOfKnock += 10;
+      knockCauses.push("Very High Boost Pressure");
+    }
+
+    if (chanceOfKnock > 50) {
+      knockCauses.map((cause) => {
+        setProblems((prev) => [
+          ...prev,
+          {
+            title: "High Chance of Knock",
+            cause: cause,
+            description:
+              "The engine has a high chance of knocking due to the engine's configuration.",
+            solution:
+              "Change the engine configuration to reduce the chance of knock",
+          },
+        ]);
+      });
+    }
   }, [engine]);
 
   return (

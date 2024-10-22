@@ -36,7 +36,7 @@ function TopEnd() {
                         headType: type.value,
                       },
                       updateState,
-                      units,
+                      units
                     );
                   }
                 });
@@ -79,21 +79,41 @@ function TopEnd() {
                 });
               }}
             />
-            <Slider
-              label={"RPM Limit: " + engine.rpmLimit.toString()}
-              value={engine.rpmLimit}
-              max={10000}
-              min={1000}
-              step={100}
-              onChange={(value) => {
-                const newEngine = {
-                  ...engine,
-                  rpmLimit: value,
-                };
-                updateState({ engine: newEngine });
-                RunCalculations(newEngine, updateState, units);
-              }}
-            />
+            <div>
+              <Slider
+                label={"RPM Limit: " + engine.rpmLimit.toString()}
+                value={engine.rpmLimit}
+                max={10000}
+                min={1000}
+                step={100}
+                onChange={(value) => {
+                  const newEngine = {
+                    ...engine,
+                    rpmLimit: value,
+                  };
+                  updateState({ engine: newEngine });
+                  RunCalculations(newEngine, updateState, units);
+                }}
+              />
+              {/* compression ratio slider  */}
+              <Slider
+                label={
+                  "Compression Ratio: " + engine.compressionRatio.toFixed(1).toString()
+                }
+                value={engine.compressionRatio}
+                max={12}
+                min={8}
+                step={0.1}
+                onChange={(value) => {
+                  const newEngine = {
+                    ...engine,
+                    compressionRatio: value,
+                  };
+                  updateState({ engine: newEngine });
+                  RunCalculations(newEngine, updateState, units);
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
