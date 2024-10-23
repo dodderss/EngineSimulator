@@ -150,12 +150,25 @@ function ProblemSidebar() {
         ]);
       });
     }
+
+    if (engine.power / engine.engineMass < 0.05) {
+      setProblems((prev) => [
+        ...prev,
+        {
+          title: "Low Power to Weight Ratio",
+          cause: "Engine",
+          description:
+            "The engine has a low power to weight ratio and may not perform well.",
+          solution: "Increase the power output or decrease the engine mass",
+        },
+      ]);
+    }
   }, [engine]);
 
   return (
     <div className="rightSection fixed right-0 bottom-0 text-3xl  flex-col overflow-auto">
       <div className="problemsSection text-3xl">
-        <h1 className="sticky">Problems</h1>
+        <h1>Problems</h1>
         {problems.map((problem, index) => (
           <div key={index} className="problem mt-2">
             <p className="text-lg">{problem.title}</p>

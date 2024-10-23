@@ -291,8 +291,8 @@ export function isEngine(obj: any): boolean {
     console.log("exhaustSize");
     return false;
   }
-  if (typeof obj.engineWeight !== "number") {
-    console.log("engineWeight");
+  if (typeof obj.engineMass !== "number") {
+    console.log("engineMass");
     return false;
   }
   if (typeof obj.enginePrice !== "number") {
