@@ -14,7 +14,6 @@ function BottomEnd() {
     if (selectedOption) {
       const newEngine = { ...engine, [key]: selectedOption.value };
       updateState({ engine: newEngine });
-      RunCalculations(newEngine, updateState, units); // Call RunCalculations after updating the state
     }
   };
 

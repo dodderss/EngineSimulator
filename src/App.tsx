@@ -3,57 +3,54 @@ import TabBar from "./components/ui/tabBar";
 import TopBar from "./components/topBar";
 import { useContext, useEffect, useState } from "react";
 import RunCalculations from "./services/calculations";
-import { EngineContext, isEngine } from "./services/globals";
+import { EngineContext } from "./services/globals";
 import MenuScreen from "./components/menuScreen";
-import { onOpenUrl } from "@tauri-apps/plugin-deep-link";
-import { readFile } from "./services/fileSystem";
-import { listen } from "@tauri-apps/api/event";
 import Graph from "./components/ui/graph";
 import Settings from "./components/settings";
 import OnlineHub from "./components/online-hub";
 import ProblemSidebar from "./components/problemSidebar";
+import UndoRedo from "./services/undoRedo";
 
 function App() {
   const { engine, updateState, units } = useContext(EngineContext);
   const [isEngineOpen, setIsEngineOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isInternetMenuOpen, setIsInternetMenuOpen] = useState(false);
-  const [url, setUrl] = useState("");
+
+  const undoSystem = new UndoRedo();
 
   useEffect(() => {
     RunCalculations(engine, updateState, units);
-    const handleOpenUrl = async (urls: any) => {
-      console.log("deep link:", urls);
-      setUrl(urls);
+    const handleUndo = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "z") {
 
-      await readFile(urls).then((value) => {
-        if (value === "") {
-          alert("Invalid file: File empty.");
-          return;
+        if (undoSystem) {
+          let undo = undoSystem.undo();
+          if (undo) {
+            updateState({ engine: undo });
+            RunCalculations(undo, updateState, units);
+          }
         }
-
-        const parsedValue = JSON.parse(value.toString());
-
-        if (isEngine(parsedValue)) {
-          updateState({ engine: JSON.parse(value.toString()) });
-          setIsEngineOpen(true);
-
-          return value;
-        } else {
-          alert("Invalid file: File may be corrupted or an old version.");
-          return;
+      } else if ((event.ctrlKey || event.metaKey) && event.key === "y") {
+        if (undoSystem) {
+          let redo = undoSystem.redo();
+          if (redo) {
+            updateState({ engine: redo });
+            RunCalculations(redo, updateState, units);
+          }
         }
-      });
+      }
     };
-    const handleOpenUrlAsync = async () => {
-      await onOpenUrl(handleOpenUrl);
+
+    window.addEventListener("keydown", handleUndo);
+    return () => {
+      window.removeEventListener("keydown", handleUndo); // Cleanup
     };
-    handleOpenUrlAsync();
-    listen("tauri://file-drop", (event) => {
-      console.log(event);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    undoSystem.push(engine);
+    console.log("pushed", engine);
+  }, [engine]);
 
   useEffect(() => {
     if (isEngineOpen) {
@@ -72,9 +69,7 @@ function App() {
       {/* Main App */}
       <div className="flex">
         {/* Top and Left Section */}
-        <div className="modelViewer">
-          <p>{url}</p>
-        </div>
+        <div className="modelViewer"></div>
         <div className="flex flex-col justify-end">
           <TopBar
             isMenuOpen={isMenuOpen}
