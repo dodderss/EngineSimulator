@@ -8,3 +8,9 @@ declare module "*.png" {
   const content: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>>;
   export default content;
 }
+
+// do the same for stl
+declare module "*.stl" {
+  const content: string;
+  export default content;
+}

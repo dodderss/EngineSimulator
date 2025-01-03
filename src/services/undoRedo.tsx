@@ -10,7 +10,6 @@ export default class UndoRedo {
     this.stack.push(item);
     this.redoStack = [];
     this.currentIndex++;
-    console.log(this.stack);
   }
 
   peek(): any | null {
@@ -21,13 +20,10 @@ export default class UndoRedo {
   }
 
   undo(): Engine | null {
-    console.log("undo", this.stack);
     if (this.currentIndex > 0) {
       const currentState = this.stack[this.currentIndex];
-      console.log(currentState);
       this.redoStack.push(currentState); 
       this.currentIndex--; 
-      console.log("undo", this.stack);
       return this.stack[this.currentIndex];
     }
     return null;

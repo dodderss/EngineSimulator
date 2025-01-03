@@ -10,6 +10,7 @@ import Settings from "./components/settings";
 import OnlineHub from "./components/online-hub";
 import ProblemSidebar from "./components/problemSidebar";
 import UndoRedo from "./services/undoRedo";
+import ModelViewer from "./components/modelViewer";
 
 function App() {
   const { engine, updateState, units } = useContext(EngineContext);
@@ -23,7 +24,6 @@ function App() {
     RunCalculations(engine, updateState, units);
     const handleUndo = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === "z") {
-
         if (undoSystem) {
           let undo = undoSystem.undo();
           if (undo) {
@@ -49,7 +49,6 @@ function App() {
   }, []);
   useEffect(() => {
     undoSystem.push(engine);
-    console.log("pushed", engine);
   }, [engine]);
 
   useEffect(() => {
@@ -69,7 +68,9 @@ function App() {
       {/* Main App */}
       <div className="flex">
         {/* Top and Left Section */}
-        <div className="modelViewer"></div>
+        <div className="modelViewer">
+          <ModelViewer />
+        </div>
         <div className="flex flex-col justify-end">
           <TopBar
             isMenuOpen={isMenuOpen}

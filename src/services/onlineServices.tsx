@@ -33,7 +33,6 @@ export async function getEngines() {
           engine.vvt = true;
         }
         if (!isEngine(engine)) {
-          console.log(engine);
           throw new Error("Invalid engine data received");
         } else {
           goodEngines.push(engine);
@@ -45,28 +44,6 @@ export async function getEngines() {
   }
 
   return goodEngines;
-}
-
-export async function getEngineById(id: string) {
-  const url = `http://127.0.0.1:5000/get_engine/${id}`;
-
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log(data); // Process the response data here
-  } catch (error) {
-    console.error("There was an error:", error);
-  }
 }
 
 export async function addEngine(engine: Engine) {
