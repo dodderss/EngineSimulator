@@ -5,6 +5,7 @@ export default class UndoRedo {
   private redoStack: any[] = [];
   private currentIndex: number = 0;
 
+  // Method to push a new item onto the stack
   push(item: any): void {
     this.stack = this.stack.slice(0, this.currentIndex + 1);
     this.stack.push(item);
@@ -12,6 +13,7 @@ export default class UndoRedo {
     this.currentIndex++;
   }
 
+  // Method to peek at the current item on the stack
   peek(): any | null {
     if (this.currentIndex === -1) {
       return null;
@@ -19,6 +21,7 @@ export default class UndoRedo {
     return this.stack[this.currentIndex];
   }
 
+  // Method to undo the last action
   undo(): Engine | null {
     if (this.currentIndex > 0) {
       const currentState = this.stack[this.currentIndex];
@@ -29,6 +32,7 @@ export default class UndoRedo {
     return null;
   }
 
+  // Method to redo the last undone action
   redo(): Engine | null {
     if (this.redoStack.length > 0) {
       const nextState = this.redoStack.pop();

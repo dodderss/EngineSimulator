@@ -6,7 +6,9 @@ import Options from "../ui/options";
 import Slider from "../ui/slider";
 
 function Aspiration() {
+  // Use the EngineContext to get the updateState function, engine object, and units
   const { updateState, engine, units } = useContext(EngineContext);
+
   return (
     <div className="bottomEnd">
       <div className="column column1 overflow-y-auto">
@@ -25,6 +27,7 @@ function Aspiration() {
               key="aspirationType"
               uniqueKey="aspirationType"
               onChange={(value) => {
+                // Update the engine's aspiration type and run calculations
                 TabOptionData.aspirationTypes.forEach((type) => {
                   if (type.name === value) {
                     updateState({
@@ -67,6 +70,7 @@ function Aspiration() {
                     step={0.5}
                     value={engine.boostPressure}
                     onChange={(value) => {
+                      // Update the engine's boost pressure and run calculations
                       const newEngine = {
                         ...engine,
                         boostPressure: value / 14.504,
@@ -93,6 +97,7 @@ function Aspiration() {
                     step={1}
                     value={engine.boostProviderSize}
                     onChange={(value) => {
+                      // Update the engine's boost provider size and run calculations
                       const newEngine = {
                         ...engine,
                         boostProviderSize: value,

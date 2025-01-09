@@ -13,15 +13,20 @@ import UndoRedo from "./services/undoRedo";
 import ModelViewer from "./components/modelViewer";
 
 function App() {
+  // Get engine, updateState, and units from EngineContext
   const { engine, updateState, units } = useContext(EngineContext);
+  // State variables to manage the visibility of different sections
   const [isEngineOpen, setIsEngineOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isInternetMenuOpen, setIsInternetMenuOpen] = useState(false);
 
+  // Initialize undo system
   const undoSystem = new UndoRedo();
 
+  // Effect to run calculations and handle undo/redo keyboard shortcuts
   useEffect(() => {
     RunCalculations(engine, updateState, units);
+
     const handleUndo = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === "z") {
         if (undoSystem) {
@@ -42,21 +47,27 @@ function App() {
       }
     };
 
+    // Add event listener for keydown events
     window.addEventListener("keydown", handleUndo);
     return () => {
-      window.removeEventListener("keydown", handleUndo); // Cleanup
+      // Cleanup event listener on component unmount
+      window.removeEventListener("keydown", handleUndo);
     };
   }, []);
+
+  // Effect to push the current engine state to the undo system
   useEffect(() => {
     undoSystem.push(engine);
   }, [engine]);
 
+  // Effect to close the menu when the engine is open
   useEffect(() => {
     if (isEngineOpen) {
       setIsMenuOpen(false);
     }
   }, [isEngineOpen, setIsMenuOpen]);
 
+  // Render the main application or the menu screen based on isEngineOpen state
   return isEngineOpen ? (
     <div className="App h-full">
       {/* Overlay Items (don't show up until requested) */}

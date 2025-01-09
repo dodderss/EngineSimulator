@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import { useContext } from "react";
 import RunCalculations from "../../services/calculations";
 import { EngineContext } from "../../services/globals";
@@ -6,10 +7,12 @@ import Options from "../ui/options";
 import Slider from "../ui/slider";
 
 function TopEnd() {
+  // Use context to get updateState, engine, and units from EngineContext
   const { updateState, engine, units } = useContext(EngineContext);
 
   return (
     <div className="bottomEnd">
+      {/* Column 1: Head Type */}
       <div className="column column1 overflow-y-auto">
         <div className="innerColumn w-full ">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -46,6 +49,7 @@ function TopEnd() {
         </div>
       </div>
 
+      {/* Column 2: Head Material */}
       <div className="column column2 overflow-y-scroll overflow-x-scroll">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -80,6 +84,7 @@ function TopEnd() {
               }}
             />
             <div>
+              {/* Slider for RPM Limit */}
               <Slider
                 label={"RPM Limit: " + engine.rpmLimit.toString()}
                 value={engine.rpmLimit}
@@ -95,6 +100,7 @@ function TopEnd() {
                   RunCalculations(newEngine, updateState, units);
                 }}
               />
+              {/* Slider for Compression Ratio */}
               <Slider
                 label={
                   "Compression Ratio: " + engine.compressionRatio.toFixed(1).toString()
@@ -116,6 +122,8 @@ function TopEnd() {
           </div>
         </div>
       </div>
+
+      {/* Column 3: Exhaust Size */}
       <div className="column column3">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white ">
@@ -146,4 +154,5 @@ function TopEnd() {
   );
 }
 
+// Export the TopEnd component as default
 export default TopEnd;

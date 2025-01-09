@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import Slider from "../ui/slider";
 import "./tabElement.css";
 import { useContext, useEffect } from "react";
@@ -7,8 +8,10 @@ import RunCalculations from "../../services/calculations";
 import TabOptionData from "../../services/data";
 
 function BottomEnd() {
+  // Get engine, updateState, and units from EngineContext`
   const { engine, updateState, units } = useContext(EngineContext);
 
+  // Handle option change for dropdowns
   const handleOptionChange = (options: any[], value: string, key: string) => {
     const selectedOption = options.find((type) => type.name === value);
     if (selectedOption) {
@@ -17,10 +20,12 @@ function BottomEnd() {
     }
   };
 
+  // Effect hook to run when engine changes
   useEffect(() => {}, [engine]);
 
   return (
     <div className="bottomEnd">
+      {/* Column 1: Engine Block */}
       <div className="column column1 overflow-y-auto">
         <div className="innerColumn w-full overflow-y-scroll overflow-x-scroll">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -28,6 +33,7 @@ function BottomEnd() {
           </div>
           <div className="columnContents w-full h-full">
             <div className="blockTable">
+              {/* Material Selection */}
               <div className="materialCol w-full border-r-white border-r-2">
                 <div className="blockHeader">
                   <p>Material</p>
@@ -53,6 +59,7 @@ function BottomEnd() {
                   </div>
                 </div>
               </div>
+              {/* Layout Selection */}
               <div className="layoutCol w-full h-full">
                 <div className="blockHeader">
                   <p>Layout</p>
@@ -116,6 +123,7 @@ function BottomEnd() {
         </div>
       </div>
 
+      {/* Column 2: Capacity & Displacement */}
       <div className="column column2 overflow-y-scroll overflow-x-scroll">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -156,6 +164,7 @@ function BottomEnd() {
         </div>
       </div>
 
+      {/* Column 3: Piston Material */}
       <div className="column column3">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -187,4 +196,5 @@ function BottomEnd() {
   );
 }
 
+// Export the BottomEnd component as default
 export default BottomEnd;

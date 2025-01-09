@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import { useContext } from "react";
 import RunCalculations from "../../services/calculations";
 import { EngineContext } from "../../services/globals";
@@ -5,11 +6,14 @@ import TabOptionData from "../../services/data";
 import Options from "../ui/options";
 import Slider from "../ui/slider";
 
+// Define the FuelAndTiming component
 function FuelAndTiming() {
+  // Use the EngineContext to get updateState, engine, and units
   const { updateState, engine, units } = useContext(EngineContext);
 
   return (
     <div className="bottomEnd">
+      {/* Fuel Quality Section */}
       <div className="column column1 overflow-y-auto">
         <div className="innerColumn w-full ">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -45,6 +49,7 @@ function FuelAndTiming() {
         </div>
       </div>
 
+      {/* Variable Systems Section */}
       <div className="column column2">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -136,6 +141,8 @@ function FuelAndTiming() {
           </div>
         </div>
       </div>
+
+      {/* Intake Type Section */}
       <div className="column column3">
         <div className="innerColumn w-full">
           <div className="columnHeader w-full border-b-2 border-white">
@@ -173,4 +180,5 @@ function FuelAndTiming() {
   );
 }
 
+// Export the FuelAndTiming component as default
 export default FuelAndTiming;
