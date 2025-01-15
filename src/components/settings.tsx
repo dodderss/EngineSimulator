@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import {
   Dispatch,
   SetStateAction,
@@ -13,25 +14,32 @@ import { Store } from "@tauri-apps/plugin-store";
 import RunCalculations from "../services/calculations";
 import Overlay from "./ui/overlay";
 
+// Define the props for the Settings component
 interface SettingsProps {
   isOverlayOpen: boolean;
   setIsOverlayOpen: Dispatch<SetStateAction<boolean>>;
 }
 
+// Define the Units interface
 interface Units {
   powerUnit?: string;
   torqueUnit?: string;
   massUnit?: string;
 }
 
+// Define the Settings component
 function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
+  // Use context to get the engine and update functions
   const { engine, updateState, updateUnits } = useContext(EngineContext);
+  // Create a memoized store instance
   const store = useMemo(() => {
     return new Store("store.bin");
   }, []);
 
+  // Define state variables
   const [localUnits, setLocalUnits] = useState<Units>({});
 
+  // Fetch units from the store when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       const units: Units = (await store.get("units")) ?? {};
@@ -43,6 +51,7 @@ function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
     fetchData();
   }, [store]);
 
+  // Render the component
   return isOverlayOpen ? (
     <Overlay
       isOverlayOpen={isOverlayOpen}
@@ -117,4 +126,5 @@ function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
   ) : null;
 }
 
+// Export the Settings component as the default export
 export default Settings;

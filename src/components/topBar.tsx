@@ -1,8 +1,8 @@
+// Importing necessary icons and dependencies
 import CloseIcon from "../assets/icons/system/close.svg";
 import MinimiseIcon from "../assets/icons/system/minimise.svg";
 import MaximiseIcon from "../assets/icons/system/maximise.svg";
 import MenuIcon from "../assets/icons/system/menu.svg";
-
 import SaveIcon from "../assets/icons/system/save.svg";
 import OpenIcon from "../assets/icons/system/open.svg";
 import SettingsIcon from "../assets/icons/system/settings.svg";
@@ -16,6 +16,7 @@ import { exit } from "@tauri-apps/plugin-process";
 import { createFile, openFile } from "../services/fileSystem";
 import Button from "./ui/button";
 
+// Interface for TopBar component props
 interface TopBarProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (value: boolean) => void;
@@ -23,21 +24,25 @@ interface TopBarProps {
   setIsInternetMenuOpen: (value: boolean) => void;
 }
 
+// TopBar component definition
 function TopBar({
   isMenuOpen,
   setIsMenuOpen,
   setIsInternetMenuOpen,
 }: TopBarProps) {
+  // Context and state hooks
   const { engine, updateState } = useContext(EngineContext);
   const [appWindow, setAppWindow] = useState<Window | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [engineName, setEngineName] = useState(engine.engineName);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // Update engine name when engine context changes
   useEffect(() => {
     setEngineName(engine.engineName);
   }, [engine.engineName]);
 
+  // Handlers for editing engine name
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -57,6 +62,7 @@ function TopBar({
     }
   };
 
+  // Fetch current window on component mount
   useEffect(() => {
     async function fetchWindow() {
       const window = await getCurrentWindow();
@@ -66,12 +72,14 @@ function TopBar({
     fetchWindow();
   }, []);
 
+  // Handle keydown event for menu
   const handleMenuKeyDown = useCallback((event: any) => {
     if (event.key === "Escape") {
       setDropdownOpen((prev) => !prev);
     }
   }, []);
 
+  // Add and remove keydown event listener based on menu state
   useEffect(() => {
     if (!isMenuOpen) {
       window.addEventListener("keydown", handleMenuKeyDown);
@@ -84,6 +92,7 @@ function TopBar({
     }
   }, [handleMenuKeyDown, isMenuOpen]);
 
+  // Render TopBar component
   return (
     <div
       data-tauri-drag-region
@@ -95,6 +104,7 @@ function TopBar({
           onMouseLeave={() => setDropdownOpen(false)}
         >
           <div className="flex min-w-52 space-x-5 p-2 pl-4 items-center pr-5 mr-5">
+            {/* Menu icon */}
             <img
               src={MenuIcon.toString()}
               alt=""
@@ -102,6 +112,7 @@ function TopBar({
               onClick={() => setDropdownOpen((prev) => !prev)}
             />
             <div>
+              {/* Conditional rendering for editing engine name */}
               {isEditing ? (
                 <input
                   type="text"
@@ -130,6 +141,7 @@ function TopBar({
             </div>
           </div>
           <div className="dropdownContent">
+            {/* Save button */}
             <Button
               icon={SaveIcon.toString()}
               name="Save as"
@@ -138,6 +150,7 @@ function TopBar({
               }}
               small={true}
             />
+            {/* Open button */}
             <Button
               icon={OpenIcon.toString()}
               name="Open"
@@ -164,6 +177,7 @@ function TopBar({
               }}
               small={true}
             />
+            {/* Enginuity Hub button */}
             <Button
               icon={InternetIcon.toString()}
               name="Enginuity Hub"
@@ -172,6 +186,7 @@ function TopBar({
               }}
               small={true}
             />
+            {/* Settings button */}
             <Button
               icon={SettingsIcon.toString()}
               name="Settings"
@@ -180,6 +195,7 @@ function TopBar({
               }}
               small={true}
             />
+            {/* Exit button */}
             <Button
               icon={CloseIcon.toString()}
               name="Exit"
@@ -193,19 +209,21 @@ function TopBar({
       </div>
 
       <div className="flex flex-row space-x-5">
+        {/* Maximize button */}
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
           onClick={() => appWindow?.maximize() ?? null}
         >
           <img src={MaximiseIcon.toString()} alt="" />
         </div>
+        {/* Minimize button */}
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
           onClick={() => appWindow?.minimize() ?? null}
         >
           <img src={MinimiseIcon.toString()} alt="" />
         </div>
-
+        {/* Close button */}
         <div
           className="windowButton padding-5 border-white border-2 w-10 h-10 flex justify-center items-center p-2"
           onClick={() => appWindow?.close() ?? null}
@@ -217,4 +235,5 @@ function TopBar({
   );
 }
 
+// Exporting TopBar component as default
 export default TopBar;

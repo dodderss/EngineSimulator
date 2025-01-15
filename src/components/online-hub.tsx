@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import {
   Dispatch,
   SetStateAction,
@@ -19,13 +20,17 @@ import LoginIcon from "../assets/icons/system/login.svg";
 
 import UserSystem from "../services/user";
 
+// Define the props for the OnlineHub component
 interface OnlineHubProps {
   isOverlayOpen: boolean;
   setIsOverlayOpen: Dispatch<SetStateAction<boolean>>;
 }
 
+// Define the OnlineHub component
 function OnlineHub({ isOverlayOpen, setIsOverlayOpen }: OnlineHubProps) {
+  // Use context to get the engine and updateState function
   const { engine, updateState } = useContext(EngineContext);
+  // Define state variables
   const [engines, setEngines] = useState<Engine[]>([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,12 +39,14 @@ function OnlineHub({ isOverlayOpen, setIsOverlayOpen }: OnlineHubProps) {
   const [registerPassword, setRegisterPassword] = useState("");
   const [signedIn, setSignedIn] = useState(false);
 
+  // Fetch engines when the component mounts
   useEffect(() => {
     getEngines().then((data) => {
       setEngines(data);
     });
   }, []);
 
+  // Reset form fields when the overlay is closed
   useEffect(() => {
     if (!isOverlayOpen) {
       setUsername("");
@@ -49,6 +56,7 @@ function OnlineHub({ isOverlayOpen, setIsOverlayOpen }: OnlineHubProps) {
     }
   }, [isOverlayOpen]);
 
+  // Handle login form submission
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     UserSystem.login(username, password).then((a) => {
@@ -60,6 +68,7 @@ function OnlineHub({ isOverlayOpen, setIsOverlayOpen }: OnlineHubProps) {
     });
   };
 
+  // Handle registration form submission
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     UserSystem.register(registerUsername, registerPassword).then((a) => {
@@ -72,6 +81,7 @@ function OnlineHub({ isOverlayOpen, setIsOverlayOpen }: OnlineHubProps) {
     });
   };
 
+  // Render the component
   return (
     <Overlay
       isOverlayOpen={isOverlayOpen}
@@ -185,4 +195,5 @@ function OnlineHub({ isOverlayOpen, setIsOverlayOpen }: OnlineHubProps) {
   );
 }
 
+// Export the OnlineHub component as the default export
 export default OnlineHub;

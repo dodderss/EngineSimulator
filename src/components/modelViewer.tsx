@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -9,10 +10,12 @@ import { Euler } from "three";
 import { useContext, useEffect, Suspense, useState } from "react";
 import { EngineContext } from "../services/globals";
 
+// Define the Model functional component
 function Model() {
-  const { engine } = useContext(EngineContext);
-  const [model, setModel] = useState(V8);
+  const { engine } = useContext(EngineContext); // Get the engine data from the EngineContext
+  const [model, setModel] = useState(V8); // Define state for the current model
 
+  // Update the model based on the number of engine cylinders
   useEffect(() => {
     if (engine.engineCylinders === 6) {
       setModel(V6);
@@ -25,32 +28,35 @@ function Model() {
     }
   }, [engine]);
 
-  const geometry = useLoader(STLLoader, model);
+  const geometry = useLoader(STLLoader, model); // Load the model geometry
 
   return (
     <mesh
       geometry={geometry}
-      rotation={new Euler(-Math.PI / 2, 0, Math.PI / 2)}
+      rotation={new Euler(-Math.PI / 2, 0, Math.PI / 2)} // Set the rotation of the model
     >
-      <meshPhongMaterial color="white" />
+      <meshPhongMaterial color="white" /> {/* Apply material to the model */}
     </mesh>
   );
-}   
+}
+
+// Define the ModelViewer functional component
 function ModelViewer() {
   return (
     <div className="h-full w-full">
       <Canvas camera={{ position: [0, 0, 3] }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={3} />
-        <directionalLight position={[-5, -5, -5]} intensity={2} />
-        <Environment preset="studio" background={false} />
+        <ambientLight intensity={0.5} /> {/* Add ambient light */}
+        <directionalLight position={[5, 5, 5]} intensity={3} /> {/* Add directional light */}
+        <directionalLight position={[-5, -5, -5]} intensity={2} /> {/* Add directional light */}
+        <Environment preset="studio" background={false} /> {/* Add environment */}
         <Suspense fallback={null}>
-          <Model />
+          <Model /> {/* Render the model */}
         </Suspense>
-        <OrbitControls />
+        <OrbitControls /> {/* Add orbit controls */}
       </Canvas>
     </div>
   );
 }
 
+// Export the ModelViewer component as the default export
 export default ModelViewer;

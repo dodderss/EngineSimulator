@@ -1,8 +1,10 @@
+// Import necessary libraries and components
 import { useContext, useEffect, useState } from "react";
 import { EngineContext } from "../services/globals";
 import "./problemSidebar.tsx.css";
 import TabOptionData from "../services/data";
 
+// Define the Problem interface
 export interface Problem {
   title: string;
   cause: string;
@@ -10,12 +12,19 @@ export interface Problem {
   solution: string;
 }
 
+// Define the ProblemSidebar component
 function ProblemSidebar() {
+  // Use context to get the engine
   const { engine } = useContext(EngineContext);
+  // Define state variables
   const [problems, setProblems] = useState<Problem[]>([]);
 
+  // Use effect to update problems when the engine changes
   useEffect(() => {
+    // Clear the problems array
     setProblems([]);
+
+    // Check block materials for problems
     TabOptionData.blockMaterials.forEach((material) => {
       if (material.value === engine.blockMaterial) {
         if (material.maxPower < engine.power) {
@@ -44,6 +53,8 @@ function ProblemSidebar() {
         }
       }
     });
+
+    // Check head materials for problems
     TabOptionData.headMaterials.forEach((material) => {
       if (material.value === engine.headMaterial) {
         if (material.maxPower < engine.power) {
@@ -72,6 +83,8 @@ function ProblemSidebar() {
         }
       }
     });
+
+    // Check piston materials for problems
     TabOptionData.pistonMaterials.forEach((material) => {
       if (material.value === engine.pistonMaterial) {
         if (material.maxPower < engine.power) {
@@ -100,6 +113,8 @@ function ProblemSidebar() {
         }
       }
     });
+
+    // Calculate the chance of knock
     var chanceOfKnock = 0;
     var knockCauses = [];
     if (engine.compressionRatio > 10) {
@@ -135,6 +150,7 @@ function ProblemSidebar() {
       knockCauses.push("Very High Boost Pressure");
     }
 
+    // Add knock problems if the chance of knock is high
     if (chanceOfKnock > 50) {
       knockCauses.forEach((cause) => {
         setProblems((prev) => [
@@ -151,6 +167,7 @@ function ProblemSidebar() {
       });
     }
 
+    // Check for low power to weight ratio
     if (engine.power / engine.engineMass < 0.05) {
       setProblems((prev) => [
         ...prev,
@@ -165,6 +182,7 @@ function ProblemSidebar() {
     }
   }, [engine]);
 
+  // Render the component
   return (
     <div className="rightSection fixed right-0 bottom-0 text-3xl  flex-col overflow-auto">
       <div className="problemsSection text-3xl">
@@ -184,4 +202,5 @@ function ProblemSidebar() {
   );
 }
 
+// Export the ProblemSidebar component as the default export
 export default ProblemSidebar;
