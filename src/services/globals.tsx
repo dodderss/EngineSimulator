@@ -1,5 +1,6 @@
 import React from "react";
 import { DummyUnits, Units } from "./globals-context-provider";
+import TabOptionData from "./data";
 
 /**
  * Represents the engine specifications.
@@ -222,25 +223,43 @@ export function isEngine(obj: any): boolean {
   if (typeof obj.bore !== "number") {
     console.log("bore");
     return false;
+  } else if (obj.bore > 120 || obj.bore < 55) {
+    console.log("bore out of range");
+    return false;
   }
   if (typeof obj.stroke !== "number") {
     console.log("stroke");
+    return false;
+  } else if (obj.stroke > 120 || obj.stroke < 55) {
+    console.log("stroke out of range");
     return false;
   }
   if (typeof obj.compressionRatio !== "number") {
     console.log("compressionRatio");
     return false;
+  } else if (obj.compressionRatio < 8 || obj.compressionRatio > 16) {
+    console.log("compressionRatio out of range");
+    return false;
   }
   if (typeof obj.displacement !== "number") {
     console.log("displacement");
+    return false;
+  } else if (obj.displacement < 0) {
+    console.log("displacement out of range");
     return false;
   }
   if (typeof obj.power !== "number") {
     console.log("power");
     return false;
+  } else if (obj.power < 0) {
+    console.log("power out of range");
+    return false;
   }
   if (typeof obj.torque !== "number") {
     console.log("torque");
+    return false;
+  } else if (obj.torque < 0) {
+    console.log("torque out of range");
     return false;
   }
   if (!Array.isArray(obj.powerList)) {
@@ -262,25 +281,43 @@ export function isEngine(obj: any): boolean {
   if (typeof obj.rpmLimit !== "number") {
     console.log("rpmLimit");
     return false;
+  } else if (obj.rpmLimit < 3000 || obj.rpmLimit > 10000) {
+    console.log("rpmLimit out of range");
+    return false;
   }
   if (typeof obj.fuelQuality !== "string") {
     console.log("fuelQuality");
+    return false;
+  } else if (TabOptionData.fuelQualities.some(fuel => fuel.value === obj.fuelQuality)) {
+    console.log("fuelQuality out of range");
     return false;
   }
   if (typeof obj.aspirationType !== "string") {
     console.log("aspirationType");
     return false;
+  } else if (TabOptionData.aspirationTypes.some(aspiration => aspiration.value === obj.aspirationType)) {
+    console.log("aspirationType out of range");
+    return false;
   }
   if (typeof obj.engineType !== "string") {
     console.log("engineType");
+    return false;
+  } else if (TabOptionData.blockTypes.some(block => block.value === obj.block)) {
+    console.log("engineType out of range");
     return false;
   }
   if (typeof obj.engineCylinders !== "number") {
     console.log("engineCylinders");
     return false;
+  } else if (obj.engineCylinders < 3 || obj.engineCylinders > 12) {
+    console.log("engineCylinders out of range");
+    return false;
   }
   if (typeof obj.boostPressure !== "number") {
     console.log("boostPressure");
+    return false;
+  } else if (obj.boostPressure < 0 || obj.boostPressure > 3) {
+    console.log("boostPressure out of range");
     return false;
   }
   if (typeof obj.boostProviderSize !== "number") {
@@ -314,21 +351,36 @@ export function isEngine(obj: any): boolean {
   if (typeof obj.blockMaterial !== "string") {
     console.log("blockMaterial");
     return false;
+  } else if (TabOptionData.blockMaterials.some(material => material.value === obj.blockMaterial)) {
+    console.log("blockMaterial out of range");
+    return false;
   }
   if (typeof obj.headMaterial !== "string") {
     console.log("headMaterial");
+    return false;
+  } else if (TabOptionData.headMaterials.some(material => material.value === obj.headMaterial)) {
+    console.log("headMaterial out of range");
     return false;
   }
   if (typeof obj.pistonMaterial !== "string") {
     console.log("pistonMaterial");
     return false;
+  } else if (TabOptionData.pistonMaterials.some(material => material.value === obj.pistonMaterial)) {
+    console.log("pistonMaterial out of range");
+    return false;
   }
   if (typeof obj.headType !== "string") {
     console.log("headType");
     return false;
+  } else if (TabOptionData.headTypes.some(type => type.value === obj.headType)) {
+    console.log("headType out of range");
+    return false;
   }
   if (typeof obj.intakeType !== "string") {
     console.log("intakeType");
+    return false;
+  } else if (TabOptionData.intakeTypes.some(type => type.value === obj.intakeType)) {
+    console.log("intakeType out of range");
     return false;
   }
   if (typeof obj.vvl !== "boolean") {
@@ -341,6 +393,9 @@ export function isEngine(obj: any): boolean {
   }
   if (typeof obj.vvlRpm !== "number") {
     console.log("vvlRpm");
+    return false;
+  } else if (obj.vvlRpm < 1000 || obj.vvlRpm > 7000) {
+    console.log("vvlRpm out of range");
     return false;
   }
   if (typeof obj.volumetricEfficiency !== "number") {

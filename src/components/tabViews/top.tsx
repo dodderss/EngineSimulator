@@ -89,7 +89,7 @@ function TopEnd() {
                 label={"RPM Limit: " + engine.rpmLimit.toString()}
                 value={engine.rpmLimit}
                 max={10000}
-                min={1000}
+                min={3000}
                 step={100}
                 onChange={(value) => {
                   const newEngine = {
@@ -106,7 +106,7 @@ function TopEnd() {
                   "Compression Ratio: " + engine.compressionRatio.toFixed(1).toString()
                 }
                 value={engine.compressionRatio}
-                max={12}
+                max={16}
                 min={8}
                 step={0.1}
                 onChange={(value) => {
