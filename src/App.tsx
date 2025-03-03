@@ -14,11 +14,14 @@ import ModelViewer from "./components/modelViewer";
 
 function App() {
   // Get engine, updateState, and units from EngineContext
-  const { engine, updateState, units } = useContext(EngineContext);
+  const { engine, updateState, units, currency, updateCurrency } =
+    useContext(EngineContext);
   // State variables to manage the visibility of different sections
   const [isEngineOpen, setIsEngineOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isInternetMenuOpen, setIsInternetMenuOpen] = useState(false);
+  const [haveRunCurrencyConversion, setHaveRunCurrencyConversion] =
+    useState(false);
 
   // Initialize undo system
   const undoSystem = new UndoRedo();
@@ -26,6 +29,20 @@ function App() {
   // Effect to run calculations and handle undo/redo keyboard shortcuts
   useEffect(() => {
     RunCalculations(engine, updateState, units);
+    if (!haveRunCurrencyConversion) {
+      setHaveRunCurrencyConversion(true);
+      const apiURL =
+        "https://api.currencyapi.com/v3/latest?apikey=&currencies=USD%2CEUR%2CJPY&base_currency=GBP";
+      fetch(apiURL)
+        .then((response) => response.json())
+        .then((data) => {
+          updateCurrency({
+            dollar: data.data.USD.value,
+            euro: data.data.EUR.value,
+            yen: data.data.JPY.value,
+          });
+        })
+    }
 
     const handleUndo = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === "z") {
@@ -53,11 +70,14 @@ function App() {
       // Cleanup event listener on component unmount
       window.removeEventListener("keydown", handleUndo);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Effect to push the current engine state to the undo system
   useEffect(() => {
     undoSystem.push(engine);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [engine]);
 
   // Effect to close the menu when the engine is open

@@ -1,24 +1,31 @@
 // Import necessary modules and components
 import "./tabBar.tsx.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BottomEnd from "../tabViews/bottom";
 import TopEnd from "../tabViews/top";
 import Aspiration from "../tabViews/aspiration";
 import FuelAndTiming from "../tabViews/fuelandtiming";
 import Appearance from "../tabViews/appearance";
+import { EngineContext } from "../../services/globals";
 
 // Define the TabBar functional component
 function TabBar() {
   // Define state for the selected tab index
   const [selectedTab, setSelectedTab] = useState<number>(0);
+  const { units } = useContext(EngineContext);
   // Define the tabs array with tab names and corresponding components
-  const tabs = [
-    ["Bottom End", BottomEnd()],
-    ["Top End", TopEnd()],
-    ["Aspiration", Aspiration()],
-    ["Fuel & Timing", FuelAndTiming()],
-    ["Appearance", Appearance()],
-  ];
+  const tabs = units.simplifiedView
+    ? [
+        ["Bottom End", BottomEnd()],
+        ["Top End", TopEnd()],
+      ]
+    : [
+        ["Bottom End", BottomEnd()],
+        ["Top End", TopEnd()],
+        ["Aspiration", Aspiration()],
+        ["Fuel & Timing", FuelAndTiming()],
+        ["Appearance", Appearance()],
+      ];
 
   // Function to get the class name for a tab based on its index
   const getClassName = (index: number) => {
@@ -46,7 +53,8 @@ function TabBar() {
           </button>
         ))}
       </div>
-      <div className="tabcontent">{tabs[selectedTab][1]}</div> {/* Display the content of the selected tab */}
+      <div className="tabcontent">{tabs[selectedTab][1]}</div>{" "}
+      {/* Display the content of the selected tab */}
     </div>
   );
 }

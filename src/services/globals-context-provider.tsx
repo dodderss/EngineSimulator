@@ -10,14 +10,30 @@ export interface Units {
   powerUnit?: string;
   torqueUnit?: string;
   massUnit?: string;
+  currencyUnit?: string;
   engineColour?: string;
+  simplifiedView?: boolean;
+}
+
+export interface CurrencyConversion {
+  dollar?: number;
+  euro?: number;
+  yen?: number;
 }
 
 export const DummyUnits = {
   powerUnit: "kW",
   torqueUnit: "Nm",
   massUnit: "kg",
-  engineColour: "#c8c8c8",
+  currencyUnit: "£",
+  engineColour: "#FFFFFF",
+  simplifiedView: false,
+};
+
+export const DummyCurrency = {
+  dollar: 1.5,
+  euro: 1.5,
+  yen: 150.0,
 };
 
 /**
@@ -31,6 +47,8 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
     updateState: () => {},
     units: DummyUnits,
     updateUnits: () => {},
+    currency: DummyCurrency,
+    updateCurrency: () => {},
   });
 
   const updateState = (newState: Partial<AppState>) => {
@@ -57,18 +75,27 @@ export const EngineContextProvider: React.FunctionComponent<Props> = (
       };
     });
   };
-  
+
+  const updateCurrency = (newCurrency: Partial<CurrencyConversion>) => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        currency: {
+          ...prevState.currency,
+          ...newCurrency,
+        },
+      };
+    });
+  };
 
   useEffect(() => {
-    RunCalculations(
-      state.engine,
-      state.updateState,
-      state.units,
-    );
+    RunCalculations(state.engine, state.updateState, state.units);
   }, [state.engine, state.updateState, state.units, state.updateUnits]);
 
   return (
-    <EngineContext.Provider value={{ ...state, updateState, updateUnits }}>
+    <EngineContext.Provider
+      value={{ ...state, updateState, updateUnits, updateCurrency }}
+    >
       {props.children}
     </EngineContext.Provider>
   );

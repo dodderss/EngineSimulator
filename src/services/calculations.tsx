@@ -129,7 +129,10 @@ const RunCalculations = (
   // ---- Total Engine Mass Calculation ---- //
 
   // Sum of block mass, head mass, and piston mass
-  const totalMass = (totalBlockMass + headMass + pistonMass) / 150;
+  const totalMass =
+    units.massUnit === "kg"
+      ? (totalBlockMass + headMass + pistonMass) / 150
+      : ((totalBlockMass + headMass + pistonMass) / 150) * 2.20462;
   let totalPrice = 500 + (totalBlockPrice + headPrice + pistonPrice) / 30;
 
   if (engine.vvt) {
@@ -141,6 +144,8 @@ const RunCalculations = (
   if (engine.boostPressure > 1) {
     totalPrice += 50 * engine.boostPressure;
   }
+
+  
 
   // ---- Power/Torque Calculations ---- //
 

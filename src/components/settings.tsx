@@ -25,6 +25,9 @@ interface Units {
   powerUnit?: string;
   torqueUnit?: string;
   massUnit?: string;
+  currencyUnit?: string;
+  engineColour?: string;
+  simplifiedView?: boolean;
 }
 
 // Define the Settings component
@@ -118,6 +121,52 @@ function Settings({ isOverlayOpen, setIsOverlayOpen }: SettingsProps) {
               options={["kg", "lb"]}
               value={localUnits.massUnit ?? "kg"}
               uniqueKey={"massUnit"}
+            />
+          </div>
+          <div>
+            <h2>Simplified View</h2>
+            <Options
+              onChange={async (value) => {
+                setLocalUnits((prevUnits) => {
+                  const newUnits = {
+                    ...prevUnits,
+                    simplifiedView: value === "Yes" ? true : false,
+                  };
+                  store.set("units", newUnits).then(() => {
+                    updateState({ engine: engine });
+                    updateUnits(newUnits);
+                    RunCalculations(engine, updateState, newUnits);
+                  });
+                  return newUnits;
+                });
+              }}
+              options={["Yes", "No"]}
+              value={localUnits.simplifiedView ? "Yes" : "No"}
+              uniqueKey={"simplifiedView"}
+            />
+          </div>
+        </div>
+        <div className="p-3 space-x-5 flex flex-row">
+          <div>
+            <h2>Currency</h2>
+            <Options
+              onChange={async (value) => {
+                setLocalUnits((prevUnits) => {
+                  const newUnits = {
+                    ...prevUnits,
+                    currencyUnit: value,
+                  };
+                  store.set("units", newUnits).then(() => {
+                    updateState({ engine: engine });
+                    updateUnits(newUnits);
+                    RunCalculations(engine, updateState, newUnits);
+                  });
+                  return newUnits;
+                });
+              }}
+              options={["£", "$", "€", "¥"]}
+              value={localUnits.currencyUnit ?? "£"}
+              uniqueKey={"currencyUnit"}
             />
           </div>
         </div>

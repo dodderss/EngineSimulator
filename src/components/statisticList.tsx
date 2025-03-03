@@ -10,13 +10,11 @@ import { useContext } from "react";
 import { EngineContext } from "../services/globals";
 
 function StatisticList() {
-  const { engine, units } = useContext(EngineContext);
+  const { engine, units, currency } = useContext(EngineContext);
 
   return (
     <div className="statList flex-col space-y-2 p-4 ">
-      <h1 className="text-4xl">
-        Statistics
-      </h1>
+      <h1 className="text-4xl">Statistics</h1>
       <StatisticItem
         image={PowerIcon.toString()}
         text={`${engine.power.toFixed(0)} ` + units.powerUnit}
@@ -27,7 +25,16 @@ function StatisticList() {
       />
       <StatisticItem
         image={PriceIcon.toString()}
-        text={`£${engine.enginePrice.toFixed(2)}`}
+        text={`${units.currencyUnit}${(
+          engine.enginePrice *
+          (units.currencyUnit == "$"
+            ? currency.dollar
+            : units.currencyUnit == "€"
+            ? currency.euro
+            : units.currencyUnit == "¥"
+            ? currency.yen
+            : 1)!
+        ).toFixed(2)}`}
       />
       <StatisticItem
         image={EfficiencyIcon.toString()}

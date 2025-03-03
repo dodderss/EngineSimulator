@@ -1,5 +1,5 @@
 import React from "react";
-import { DummyUnits, Units } from "./globals-context-provider";
+import { CurrencyConversion, DummyCurrency, DummyUnits, Units } from "./globals-context-provider";
 import TabOptionData from "./data";
 
 /**
@@ -192,6 +192,8 @@ export interface AppState {
   updateState: (newState: Partial<AppState>) => void;
   units: Units;
   updateUnits: (newUnits: Partial<Units>) => void;
+  currency: CurrencyConversion;
+  updateCurrency: (newCurrency: Partial<CurrencyConversion>) => void;
 }
 
 /**
@@ -202,6 +204,8 @@ const defaultState: AppState = {
   updateState: (newState?: Partial<AppState>) => {},
   units: DummyUnits,
   updateUnits: (newUnits?: Partial<Units>) => {},
+  currency: DummyCurrency,
+  updateCurrency: (newCurrency?: Partial<CurrencyConversion>) => {},
 };
 
 /**
