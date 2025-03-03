@@ -10,12 +10,14 @@ export interface Units {
   powerUnit?: string;
   torqueUnit?: string;
   massUnit?: string;
+  engineColour?: string;
 }
 
 export const DummyUnits = {
   powerUnit: "kW",
   torqueUnit: "Nm",
   massUnit: "kg",
+  engineColour: "#c8c8c8",
 };
 
 /**

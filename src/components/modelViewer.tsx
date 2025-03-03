@@ -12,7 +12,7 @@ import { EngineContext } from "../services/globals";
 
 // Define the Model functional component
 function Model() {
-  const { engine } = useContext(EngineContext); // Get the engine data from the EngineContext
+  const { engine, units } = useContext(EngineContext); // Get the engine data from the EngineContext
   const [model, setModel] = useState(V8); // Define state for the current model
 
   // Update the model based on the number of engine cylinders
@@ -35,7 +35,7 @@ function Model() {
       geometry={geometry}
       rotation={new Euler(-Math.PI / 2, 0, Math.PI / 2)} // Set the rotation of the model
     >
-      <meshPhongMaterial color="white" /> {/* Apply material to the model */}
+      <meshPhongMaterial color={units.engineColour} /> {/* Apply material to the model */}
     </mesh>
   );
 }
