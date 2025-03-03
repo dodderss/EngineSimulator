@@ -14,7 +14,7 @@ import ModelViewer from "./components/modelViewer";
 
 function App() {
   // Get engine, updateState, and units from EngineContext
-  const { engine, updateState, units, currency, updateCurrency } =
+  const { engine, updateState, units, updateCurrency } =
     useContext(EngineContext);
   // State variables to manage the visibility of different sections
   const [isEngineOpen, setIsEngineOpen] = useState(false);
@@ -32,7 +32,7 @@ function App() {
     if (!haveRunCurrencyConversion) {
       setHaveRunCurrencyConversion(true);
       const apiURL =
-        "https://api.currencyapi.com/v3/latest?apikey=&currencies=USD%2CEUR%2CJPY&base_currency=GBP";
+        "https://api.currencyapi.com/v3/latest?apikey=cur_live_bH0kwrMh4TxV9St24d1L1AIw9Z3dxBrWrydSiSuV&currencies=USD%2CEUR%2CJPY&base_currency=GBP";
       fetch(apiURL)
         .then((response) => response.json())
         .then((data) => {

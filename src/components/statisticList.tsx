@@ -27,11 +27,11 @@ function StatisticList() {
         image={PriceIcon.toString()}
         text={`${units.currencyUnit}${(
           engine.enginePrice *
-          (units.currencyUnit == "$"
+          (units.currencyUnit === "$"
             ? currency.dollar
-            : units.currencyUnit == "€"
+            : units.currencyUnit === "€"
             ? currency.euro
-            : units.currencyUnit == "¥"
+            : units.currencyUnit === "¥"
             ? currency.yen
             : 1)!
         ).toFixed(2)}`}
