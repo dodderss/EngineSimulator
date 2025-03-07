@@ -157,8 +157,52 @@ class Database:
         connection.close()
         return engines
 
-    def recieveRequest(self):
-        pass
+    def getSortedEngines(self):
+        def merge(left, right):
+            # Create final list, and two temp variables for iteration
+            final = []
+            temp1 = 0
+            temp2 = 0
+
+            # While both lists have items
+            while temp1 < len(left) and temp2 < len(right):
+                # Compare the 5th element of each list
+                if left[temp1][5] > right[temp2][5]:
+                    # If the left list's element is bigger, add it to the final list
+                    final.append(left[temp1])
+                    temp1 += 1
+                else:
+                    # Otherwise, add the right list's element to the final list
+                    final.append(right[temp2])
+                    temp2 += 1
+
+            final += left[temp1:]
+            final += right[temp2:]
+
+            return final
+
+        def mergeSort(engines):
+            # Checks if the list is empty or has only one item
+            if len(engines) <= 1:
+                return engines
+
+            middle = len(engines) // 2  # Finds the middle engine
+            # Cuts from the start to the middle engine
+            leftSection = engines[:middle]
+            # Cuts from the middle to the end engine
+            rightSection = engines[middle:]
+
+            # Uses iteration to sort remaining items
+            sortedLeft = mergeSort(leftSection)
+            sortedRight = mergeSort(rightSection)  # and again
+
+            # Returns the sorted list
+            return merge(sortedLeft, sortedRight)
+
+        engines = self.getEngines()
+        sortedEngines = mergeSort(engines)
+        sortedEngines.reverse()
+        return sortedEngines
 
 
 db = Database()
@@ -308,7 +352,7 @@ def window():
 
             # Delete button
             delete_button = tk.Button(details_window, text="Delete Engine", command=lambda: [
-                                    db.delete_engine(engine_id), details_window.destroy()])
+                db.delete_engine(engine_id), details_window.destroy()])
             delete_button.pack(pady=10)
 
         else:
@@ -316,15 +360,13 @@ def window():
 
     # Function to update the list of engines in the UI
 
-
     def update_engine_list():
 
-        engines = Database().getEngines()
+        engines = Database().getSortedEngines()
 
         engine_listbox.delete(0, tk.END)
         for engine in engines:
             engine_listbox.insert(tk.END, f"{engine[19]} (ID: {engine[0]})")
-
 
     # Main Tkinter window
     root = tk.Tk()
@@ -344,10 +386,10 @@ def window():
 
     root.mainloop()
 
+
 if __name__ == '__main__':
-    Thread(target=lambda: app.run(debug=True, use_reloader=False)).start() 
+    Thread(target=lambda: app.run(debug=True, use_reloader=False)).start()
     window()
-    
 
 
 @app.after_request
